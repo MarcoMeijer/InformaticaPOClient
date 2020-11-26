@@ -7,8 +7,11 @@ export default class App extends React.Component {
   }
 
   fetchData() {
+    // getData('')
+    //   .then(data => this.setState({data: data}))
+    //   .catch(error => console.log(error));
     fetch('http://localhost:4000')
-      .then(response => response.json())
+      .then(response => response.json()) // response is een string, verander het in een javascript object
       .then(data => this.setState({ data: data }))
       .catch(error => console.log(error));
   }
@@ -20,7 +23,7 @@ export default class App extends React.Component {
           onPress={() => {
             this.fetchData();
           }}
-          title="Button"
+          title="Fetch data"
           color="#841584"
         />
         {this.state.data.map((object, index) => {
