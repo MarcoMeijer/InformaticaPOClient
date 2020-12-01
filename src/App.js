@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Button, Text, View } from 'react-native';
+import getData from './server/fetchData.js';
 
 export default class App extends React.Component {
   state = {
@@ -7,12 +8,8 @@ export default class App extends React.Component {
   }
 
   fetchData() {
-    // getData('')
-    //   .then(data => this.setState({data: data}))
-    //   .catch(error => console.log(error));
-    fetch('http://localhost:4000')
-      .then(response => response.json()) // response is een string, verander het in een javascript object
-      .then(data => this.setState({ data: data }))
+    getData('')
+      .then(data => this.setState({data: data}))
       .catch(error => console.log(error));
   }
 
