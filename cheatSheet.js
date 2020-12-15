@@ -157,8 +157,3 @@
 // pepcock.printTime(); // gebruikt de nieuwe printTime functie
 // console.log(pepcock.weight); // je kan nog steeds bij de variablen van de base class
 
-
-
-// =============================== //
-// Classes en Objects
-// =============================== //
