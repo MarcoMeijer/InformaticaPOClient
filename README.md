@@ -1,6 +1,65 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Informatica PO
+
+
+## Installatie
+
+Om de code aan te passen zou ik VS Code gebruiken.
+Dit kan je downloaden op [https://code.visualstudio.com/](https://code.visualstudio.com/).
+Daarnaast heb je om de code uit te voeren yarn nodig.
+Dit kan je downloaden op [https://classic.yarnpkg.com/en/docs/install/#windows-stable](https://classic.yarnpkg.com/en/docs/install/#windows-stable).
+Het kan zijn dat ik iets vergeten ben dus als je foutmeldingen krijgt stuur die dan naar mij door(Marco).
+
+Zodat we samen kunnen werken met de code heb je git nodig.
+Dit kan je downloaden op [https://git-scm.com/downloads](https://git-scm.com/downloads).
+Je hoeft NIET de GUI-Client te downloaden.
+
+## Code downloaden
+
+Om de code te downloaden moet je eerst VS code openen.
+Daarna druk je op CTRL+SHIFT+P om het commando window te openen.
+Daarin type je "Git: Clone" en druk je op enter.
+Nu heb je de URL van de repository nodig.
+Die kan je op de github pagina vinden:
+![alt text](readme/clone.png)
+In dit geval is dat [https://github.com/MarcoMeijer/InformaticaPOClient.git](https://github.com/MarcoMeijer/InformaticaPOClient.git)
+Als je nu op enter drukt gaat hij als het goed is de code downloaden.
+
+## Uitvoeren
+
+Om het uit te voeren moet je de folder openen in VS code.
+Daarna moet je op CTRL+SHIFT+` drukken om de terminal in VS code te openen.
+Daarin type je:
+
+### `yarn start`
+
+Om het project te starten.
+
+## Aanpasingen opslaan
+
+Als je aanpassingen aan de code hebt gemaakt worden deze niet automatisch op github veranderd.
+Je ziet dat de bestanden die je hebt aangemaakt groen zijn in VS code, en de bestanden die je hebt aangepast oranje.
+Om je wijzegingen op te slaan moet je je aanpassingen "commiten".
+Je drukt dan op de source controll knop link in de VS code editor.
+
+![alt text](readme/sourceControll.png)
+
+Daarna druk je op de stage all changes knop.
+Dit betekent dat je al je veranderingen wil opslaan.
+
+![alt text](readme/changes.png)
+
+Je typt er een message bij die aangeeft wat je hebt aangepast.
+Bijvoorbeeld "Bug gegixed" of "Open vragen toegevoegt".
+En daarna kan je op de commit knop drukken:
+
+![alt text](readme/commit.png)
+
+Je wijzigingen zijn nu gecommit, maar ze zijn nu nog niet naar github verstuurd.
+Je commit staat nu alleen nog maar op je computer opgeslagen.
+Om heb naar github te sturen klip je op de "push" knop links-onderin de editor:
+
+![alt text](readme/push.png)
 
 ## Available Scripts
 
@@ -28,43 +87,3 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
