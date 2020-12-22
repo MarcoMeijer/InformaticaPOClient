@@ -5,13 +5,13 @@
 ## Installatie
 
 Om de code aan te passen zou ik VS Code gebruiken.
-Dit kan je downloaden op [https://code.visualstudio.com/](https://code.visualstudio.com/).
+Dit kan je [hier](https://code.visualstudio.com/) downloaden.
 Daarnaast heb je om de code uit te voeren yarn nodig.
-Dit kan je downloaden op [https://classic.yarnpkg.com/en/docs/install/#windows-stable](https://classic.yarnpkg.com/en/docs/install/#windows-stable).
+Dit kan je [hier](https://classic.yarnpkg.com/en/docs/install/#windows-stable) downloaden.
 Het kan zijn dat ik iets vergeten ben dus als je foutmeldingen krijgt stuur die dan naar mij door(Marco).
 
 Zodat we samen kunnen werken met de code heb je git nodig.
-Dit kan je downloaden op [https://git-scm.com/downloads](https://git-scm.com/downloads).
+Dit kan je [hier](https://git-scm.com/downloads) downloaden.
 Je hoeft NIET de GUI-Client te downloaden.
 
 ## Code downloaden
@@ -62,6 +62,12 @@ Je commit staat nu alleen nog maar op je computer opgeslagen.
 Om heb naar github te sturen klip je op de "push" knop links-onderin de editor:
 
 ![alt text](readme/push.png)
+
+## cheat sheet
+
+In cheatSheet.js staat de basis van javascript als je wat dingen vergeten bent.
+Voor het maken van de webpagina/app gebruiken we react-native-web.
+De documentatie hier van kan je [hier](http://necolas.github.io/react-native-web/docs/?path=/docs/components-modal--props-example-animation-type) vinden.
 
 ## Available Scripts
 
