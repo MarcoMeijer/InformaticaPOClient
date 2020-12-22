@@ -21,7 +21,9 @@ Daarna druk je op CTRL+SHIFT+P om het commando window te openen.
 Daarin type je "Git: Clone" en druk je op enter.
 Nu heb je de URL van de repository nodig.
 Die kan je op de github pagina vinden:
+
 ![alt text](readme/clone.png)
+
 In dit geval is dat [https://github.com/MarcoMeijer/InformaticaPOClient.git](https://github.com/MarcoMeijer/InformaticaPOClient.git)
 Als je nu op enter drukt gaat hij als het goed is de code downloaden.
 
