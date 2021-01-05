@@ -1,34 +1,41 @@
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import { Button, Text, View } from 'react-native';
-import RadioChoices from './Gui/RadioChoices.js';
-import getData from './server/fetchData.js';
+import RadioChoices from './Gui/RadioChoices';
+
+function HomeScreen({navigation}) {
+    return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Home Screen</Text>
+            <Button
+                title="Go to Test screen"
+                onPress={() => navigation.navigate('Test')}
+            />
+        </View>
+    );
+}
+function TestScreen({navigation}) {
+    return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Test Screen</Text>
+            <RadioChoices options={["Optie 1", "Optie 2", "Optie 3"]}/>
+            <Button title="Go back" onPress={() => navigation.goBack()} />
+        </View>
+    );
+}
+
+const Stack = createStackNavigator();
 
 export default class App extends React.Component {
-  state = {
-    data: []
-  }
-
-  fetchData() {
-    getData('')
-      .then(data => this.setState({data: data}))
-      .catch(error => console.log(error));
-  }
-
   render() {
     return (
-      <View>
-        <Button
-          onPress={() => {
-            this.fetchData();
-          }}
-          title="Fetch data"
-          color="#841584"
-        />
-        {this.state.data.map((object, index) => {
-          return (<Text key={index}>{`a is ${object.a}\nb is ${object.b}\nc is ${object.c}\n`}</Text>);
-        })}
-        <RadioChoices options={["Optie a", "Optie b", "Optie c"]}/>
-      </View>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Test" component={TestScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
     );
   }
 }
