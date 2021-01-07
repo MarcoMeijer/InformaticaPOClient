@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import { Button, Text, View } from 'react-native';
-import RadioChoices from './Gui/RadioChoices';
+import Question from './Gui/Question';
 
 function HomeScreen({ navigation }) {
   return (
@@ -19,7 +19,7 @@ function TestScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Test Screen</Text>
-      <RadioChoices options={["Optie 1", "Optie 2", "Optie 3"]} />
+      <Question question="Test vraag" options={["A", "B", "C", "D"]}/>
       <Button title="Go back" onPress={() => navigation.goBack()} />
     </View>
   );
