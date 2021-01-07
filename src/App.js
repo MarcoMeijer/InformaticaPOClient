@@ -27,15 +27,13 @@ function TestScreen({ navigation }) {
 
 const Stack = createStackNavigator();
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Test" component={TestScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
-  }
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Test" component={TestScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
