@@ -1,19 +1,19 @@
 import * as React from 'react';
-import { View, Button, Text } from 'react-native';
+import { Button, Text, View } from 'react-native';
 
 export default function HomePage({ navigation }) {
   return (
     <View>
-      
+
       <Text>
-      <Text>Welkom op deze mooie site</Text>
+        <Text>Welkom op deze mooie site</Text>
       </Text>
-    
+
       <Button
-          title="Go to Log in screen"
-          onPress={() => navigation.navigate('BartTest1')}
+        title="Go to Log in screen"
+        onPress={() => navigation.navigate('BartTest1')}
       />
-  
-    </View> 
+
+    </View>
   );
 }
