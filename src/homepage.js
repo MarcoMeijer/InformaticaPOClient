@@ -10,12 +10,16 @@ export default function HomePage({ navigation }) {
       </Text>
 
       <Button
-        title="Go to Log in screen"
+        title="Ga naar login scherm"
         onPress={() => navigation.navigate('BartTest1')}
       />
       <Button
-        title="Go to edit exam screen"
+        title="Ga naar examen edit scherm"
         onPress={() => navigation.navigate('Edit exam')}
+      />
+      <Button
+        title="Ga naar examen tekst"
+        onPress={() => navigation.navigate('Examen tekst')}
       />
 
     </View>

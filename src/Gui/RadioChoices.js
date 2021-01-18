@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { styles } from '../Styles';
 import RadioButton from './RadioButton';
 
 export default function RadioChoices(props) {
@@ -17,7 +18,7 @@ export default function RadioChoices(props) {
           >
             <RadioButton selected={isSelected === object} style={[{ margin: 3 }]} />
           </TouchableOpacity>
-          <Text style={[{ margin: 3 }]} >{object}</Text>
+          <Text style={{...styles.text, margin: 5}}>{object}</Text>
         </View>);
       })}
     </View>
