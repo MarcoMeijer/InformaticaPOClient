@@ -9,6 +9,7 @@ Dit kan je [hier](https://code.visualstudio.com/) downloaden.
 Daarnaast heb je om de code uit te voeren yarn nodig.
 Dit kan je [hier](https://classic.yarnpkg.com/en/docs/install/#windows-stable) downloaden.
 Het kan zijn dat ik iets vergeten ben dus als je foutmeldingen krijgt stuur die dan naar mij door(Marco).
+Verder heb je ook nog Node JS nodig [hier](https://nodejs.org/en/download/).
 
 Zodat we samen kunnen werken met de code heb je git nodig.
 Dit kan je [hier](https://git-scm.com/downloads) downloaden.
