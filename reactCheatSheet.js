@@ -3,11 +3,6 @@
 // Informatie tussen pagina's doorgeven
 // ====================================== //
 
-const { useState } = require("react");
-const { ActivityIndicator } = require("react-native");
-const { TextInput } = require("react-native-gesture-handler");
-const { default: fetchData } = require("./src/server/fetchData");
-
 // informatie doorgeven aan andere pagina's
 function pagina1({ navigation }) {
   return (
