@@ -1,26 +1,28 @@
 import * as React from 'react';
-import { Button, View, Text } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Text, View } from 'react-native';
+import { Tab, TabsHeader } from './TabsHeader';
 
 function HomeScreen() {
   return (
-    <Text>Geachte leerling, welkom op jouw online examenteksten oefenen portal. Klik hieronder om direct aan de slag te gaan. Zie rechts de bijbeltekst van vandaag, met dagopening van meneer Stamhuis.</Text>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home!</Text>
+    </View>
   );
 }
 
-function TekstenOefenen() {
+function SettingsScreen() {
   return (
-    <Text>Teksten blablabla nog meer teksten</Text>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings!</Text>
+    </View>
   );
 }
-
-const Tabs = createBottomTabNavigator();
 
 export default function TabTest() {
   return (
-    <Tabs.Navigator>
-      <Tabs.Screen name="Home" component={HomeScreen}/>
-      <Tabs.Screen name="TekstenOefenen" component={TekstenOefenen} />
-    </Tabs.Navigator>
+    <TabsHeader>
+      <Tab name="Home" component={HomeScreen} />
+      <Tab name="Settings" component={SettingsScreen} />
+    </TabsHeader>
   );
 }

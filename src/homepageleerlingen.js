@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { Button, View, Text, Alert } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
- 
+import * as React from 'react';
+import { Button, Text, View } from 'react-native';
+
 function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -9,7 +9,7 @@ function HomeScreen({ navigation }) {
       <Button
         title="Teksten gaan oefenen"
         onPress={() => navigation.navigate('TekstenOefenen')}
-    />
+      />
     </View>
   );
 }
@@ -27,7 +27,7 @@ const Stack = createStackNavigator();
 export default function HomePageLeerlingen() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Overview' }}/>
+      <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Overview' }} />
       <Stack.Screen name="TekstenOefenen" component={TekstenOefenen} />
     </Stack.Navigator>
   );

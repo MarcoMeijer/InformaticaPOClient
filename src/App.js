@@ -19,9 +19,9 @@ export default function App() {
         <Stack.Screen name="BartTest1" component={BartTest1} />
         <Stack.Screen name="Edit exam" component={ExamEditPage} />
         <Stack.Screen name="Examen tekst" component={ExamTextPage} />
-        <Stack.Screen name="homepageleerlingen" component={HomePageLeerlingen}/>
-        <Stack.Screen name="registreren" component={Barten}/>
-        <Stack.Screen name="tabtest" component={TabTest}/>
+        <Stack.Screen name="homepageleerlingen" component={HomePageLeerlingen} />
+        <Stack.Screen name="registreren" component={Barten} />
+        <Stack.Screen name="tabtest" component={TabTest} />
       </Stack.Navigator>
     </NavigationContainer>
   );

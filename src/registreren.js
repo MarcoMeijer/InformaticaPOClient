@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TextInput ,View, Text } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import { styles } from './Styles';
 
 export default function Barten() {
