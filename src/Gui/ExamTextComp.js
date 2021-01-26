@@ -49,7 +49,6 @@ export default function ExamTextComp(props) {
   let text = props.text;
 
   let parsedText = ParseElementArray()(arrayToLinkedList(text.text))[1];
-  console.log(parsedText);
 
   return (
     <View>

@@ -6,7 +6,7 @@ import RadioChoices from './RadioChoices';
 export default function QuestionComp(props) {
   return (
     <View>
-      <Text style={styles.text}>{props.data.question}</Text>
+      <Text style={styles.text}>{props.data.vraag}</Text>
       <RadioChoices {...props.data} />
     </View>
   )

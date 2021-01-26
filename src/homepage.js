@@ -19,7 +19,7 @@ export default function HomePage({ navigation }) {
       />
       <Button
         title="Ga naar examen tekst"
-        onPress={() => navigation.navigate('Examen tekst')}
+        onPress={() => navigation.navigate('Examen tekst', { tekstid: 1, vraagid: 1 })}
       />
 
     </View>
