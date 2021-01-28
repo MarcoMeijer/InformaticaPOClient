@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { Button, View } from 'react-native';
-import { styles } from './Styles';
+import { styles } from '../Styles';
 
 
 export function Tab({ name, component, tabNavigator }) {

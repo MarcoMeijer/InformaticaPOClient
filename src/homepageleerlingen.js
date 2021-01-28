@@ -1,15 +1,11 @@
-import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import { Tab, TabsHeader } from './Gui/Tabs';
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Geachte leerling, welkom op jouw online examenteksten oefenen portal. Klik hieronder om direct aan de slag te gaan. Zie rechts de bijbeltekst van vandaag, met dagopening van meneer Stamhuis.</Text>
-      <Button
-        title="Teksten gaan oefenen"
-        onPress={() => navigation.navigate('TekstenOefenen')}
-      />
+      <Text>Geachte leerling, welkom op jouw online examenteksten oefenen portal. Zie rechts de bijbeltekst van vandaag, met dagopening van meneer Stamhuis.</Text>
     </View>
   );
 }
@@ -22,13 +18,11 @@ function TekstenOefenen() {
   );
 }
 
-const Stack = createStackNavigator();
-
 export default function HomePageLeerlingen() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Overview' }} />
-      <Stack.Screen name="TekstenOefenen" component={TekstenOefenen} />
-    </Stack.Navigator>
+    <TabsHeader>
+      <Tab name="Home" component={HomeScreen} />
+      <Tab name="TekstenOefenen" component={TekstenOefenen} />
+    </TabsHeader>
   );
 }

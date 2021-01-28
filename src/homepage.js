@@ -29,10 +29,6 @@ export default function HomePage({ navigation }) {
         title="registreren"
         onPress={() => navigation.navigate('registreren')}
       />
-      <Button
-        title="tabtest"
-        onPress={() => navigation.navigate('tabtest')}
-      />
     </View>
   );
 }

@@ -7,7 +7,6 @@ import ExamTextPage from './ExamTextPage';
 import HomePage from './homepage';
 import HomePageLeerlingen from './homepageleerlingen';
 import Barten from './registreren';
-import TabTest from './TabTest';
 
 const Stack = createStackNavigator();
 
@@ -21,7 +20,6 @@ export default function App() {
         <Stack.Screen name="Examen tekst" component={ExamTextPage} />
         <Stack.Screen name="homepageleerlingen" component={HomePageLeerlingen} />
         <Stack.Screen name="registreren" component={Barten} />
-        <Stack.Screen name="tabtest" component={TabTest} />
       </Stack.Navigator>
     </NavigationContainer>
   );
