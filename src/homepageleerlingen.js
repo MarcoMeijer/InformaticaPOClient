@@ -22,7 +22,7 @@ export default function HomePageLeerlingen() {
   return (
     <TabsHeader>
       <Tab name="Home" component={HomeScreen} />
-      <Tab name="TekstenOefenen" component={TekstenOefenen} />
+      <Tab name="Teksten oefenen" component={TekstenOefenen} />
     </TabsHeader>
   );
 }

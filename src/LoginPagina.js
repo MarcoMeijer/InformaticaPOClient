@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, TextInput, View } from 'react-native';
 import { styles } from './Styles';
 
-export default function BartTest1() {
+export default function LoginPagina() {
   const [llnr, changellnr] = React.useState('');
   const [password, changepassword] = React.useState('');
   return (

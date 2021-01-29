@@ -10,20 +10,20 @@ export default function HomePage({ navigation }) {
       </Text>
 
       <Button
-        title="Ga naar login scherm"
-        onPress={() => navigation.navigate('BartTest1')}
+        title="Ga naar login pagina"
+        onPress={() => navigation.navigate('Login pagina')}
       />
       <Button
         title="Ga naar examen tekst"
         onPress={() => navigation.navigate('Examen tekst', { tekstid: 1, vraagid: 1 })}
       />
       <Button
-        title="Ga naar Homepage leerlingen"
-        onPress={() => navigation.navigate('homepageleerlingen')}
+        title="Ga naar leerlingen home paginga"
+        onPress={() => navigation.navigate('Leerlingen home pagina')}
       />
       <Button
-        title="Ga naar Homepage leraren"
-        onPress={() => navigation.navigate('homepage leraren')}
+        title="Ga naar leraren home paginga"
+        onPress={() => navigation.navigate('Leraren home pagina')}
       />
       <Button
         title="registreren"
