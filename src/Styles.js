@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   rowContainer: {
-    flex: 1,
     flexDirection: 'row'
   },
   box: {
@@ -18,7 +17,6 @@ export const styles = StyleSheet.create({
     fontSize: '16px'
   },
   textBox: {
-    maxHeight: 2000,
     borderColor: 'deepskyblue',
     backgroundColor: '#eeeeee',
     borderWidth: 1

@@ -14,16 +14,16 @@ export default function HomePage({ navigation }) {
         onPress={() => navigation.navigate('BartTest1')}
       />
       <Button
-        title="Ga naar examen edit scherm"
-        onPress={() => navigation.navigate('Edit exam')}
-      />
-      <Button
         title="Ga naar examen tekst"
         onPress={() => navigation.navigate('Examen tekst', { tekstid: 1, vraagid: 1 })}
       />
       <Button
         title="Ga naar Homepage leerlingen"
         onPress={() => navigation.navigate('homepageleerlingen')}
+      />
+      <Button
+        title="Ga naar Homepage leraren"
+        onPress={() => navigation.navigate('homepage leraren')}
       />
       <Button
         title="registreren"
