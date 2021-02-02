@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { Tab, TabsHeader } from './Gui/Tabs';
+import fetchData from './server/fetchData';
 
 function HomeScreen() {
   return (
@@ -11,9 +12,24 @@ function HomeScreen() {
 }
 
 function TekstenOefenen() {
+ const[resultaat, zetResultaat] = React.useState('')
+ fetchData("teksten")
+           .then(data => {
+             if(data.length === 0) {
+               zetResultaat("fail");
+             } else {
+               zetResultaat(JSON.stringify(data) + 
+                            "teksten geladen");
+               
+             }
+           })
+  .catch(error => {
+   zetResultaat("timeout")
+ });
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Teksten komen hier</Text>
+      <Text>Status van teksten laden:</Text>
+     <Text>{resultaat}</Text>
     </View>
   );
 }

@@ -20,5 +20,14 @@ export const styles = StyleSheet.create({
     borderColor: 'deepskyblue',
     backgroundColor: '#eeeeee',
     borderWidth: 1
+  },
+  loginbutton: {
+    Width: '100px',
+    margin: '500px'
+  },
+  barten: {
+    height: 25, 
+    borderColor: 'gray', 
+    borderWidth: 1
   }
 });

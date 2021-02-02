@@ -1,5 +1,5 @@
 
-const serverURL = 'http://94.214.161.27:4000';
+const serverURL = 'http://94.214.161.27:21';
 
 export default async function fetchData(url, body) {
   const response = await fetch(`${serverURL}/${url}`, {
