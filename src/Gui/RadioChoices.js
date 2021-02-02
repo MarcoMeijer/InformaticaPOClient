@@ -9,7 +9,7 @@ export default function RadioChoices(props) {
 
   return (
     <View>
-      {props.options.map((object, index) => {
+      {props.opties.map((object, index) => {
         return (<View key={index} style={[{ flex: 1, flexDirection: 'row', margin: 3 }]}>
           <TouchableOpacity
             onPress={() => {

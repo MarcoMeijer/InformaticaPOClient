@@ -1,10 +1,10 @@
 import Editor from "@monaco-editor/react";
 import * as React from 'react';
-import { Button, Text, TextInput, View } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import ExamTextComp from './Gui/ExamTextComp';
 import { styles } from './Styles';
 
-export default function ExamEditPage({ navigation }) {
+export default function ExamEditPage() {
   const [title, changeTitle] = React.useState('');
   const [text, changeText] = React.useState('');
 
@@ -21,7 +21,7 @@ export default function ExamEditPage({ navigation }) {
   };
 
   return (
-    <View style={styles.rowContainer}>
+    <View style={{flex: 1, flexDirection: 'row'}}>
       <View style={styles.box}>
         <Text style={styles.text}>
           Titel:
@@ -37,14 +37,9 @@ export default function ExamEditPage({ navigation }) {
         </Text>
         <TextInput
           multiline
-          numberOfLines={30}
-          style={styles.textBox}
+          style={[styles.textBox, {flex: 1}]}
           onChangeText={text => changeText(text)}
           value={text}
-        />
-        <Button
-          title="Terug"
-          onPress={() => navigation.goBack()}
         />
       </View>
       <View style={styles.box}>

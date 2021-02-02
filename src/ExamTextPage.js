@@ -1,50 +1,52 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { ActivityIndicator, Button, View } from 'react-native';
 import ExamTextComp from './Gui/ExamTextComp';
-import QuestionListComp from './Gui/QuestionListComp';
-import getData from './server/fetchData';
+import QuestionComp from './Gui/QuestionComp';
+import fetchData from './server/fetchData';
 import { styles } from './Styles';
 
-export default function ExamEditPage() {
-  const [text, setText] = React.useState(undefined);
-  const [questions, setQuestions] = React.useState(undefined);
+export default function ExamEditPage({ route, navigation }) {
+  const { tekstid, vraagid } = route.params;
+  const [text, setText] = useState(undefined);
+  const [vraag, setVraag] = useState(undefined);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (text === undefined) {
-      setTimeout(() => {
-        getData("test").then(data => setText(data));
-      }, 0);
+      fetchData("tekst", { tekstid: tekstid }).then(data => {
+        setText(JSON.parse(data.tekstinhoud));
+      });
     }
-  }, [text]);
+  }, [text, tekstid]);
 
-  React.useEffect(() => {
-    if (questions === undefined) {
-      setTimeout(() => {
-        getData("vragen").then(data => setQuestions(data));
-      }, 0);
+  useEffect(() => {
+    if (vraag === undefined) {
+      fetchData("vraag", { vraagid: vraagid }).then(data => {
+        setVraag(JSON.parse(data.vraaginhoud));
+      });
     }
-  }, [questions]);
-  
+  }, [vraag, vraagid]);
+
   return (
     <View style={styles.rowContainer}>
       <View style={styles.box}>
         {
           text === undefined ?
-          <ActivityIndicator/> :
-          <ExamTextComp text={text}>
-          </ExamTextComp>
+            <ActivityIndicator /> :
+            <ExamTextComp text={text}>
+            </ExamTextComp>
         }
       </View>
       <View style={styles.box}>
         {
-          questions === undefined ?
-          <ActivityIndicator/> :
-          <QuestionListComp questions={questions}>
-          </QuestionListComp>
+          vraag === undefined ?
+            <ActivityIndicator /> :
+            <QuestionComp data={vraag}>
+            </QuestionComp>
         }
         <Button
           title="Submit"
-          onPress={() => {}}
+          onPress={() => { }}
         />
       </View>
     </View>
