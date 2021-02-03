@@ -21,13 +21,26 @@ export const styles = StyleSheet.create({
     backgroundColor: '#eeeeee',
     borderWidth: 1
   },
-  loginbutton: {
-    Width: '100px',
-    margin: '500px'
-  },
   barten: {
     height: 25, 
     borderColor: 'gray', 
     borderWidth: 1
-  }
+  },
+  //loginstyle
+  loginbutton: {
+    width: '250px',
+    marginTop: '5px',
+  },
+  loginbutton2: {
+    width: '250px',
+    marginTop: '5px',
+  },
+  loginmain: {
+    flex: 1,
+    alignItems: 'Left',
+    justifyContent: 'Top',
+    marginLeft: '10px',
+    width: '500px'
+  },
+
 });
