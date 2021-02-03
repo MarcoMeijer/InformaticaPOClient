@@ -8,6 +8,10 @@ export default function LoginPagina({ navigation }) {
   const [password, changepassword] = React.useState('');
   const [result, setResult] = React.useState(undefined);
 
+  let naarhome = () => {
+    navigation.navigate('Home')
+  }
+
   let login = () => {
     setResult("wachten");
     fetchData("login", { leerlingnummer: llnr, wachtwoord: password })
@@ -15,13 +19,14 @@ export default function LoginPagina({ navigation }) {
         if (data.length === 0) {
           setResult("fail");
         } else {
-          setResult("success");
+          setResult("success")
+          (naarhome)
         }
       });
   }
   return (
     <View style={styles.loginmain}>
-      <Text style={styles.text}>
+      <Text style={[styles.text, styles.row]}>
         leerlingnummer:
         </Text>
 

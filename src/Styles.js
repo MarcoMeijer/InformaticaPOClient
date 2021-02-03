@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
   loginmain: {
     flex: 1,
     alignItems: 'Left',
-    justifyContent: 'Top',
+    justifyContent: 'Left',
     marginLeft: '10px',
     width: '500px'
   },
