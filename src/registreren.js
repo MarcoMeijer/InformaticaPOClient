@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {useState} from 'react';
-import { Text, TextInput, View, Button } from 'react-native';
-import { styles } from './Styles';
+import { useState } from 'react';
+import { Button, Text, TextInput, View } from 'react-native';
 import fetchData from './server/fetchData';
+import { styles } from './Styles';
 
 export default function Barten({navigation}) {
   const [leerlingnummer, zetleerlingnummer] = useState("");
@@ -54,7 +54,7 @@ export default function Barten({navigation}) {
       }
     else
       {              
-        fetchData('register', {leerlingnummer: leerlingnummer, voornaam: voornaam,tussenvoegsel: tussenvoegsel,achternaam: achternaam,klas: klas,wachtwoord: wachtwoord,wachtwoordherhalen: wachtwoordherhalen})
+        fetchData('register', {llnr: leerlingnummer, voornaam: voornaam,tussenvoegsel: tussenvoegsel,achternaam: achternaam,klas: klas,wachtwoord: wachtwoord,wachtwoordherhalen: wachtwoordherhalen})
         .then (naarhome)
         .catch (zeterror_2)
       }
