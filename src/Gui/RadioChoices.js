@@ -5,7 +5,7 @@ import { styles } from '../Styles';
 import RadioButton from './RadioButton';
 
 export default function RadioChoices(props) {
-  const [isSelected, setSelected] = useState(true);
+  const [isSelected, setSelected] = useState(props.value);
 
   return (
     <View>
@@ -14,6 +14,7 @@ export default function RadioChoices(props) {
           <TouchableOpacity
             onPress={() => {
               setSelected(object);
+              props.onChangeText(object);
             }}
           >
             <RadioButton selected={isSelected === object} style={[{ margin: 3 }]} />
