@@ -29,6 +29,10 @@ export default function HomePage({ navigation }) {
         title="registreren"
         onPress={() => navigation.navigate('registreren')}
       />
+      <Button
+        title="inloggen"
+        onPress={() => navigation.navigate('inloggen')}
+      />
     </View>
   );
 }

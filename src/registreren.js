@@ -182,7 +182,7 @@ export default function Barten({navigation}) {
         <Text>{"\n"}</Text>
         <Button
           title = "Heeft u al een account? Log dan in!"
-          onPress={() => navigation.navigate('Login pagina')}
+          onPress={() => navigation.navigate('inloggen')}
         />
       </View>
     </View>

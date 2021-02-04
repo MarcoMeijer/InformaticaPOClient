@@ -8,6 +8,7 @@ import HomePageLeerlingen from './homepageleerlingen';
 import HomePageLeraren from './homepageleraren';
 import LoginPagina from './LoginPagina';
 import Barten from './registreren';
+import Barten2 from './inloggen';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,7 @@ export default function App() {
           <Stack.Screen name="Leerlingen home pagina" component={HomePageLeerlingen} />
           <Stack.Screen name="Leraren home pagina" component={HomePageLeraren} />
           <Stack.Screen name="registreren" component={Barten} />
+          <Stack.Screen name="inloggen" component={Barten2} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>
