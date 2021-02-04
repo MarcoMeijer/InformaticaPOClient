@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
-import { Text, TextInput, View, Button, TouchableOpacity } from 'react-native';
-import { styles } from './Styles';
+import { useEffect, useState } from 'react';
+import { Button, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import DropDownMenu from './Gui/DropDownMenu';
 import fetchData from './server/fetchData';
-import RadioChoices from './Gui/RadioChoices'
+import { styles } from './Styles';
 
 export default function Barten({ navigation }) {
   const [leerlingnummer, zetleerlingnummer] = useState("");
@@ -79,7 +79,7 @@ export default function Barten({ navigation }) {
   }
 
   useEffect(() => {
-    if (klassen === []) {
+    if (klassen.length === 0) {
       fetchData("klassen")
         .then(data => {
           let nieuweKlassen = [];
@@ -98,13 +98,13 @@ export default function Barten({ navigation }) {
         <TouchableOpacity
           onPress={veranderfahne}
         >
-          Hier kunt u zich
+          <Text>Hier kunt u zich</Text>
         </TouchableOpacity>
         {" "}
         <TouchableOpacity
           onPress={veranderterug}
         >
-          registreren! {"\n\n"}
+          <Text>registreren! {"\n\n"}</Text>
         </TouchableOpacity>
       </Text>
       <Text style={{ color: '#ff0000' }}>{error1}</Text>
@@ -142,13 +142,12 @@ export default function Barten({ navigation }) {
           value={achternaam}
         />
       </View>
-      <View style={styles.rowContainer}>
+      <View style={{zIndex: 2, ...styles.rowContainer}}>
         <Text>Klas:                                                </Text>
-        <RadioChoices
+        <DropDownMenu
           opties={klassen}
           onChangeText={nieuweklas => zetklas(nieuweklas)}
           value={klas}
-          backgroundColor='#ffffff'
         />
       </View>
       <View style={styles.rowContainer}>

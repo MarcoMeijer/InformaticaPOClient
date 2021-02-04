@@ -1,30 +1,35 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Button, Text, TouchableOpacity, View } from 'react-native';
+import { Button, View } from 'react-native';
 
 export default function DropDownMenu(props) {
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(props.value);
+  const [selected, setSelected] = useState(undefined);
 
   let OpenButton = () => {
-    return (<TouchableOpacity
+    return (<Button
+      title={selected === undefined ? 'Selecteer optie' : selected}
       onPress={() => setOpen(!open)}
-    >
-      <Text>{selected === undefined ? 'Selecteer optie' : selected}</Text>
-    </TouchableOpacity>);
+    />);
   }
 
   return (
-    <View style={{zIndex: 2}}>
-      <OpenButton/>
+    <View style={{zIndex: 2, flex: 1, flexDirection: 'row'}}>
+      <OpenButton />
       {
         open &&
-        <View style={{position: 'absolute', flex: 0}}>
-          <OpenButton/>
+        <View style={{ position: 'absolute', flex: 1 }}>
+          <OpenButton />
           {props.opties.map((object, index) => {
-            return (<Button key={index} title={object} onPress={() => {
+            return (<Button
+              key={index}
+              title={object}
+              color="#98d9f5"
+              onPress={() => {
                 setSelected(object);
-            }}/>)
+                setOpen(!open);
+              }}
+            />)
           })}
         </View>
       }
