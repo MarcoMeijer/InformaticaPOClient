@@ -14,20 +14,12 @@ export default function HomePage({ navigation }) {
         onPress={() => navigation.navigate('Login pagina')}
       />
       <Button
-        title="Ga naar examen tekst"
-        onPress={() => navigation.navigate('Examen tekst', { tekstid: 1, vraagid: 1 })}
-      />
-      <Button
         title="Ga naar leraren home paginga"
         onPress={() => navigation.navigate('Leraren home pagina')}
       />
       <Button
         title="inloggen"
         onPress={() => navigation.navigate('inloggen')}
-      />
-      <Button
-        title="tekstenscherm"
-        onPress={() => navigation.navigate('tekstenscherm')}
       />
     </View>
   );

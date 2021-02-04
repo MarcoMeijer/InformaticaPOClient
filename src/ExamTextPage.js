@@ -21,6 +21,7 @@ export default function ExamEditPage({ route, navigation }) {
 
   useEffect(() => {
     if (vraag === undefined) {
+      console.log(vraagid);
       fetchData("vraag", { vraagid: vraagid }).then(data => {
         setVraag(JSON.parse(data.vraaginhoud));
       });

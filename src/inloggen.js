@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { Button, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import useFahneKleur from './Hooks/FahneKleur';
 import fetchData from './server/fetchData';
 import { styles } from './Styles';
 
@@ -12,7 +13,7 @@ export default function Barten2({ navigation }) {
   const [error3, zeterror3] = useState("");
   const [leerlingnummercolor, zetleerlingnummercolor] = useState("grey");
   const [wachtwoordcolor, zetwachtwoordcolor] = useState("grey");
-  const [fahnekleur, zetfahnekleur] = useState("#ffffff");
+  const [fahnekleur, veranderfahne, veranderterug] = useFahneKleur();
 
   let inloggen = () => {
     if (leerlingnummer === "") {
@@ -38,22 +39,6 @@ export default function Barten2({ navigation }) {
 
   let naarhome = () => {
     navigation.navigate('Leerlingen home pagina')
-  }
-
-  let veranderfahne = () => {
-    if (fahnekleur === "#ffffff") {
-      zetfahnekleur("#171717")
-    } else if (fahnekleur === "#ffeb33") {
-      zetfahnekleur("#171717")
-    } else if (fahnekleur === "#171717") {
-      zetfahnekleur("#d40404")
-    } else {
-      zetfahnekleur("#ffeb33")
-    }
-  }
-
-  let veranderterug = () => {
-    zetfahnekleur("#ffffff")
   }
 
   return (

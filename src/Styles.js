@@ -22,8 +22,8 @@ export const styles = StyleSheet.create({
     borderWidth: 1
   },
   barten: {
-    height: 25, 
-    borderColor: 'gray', 
+    height: 25,
+    borderColor: 'gray',
     borderWidth: 1
   },
   //loginstyle

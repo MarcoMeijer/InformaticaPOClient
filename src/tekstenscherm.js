@@ -1,11 +1,26 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Text, TouchableOpacity, View } from 'react-native';
 import useFahneKleur from './Hooks/FahneKleur';
+import fetchData from './server/fetchData';
 
 export default function Barten3({ navigation }) {
   const [fahnekleur, veranderfahne, veranderterug] = useFahneKleur();
   const [teksten, zetTeksten] = useState([]);
+
+  useEffect(() => {
+    if (teksten.length === 0) {
+      fetchData('tekstniveau', { tekstniveau: 1 })
+        .then(data => {
+          zetTeksten(data.map(tekst => {
+            let nieuweTekst = JSON.parse(tekst.tekstinhoud);
+            nieuweTekst.tekstid = tekst.tekstid;
+            nieuweTekst.vraagid = tekst.vraagid;
+            return nieuweTekst;
+          }));
+        });
+    }
+  }, [teksten]);
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: fahnekleur }}>
@@ -13,15 +28,27 @@ export default function Barten3({ navigation }) {
         <TouchableOpacity
           onPress={veranderfahne}
         >
-          Hier kunt u alle teksten
+          <Text>Hier kunt u alle teksten</Text>
             </TouchableOpacity>
         {" "}
         <TouchableOpacity
           onPress={veranderterug}
         >
-          bekijken! {"\n\n"}
+          <Text>bekijken! {"\n\n"}</Text>
         </TouchableOpacity>
       </Text>
+      {
+        teksten.map((tekst, index) => {
+          return (
+            <Button
+              title={tekst.title}
+              onPress={() => {
+                navigation.navigate('Examen tekst', { tekstid: tekst.tekstid, vraagid: tekst.vraagid });
+              }}
+            />
+          )
+        })
+      }
       <Text>{"\n"}</Text>
       <Button
         title="Hier kunt u all teksten bekijken"

@@ -14,7 +14,7 @@ export function Tab({ name, component, tabNavigator }) {
     />
   );
 }
-export function TabsHeader({ children }) {
+export function TabsHeader({ navigation, children }) {
   const [selectedComponent, setSelectedComponent] = useState({f: children[0].props.component});
 
   const childrenWithProps = React.Children.map(children, child => {
@@ -26,7 +26,7 @@ export function TabsHeader({ children }) {
       <View style={styles.rowContainer}>
         {childrenWithProps}
       </View>
-      {<selectedComponent.f style={{flex: 1}}/>}
+      {<selectedComponent.f style={{flex: 1}} navigation={navigation}/>}
     </View>
   );
 }

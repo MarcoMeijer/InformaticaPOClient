@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Text, TextInput, View, Button } from 'react-native';
-import { styles } from './Styles';
+import { Button, Text, TextInput, View } from 'react-native';
 import fetchData from './server/fetchData';
+import { styles } from './Styles';
 
 export default function LoginPagina({ navigation }) {
   const [llnr, changellnr] = React.useState('');
