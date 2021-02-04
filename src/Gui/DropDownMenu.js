@@ -24,8 +24,9 @@ export default function DropDownMenu(props) {
             return (<Button
               key={index}
               title={object}
-              color="#98d9f5"
+              color="#83cceb"
               onPress={() => {
+                props.onChangeText(object);
                 setSelected(object);
                 setOpen(!open);
               }}

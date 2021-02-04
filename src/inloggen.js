@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Text, TextInput, View, Button, TouchableOpacity } from 'react-native';
-import { styles } from './Styles';
+import { Button, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import fetchData from './server/fetchData';
+import { styles } from './Styles';
 
 export default function Barten2({ navigation }) {
   const [leerlingnummer, zetleerlingnummer] = useState("");
@@ -37,7 +37,7 @@ export default function Barten2({ navigation }) {
   };
 
   let naarhome = () => {
-    navigation.navigate('Home')
+    navigation.navigate('Leerlingen home pagina')
   }
 
   let veranderfahne = () => {
@@ -62,13 +62,13 @@ export default function Barten2({ navigation }) {
         <TouchableOpacity
           onPress={veranderfahne}
         >
-          Hier kunt u
+          <Text>Hier kunt u</Text>
         </TouchableOpacity>
         {" "}
         <TouchableOpacity
           onPress={veranderterug}
         >
-          inloggen! {"\n\n"}
+          <Text>inloggen! {"\n\n"}</Text>
         </TouchableOpacity>
       </Text>
       <Text style={{ color: '#ff0000' }}>{error1}</Text>

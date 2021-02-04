@@ -18,16 +18,8 @@ export default function HomePage({ navigation }) {
         onPress={() => navigation.navigate('Examen tekst', { tekstid: 1, vraagid: 1 })}
       />
       <Button
-        title="Ga naar leerlingen home paginga"
-        onPress={() => navigation.navigate('Leerlingen home pagina')}
-      />
-      <Button
         title="Ga naar leraren home paginga"
         onPress={() => navigation.navigate('Leraren home pagina')}
-      />
-      <Button
-        title="registreren"
-        onPress={() => navigation.navigate('registreren')}
       />
       <Button
         title="inloggen"
@@ -35,7 +27,7 @@ export default function HomePage({ navigation }) {
       />
       <Button
         title="tekstenscherm"
-        onPress={() => navigation.navigate('tekstscherm')}
+        onPress={() => navigation.navigate('tekstenscherm')}
       />
     </View>
   );

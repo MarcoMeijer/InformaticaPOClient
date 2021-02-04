@@ -6,9 +6,9 @@ import ExamTextPage from './ExamTextPage';
 import HomePage from './homepage';
 import HomePageLeerlingen from './homepageleerlingen';
 import HomePageLeraren from './homepageleraren';
+import Barten2 from './inloggen';
 import LoginPagina from './LoginPagina';
 import Barten from './registreren';
-import Barten2 from './inloggen';
 import Barten3 from './tekstenscherm';
 
 const Stack = createStackNavigator();

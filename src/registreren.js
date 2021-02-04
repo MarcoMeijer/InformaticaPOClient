@@ -142,8 +142,8 @@ export default function Barten({ navigation }) {
           value={achternaam}
         />
       </View>
-      <View style={{zIndex: 2, ...styles.rowContainer}}>
-        <Text>Klas:                                                </Text>
+      <View style={{zIndex: 2, flexDirection: 'row'}}>
+        <Text>Klas:                                                           </Text>
         <DropDownMenu
           opties={klassen}
           onChangeText={nieuweklas => zetklas(nieuweklas)}
