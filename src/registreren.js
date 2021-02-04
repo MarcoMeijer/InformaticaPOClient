@@ -1,11 +1,11 @@
 import * as React from 'react';
-import {useState} from 'react';
+import { useState, useEffect } from 'react';
 import { Text, TextInput, View, Button, TouchableOpacity } from 'react-native';
 import { styles } from './Styles';
 import fetchData from './server/fetchData';
 import RadioChoices from './Gui/RadioChoices'
 
-export default function Barten({navigation}) {
+export default function Barten({ navigation }) {
   const [leerlingnummer, zetleerlingnummer] = useState("");
   const [voornaam, zetvoornaam] = useState("");
   const [tussenvoegsel, zettussenvoegsel] = useState("");
@@ -23,47 +23,39 @@ export default function Barten({navigation}) {
   const [wachtwoordherhalencolor, zetwachtwoordherhalencolor] = useState("grey");
   const [klassen, zetklassen] = useState([]);
   const [fahnekleur, zetfahnekleur] = useState("#ffffff");
-  
+
   let registreren = () => {
-    if (leerlingnummer === "")
-      {
-        zeterror1("U heeft het leerlingnummer niet ingevuld. \n\n");
-        zetleerlingnummercolor("#ff0000");
-      }      
-    else if (voornaam === "")
-      {
-        zeterror1("U heeft uw voornaam niet ingevuld. \n\n");
-        zetvoornaamcolor("#ff0000");
-      }
-    else if (achternaam === "")
-      {
-        zeterror1("U heeft uw achternaam niet ingevuld. \n\n");
-        zetachternaamcolor("#ff0000");
-      }
-    else if (klas === "")
-      {
-        zeterror1("U heeft uw klas niet ingevuld. \n\n");
-      }
-    else if (wachtwoord === "")
-      {
-        zeterror1("U heeft uw wachtwoord niet ingevuld. \n\n");
-        zetwachtwoordcolor("#ff0000");
-      }
-    else if (wachtwoordherhalen === "")
-      {
-        zeterror1("U heeft uw wachtwoord herhalen niet ingevuld. \n\n");
-        zetwachtwoordherhalencolor("#ff0000");
-      }
-    else if (wachtwoord !== wachtwoordherhalen)
-    {
+    if (leerlingnummer === "") {
+      zeterror1("U heeft het leerlingnummer niet ingevuld. \n\n");
+      zetleerlingnummercolor("#ff0000");
+    }
+    else if (voornaam === "") {
+      zeterror1("U heeft uw voornaam niet ingevuld. \n\n");
+      zetvoornaamcolor("#ff0000");
+    }
+    else if (achternaam === "") {
+      zeterror1("U heeft uw achternaam niet ingevuld. \n\n");
+      zetachternaamcolor("#ff0000");
+    }
+    else if (klas === "") {
+      zeterror1("U heeft uw klas niet ingevuld. \n\n");
+    }
+    else if (wachtwoord === "") {
+      zeterror1("U heeft uw wachtwoord niet ingevuld. \n\n");
+      zetwachtwoordcolor("#ff0000");
+    }
+    else if (wachtwoordherhalen === "") {
+      zeterror1("U heeft uw wachtwoord herhalen niet ingevuld. \n\n");
+      zetwachtwoordherhalencolor("#ff0000");
+    }
+    else if (wachtwoord !== wachtwoordherhalen) {
       zeterror3("Uw wachtwoord komt niet overeen met het wachtwoord dat u heeft herhaald. \n\n");
     }
-    else  
-      {              
-        fetchData('register', {llnr: leerlingnummer, voornaam: voornaam,tussenvoegsel: tussenvoegsel,achternaam: achternaam,klas: klas,wachtwoord: wachtwoord,wachtwoordherhalen: wachtwoordherhalen})
-          .then (naarhome)
-          .catch (() => {zeterror2("De server is niet online op dit moment. probeer het op een ander moment. \n\n")})
-      }
+    else {
+      fetchData('register', { llnr: leerlingnummer, voornaam: voornaam, tussenvoegsel: tussenvoegsel, achternaam: achternaam, klas: klas, wachtwoord: wachtwoord, wachtwoordherhalen: wachtwoordherhalen })
+        .then(naarhome)
+        .catch(() => { zeterror2("De server is niet online op dit moment. probeer het op een ander moment. \n\n") })
+    }
   };
 
   let naarhome = () => {
@@ -71,13 +63,13 @@ export default function Barten({navigation}) {
   }
 
   let veranderfahne = () => {
-    if(fahnekleur === "#ffffff"){
+    if (fahnekleur === "#ffffff") {
       zetfahnekleur("#171717")
-    }else if(fahnekleur === "#ffeb33"){
+    } else if (fahnekleur === "#ffeb33") {
       zetfahnekleur("#171717")
-    }else if(fahnekleur === "#171717"){
+    } else if (fahnekleur === "#171717") {
       zetfahnekleur("#d40404")
-    }else{
+    } else {
       zetfahnekleur("#ffeb33")
     }
   }
@@ -86,15 +78,19 @@ export default function Barten({navigation}) {
     zetfahnekleur("#ffffff")
   }
 
-  fetchData("klassen")
-    .then(data => {
-      let nieuweKlassen = [];
-      for(let klas of data) {
-        nieuweKlassen.push(klas.klas);
-      }
-      zetklassen(nieuweKlassen);
-    })
-    .catch (() => {zeterror2("De server is niet online op dit moment. probeer het op een ander moment. \n\n")})
+  useEffect(() => {
+    if (klassen === []) {
+      fetchData("klassen")
+        .then(data => {
+          let nieuweKlassen = [];
+          for (let klas of data) {
+            nieuweKlassen.push(klas.klas);
+          }
+          zetklassen(nieuweKlassen);
+        })
+        .catch(() => { zeterror2("De server is niet online op dit moment. probeer het op een ander moment. \n\n") })
+    }
+  }, [klassen]);
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: fahnekleur }}>
@@ -104,7 +100,7 @@ export default function Barten({navigation}) {
         >
           Hier kunt u zich
         </TouchableOpacity>
-          {" "}
+        {" "}
         <TouchableOpacity
           onPress={veranderterug}
         >
@@ -117,58 +113,58 @@ export default function Barten({navigation}) {
       <View style={styles.rowContainer}>
         <Text>Leerlingnummer:          </Text>
         <TextInput
-          style= {{height: 25, borderColor: leerlingnummercolor, borderWidth: 1, backgroundColor: '#ffffff' }}
-          onChangeText={nieuweleerlingnummer => {zetleerlingnummer(nieuweleerlingnummer) ; zetleerlingnummercolor("'grey'") ; }}
+          style={{ height: 25, borderColor: leerlingnummercolor, borderWidth: 1, backgroundColor: '#ffffff' }}
+          onChangeText={nieuweleerlingnummer => { zetleerlingnummer(nieuweleerlingnummer); zetleerlingnummercolor("'grey'"); }}
           value={leerlingnummer}
         />
       </View>
       <View style={styles.rowContainer}>
         <Text>Voornaam:                    </Text>
         <TextInput
-          style= {{height: 25, borderColor: voornaamcolor, borderWidth: 1, backgroundColor: '#ffffff' }}
-          onChangeText= { nieuwevoornaam => {zetvoornaam(nieuwevoornaam) ; zetvoornaamcolor("'grey'")}}
-          value={voornaam}          
+          style={{ height: 25, borderColor: voornaamcolor, borderWidth: 1, backgroundColor: '#ffffff' }}
+          onChangeText={nieuwevoornaam => { zetvoornaam(nieuwevoornaam); zetvoornaamcolor("'grey'") }}
+          value={voornaam}
         />
       </View>
       <View style={styles.rowContainer}>
         <Text>Tussenvoegsel:             </Text>
         <TextInput
-          style= {{height: 25, borderColor: 'gray', borderWidth: 1, backgroundColor: '#ffffff' }}
-          onChangeText={nieuwetussenvoegsel => zettussenvoegsel(nieuwetussenvoegsel) }
+          style={{ height: 25, borderColor: 'gray', borderWidth: 1, backgroundColor: '#ffffff' }}
+          onChangeText={nieuwetussenvoegsel => zettussenvoegsel(nieuwetussenvoegsel)}
           value={tussenvoegsel}
         />
       </View>
       <View style={styles.rowContainer}>
         <Text>Achternaam:                 </Text>
         <TextInput
-          style= {{height: 25, borderColor: achternaamcolor, borderWidth: 1, backgroundColor: '#ffffff' }}
-          onChangeText={nieuweachternaam => {zetachternaam(nieuweachternaam) ; zetachternaamcolor("'grey'")}}
+          style={{ height: 25, borderColor: achternaamcolor, borderWidth: 1, backgroundColor: '#ffffff' }}
+          onChangeText={nieuweachternaam => { zetachternaam(nieuweachternaam); zetachternaamcolor("'grey'") }}
           value={achternaam}
         />
       </View>
       <View style={styles.rowContainer}>
         <Text>Klas:                                                </Text>
-        <RadioChoices 
+        <RadioChoices
           opties={klassen}
           onChangeText={nieuweklas => zetklas(nieuweklas)}
           value={klas}
-          backgroundColor= '#ffffff'
+          backgroundColor='#ffffff'
         />
       </View>
       <View style={styles.rowContainer}>
         <Text>Wachtwoord:                </Text>
         <TextInput
-          style= {{height: 25, borderColor: wachtwoordcolor, borderWidth: 1, backgroundColor: '#ffffff' }}
-          onChangeText={nieuwewachtwoord => {zetwachtwoord(nieuwewachtwoord) ; zetwachtwoordcolor("'grey'")}}
+          style={{ height: 25, borderColor: wachtwoordcolor, borderWidth: 1, backgroundColor: '#ffffff' }}
+          onChangeText={nieuwewachtwoord => { zetwachtwoord(nieuwewachtwoord); zetwachtwoordcolor("'grey'") }}
           value={wachtwoord}
-  	      secureTextEntry={true}
+          secureTextEntry={true}
         />
       </View>
       <View style={styles.rowContainer}>
         <Text>Wachtwoord herhalen: </Text>
         <TextInput
-          style= {{height: 25, borderColor: wachtwoordherhalencolor, borderWidth: 1, backgroundColor: '#ffffff' }}
-          onChangeText={nieuwewachtwoordherhalen => {zetwachtwoordherhalen(nieuwewachtwoordherhalen) ; zetwachtwoordherhalencolor("'grey'")}}
+          style={{ height: 25, borderColor: wachtwoordherhalencolor, borderWidth: 1, backgroundColor: '#ffffff' }}
+          onChangeText={nieuwewachtwoordherhalen => { zetwachtwoordherhalen(nieuwewachtwoordherhalen); zetwachtwoordherhalencolor("'grey'") }}
           value={wachtwoordherhalen}
           secureTextEntry={true}
         />
@@ -177,11 +173,11 @@ export default function Barten({navigation}) {
         <Text>{"\n"}</Text>
         <Button
           title="Registreren"
-          onPress={registreren} 
+          onPress={registreren}
         />
         <Text>{"\n"}</Text>
         <Button
-          title = "Heeft u al een account? Log dan in!"
+          title="Heeft u al een account? Log dan in!"
           onPress={() => navigation.navigate('inloggen')}
         />
       </View>

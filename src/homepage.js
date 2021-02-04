@@ -33,6 +33,10 @@ export default function HomePage({ navigation }) {
         title="inloggen"
         onPress={() => navigation.navigate('inloggen')}
       />
+      <Button
+        title="tekstenscherm"
+        onPress={() => navigation.navigate('tekstscherm')}
+      />
     </View>
   );
 }
