@@ -10,7 +10,7 @@ export default function RadioChoices(props) {
   let color = props.backgroundColor;
 
   if(color === undefined)
-    color = '#000';
+    color = '#fff';
 
   return (
     <View>

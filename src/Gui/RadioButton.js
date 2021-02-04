@@ -11,6 +11,7 @@ export default function RadioButton(props) {
       borderColor: '#000',
       alignItems: 'center',
       justifyContent: 'center',
+      backgroundColor: props.backgroundColor
     }, props.style]}>
       {
         props.selected ?
@@ -18,7 +19,7 @@ export default function RadioButton(props) {
             height: 12,
             width: 12,
             borderRadius: 6,
-            backgroundColor: props.backgroundColor,
+            backgroundColor: '#000',
           }} />
           : null
       }
