@@ -3,6 +3,7 @@ import {useState} from 'react';
 import { Text, TextInput, View, Button } from 'react-native';
 import { styles } from './Styles';
 import fetchData from './server/fetchData';
+import RadioChoices from './Gui/RadioChoices'
 
 export default function Barten({navigation}) {
   const [leerlingnummer, zetleerlingnummer] = useState("");
@@ -14,6 +15,7 @@ export default function Barten({navigation}) {
   const [wachtwoordherhalen, zetwachtwoordherhalen] = useState("");
   const [error1, zeterror1] = useState("");
   const [error2, zeterror2] = useState("");
+  const [error3, zeterror3] = useState("");
   const [leerlingnummercolor, zetleerlingnummercolor] = useState("'grey'");
   const [voornaamcolor, zetvoornaamcolor] = useState("'grey'");
   const [achternaamcolor, zetachternaamcolor] = useState("'grey'");
@@ -52,11 +54,15 @@ export default function Barten({navigation}) {
         zeterror1("U heeft uw wachtwoord herhalen niet ingevuld. \n\n");
         zetwachtwoordherhalencolor("#ff0000");
       }
-    else
+    else if (wachtwoord !== wachtwoordherhalen)
+    {
+      zeterror3("Uw wachtwoord komt niet overeen met het wachtwoord dat u heeft herhaald. \n\n");
+    }
+    else  
       {              
-        fetchData('register', {leerlingnummer: leerlingnummer, voornaam: voornaam,tussenvoegsel: tussenvoegsel,achternaam: achternaam,klas: klas,wachtwoord: wachtwoord,wachtwoordherhalen: wachtwoordherhalen})
+        fetchData('register', {llnr: leerlingnummer, voornaam: voornaam,tussenvoegsel: tussenvoegsel,achternaam: achternaam,klas: klas,wachtwoord: wachtwoord,wachtwoordherhalen: wachtwoordherhalen})
         .then (naarhome)
-        .catch (zeterror_2)
+        .catch (() => {zeterror2("De server is niet online op dit moment. probeer het op een ander moment. \n\n")})
       }
   };
 
@@ -64,20 +70,17 @@ export default function Barten({navigation}) {
     navigation.navigate('Home')
   }
 
-  let zeterror_2 = () => {
-    zeterror2("De server is niet online op dit moment. probeer het op een ander moment. \n\n");
-  }
-  
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Hier kunt u zich registreren! {"\n\n"}</Text>
       <Text style={{ color: '#ff0000' }}>{error1}</Text>
       <Text style={{ color: '#ff0000' }}>{error2}</Text>
+      <Text style={{ color: '#ff0000' }}>{error3}</Text>
       <View style={styles.rowContainer}>
         <Text>Leerlingnummer:          </Text>
         <TextInput
           style= {{height: 25, borderColor: leerlingnummercolor, borderWidth: 1 }}
-          onChangeText={nieuweleerlingnummer => {zetleerlingnummer(nieuweleerlingnummer) ; zetleerlingnummercolor("'grey'")}}
+          onChangeText={nieuweleerlingnummer => {zetleerlingnummer(nieuweleerlingnummer) ; zetleerlingnummercolor("'grey'") ; }}
           value={leerlingnummer}
         />
       </View>
@@ -107,6 +110,7 @@ export default function Barten({navigation}) {
       </View>
       <View style={styles.rowContainer}>
         <Text>Klas:                              </Text>
+        <RadioChoices opties={​​​​['6Va', '6Vb', '6Vc']}​​​​ />
         <TextInput
           style= {{height: 25, borderColor: klascolor, borderWidth: 1 }}
           onChangeText={nieuweklas => {zetklas(nieuweklas) ; zetklascolor("'grey'")}}
