@@ -18,7 +18,7 @@ export default function RadioButton(props) {
             height: 12,
             width: 12,
             borderRadius: 6,
-            backgroundColor: '#000',
+            backgroundColor: props.backgroundColor,
           }} />
           : null
       }

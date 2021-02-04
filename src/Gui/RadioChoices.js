@@ -7,6 +7,11 @@ import RadioButton from './RadioButton';
 export default function RadioChoices(props) {
   const [isSelected, setSelected] = useState(props.value);
 
+  let color = props.backgroundColor;
+
+  if(color === undefined)
+    color = '#000';
+
   return (
     <View>
       {props.opties.map((object, index) => {
@@ -14,10 +19,9 @@ export default function RadioChoices(props) {
           <TouchableOpacity
             onPress={() => {
               setSelected(object);
-              props.onChangeText(object);
             }}
           >
-            <RadioButton selected={isSelected === object} style={[{ margin: 3 }]} />
+            <RadioButton selected={isSelected === object} style={[{ margin: 3 }]} backgroundColor={color} />
           </TouchableOpacity>
           <Text style={{...styles.text, margin: 5}}>{object}</Text>
         </View>);
