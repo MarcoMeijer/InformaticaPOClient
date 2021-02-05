@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Button, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Button, Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import logoPng from './afbeeldingen/logo.png';
 import useFahneKleur from './Hooks/FahneKleur';
 import fetchData from './server/fetchData';
 import { styles } from './Styles';
@@ -33,7 +34,7 @@ export default function Barten2({ navigation }) {
             naarhome()
           }
         })
-        .catch(() => { zeterror3("De server is niet online op dit moment. probeer het op een ander moment. \n\n") })
+        .catch(() => { zeterror3("De server is niet online op dit moment. \n\n") })
     }
   };
 
@@ -43,50 +44,56 @@ export default function Barten2({ navigation }) {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: fahnekleur }}>
-      <Text>
-        <TouchableOpacity
-          onPress={veranderfahne}
-        >
-          <Text>Hier kunt u</Text>
-        </TouchableOpacity>
-        {" "}
-        <TouchableOpacity
-          onPress={veranderterug}
-        >
-          <Text>inloggen! {"\n\n"}</Text>
-        </TouchableOpacity>
-      </Text>
-      <Text style={{ color: '#ff0000' }}>{error1}</Text>
-      <Text style={{ color: '#ff0000' }}>{error2}</Text>
-      <Text style={{ color: '#ff0000' }}>{error3}</Text>
-      <View style={styles.rowContainer}>
-        <Text>Leerlingnummer:          </Text>
-        <TextInput
-          style={{ height: 25, borderColor: leerlingnummercolor, borderWidth: 1, backgroundColor: '#ffffff' }}
-          onChangeText={nieuweleerlingnummer => { zetleerlingnummer(nieuweleerlingnummer); zetleerlingnummercolor("'grey'"); }}
-          value={leerlingnummer}
+      <View style={{width: 450, height: 800 , backgroundColor: 'powderblue', alignItems: 'center', justifyContent: 'center'}}>
+        <Image
+          style={{width: 169, height: 74}}
+          source={logoPng}
         />
-      </View>
-      <View style={styles.rowContainer}>
-        <Text>Wachtwoord:                </Text>
-        <TextInput
-          style={{ height: 25, borderColor: wachtwoordcolor, borderWidth: 1, backgroundColor: '#ffffff' }}
-          onChangeText={nieuwewachtwoord => { zetwachtwoord(nieuwewachtwoord); zetwachtwoordcolor("'grey'") }}
-          value={wachtwoord}
-          secureTextEntry={true}
-        />
-      </View>
-      <View>
-        <Text>{"\n"}</Text>
-        <Button
-          title="Inloggen"
-          onPress={inloggen}
-        />
-        <Text>{"\n"}</Text>
-        <Button
-          title="Heeft u nog geen account? Maak dan een account!"
-          onPress={() => navigation.navigate('registreren')}
-        />
+        <Text style={{ marginBottom: 20, fontSize: 25 }}>
+          <TouchableOpacity
+            onPress={veranderfahne}
+          >
+            <Text>Hier kunt u</Text>
+          </TouchableOpacity>
+          {" "}
+          <TouchableOpacity
+            onPress={veranderterug}
+          >
+            <Text>inloggen!</Text>
+          </TouchableOpacity>
+        </Text>
+        <Text style={{ color: '#ff0000' }}>{error1}</Text>
+        <Text style={{ color: '#ff0000' }}>{error2}</Text>
+        <Text style={{ color: '#ff0000' }}>{error3}</Text>
+        <View style={styles.rowContainer}>
+          <Text>Leerlingnummer:          </Text>
+          <TextInput
+            style={{ height: 25, borderColor: leerlingnummercolor, borderWidth: 1, backgroundColor: '#ffffff' }}
+            onChangeText={nieuweleerlingnummer => { zetleerlingnummer(nieuweleerlingnummer); zetleerlingnummercolor("'grey'"); }}
+            value={leerlingnummer}
+          />
+        </View>
+        <View style={styles.rowContainer}>
+          <Text>Wachtwoord:                </Text>
+          <TextInput
+            style={{ height: 25, borderColor: wachtwoordcolor, borderWidth: 1, backgroundColor: '#ffffff' }}
+            onChangeText={nieuwewachtwoord => { zetwachtwoord(nieuwewachtwoord); zetwachtwoordcolor("'grey'") }}
+            value={wachtwoord}
+            secureTextEntry={true}
+          />
+        </View>
+        <View>
+          <Text>{"\n"}</Text>
+          <Button
+            title="Inloggen"
+            onPress={inloggen}
+          />
+          <Text>{"\n"}</Text>
+          <Button
+            title="Heeft u nog geen account? Maak dan een account!"
+            onPress={() => navigation.navigate('registreren')}
+          />
+        </View>
       </View>
     </View>
   );

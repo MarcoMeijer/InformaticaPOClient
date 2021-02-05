@@ -73,97 +73,99 @@ export default function Barten({ navigation }) {
           }
           zetklassen(nieuweKlassen);
         })
-        .catch(() => { zeterror2("De server is niet online op dit moment. probeer het op een ander moment. \n\n") })
+        .catch(() => { zeterror2("De server is niet online op dit moment. \n\n") })
     }
   }, [klassen]);
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: fahnekleur }}>
-      <Text>
-        <TouchableOpacity
-          onPress={veranderfahne}
-        >
-          <Text>Hier kunt u zich</Text>
-        </TouchableOpacity>
-        {" "}
-        <TouchableOpacity
-          onPress={veranderterug}
-        >
-          <Text>registreren! {"\n\n"}</Text>
-        </TouchableOpacity>
-      </Text>
-      <Text style={{ color: '#ff0000' }}>{error1}</Text>
-      <Text style={{ color: '#ff0000' }}>{error2}</Text>
-      <Text style={{ color: '#ff0000' }}>{error3}</Text>
-      <View style={styles.rowContainer}>
-        <Text>Leerlingnummer:          </Text>
-        <TextInput
-          style={{ height: 25, borderColor: leerlingnummercolor, borderWidth: 1, backgroundColor: '#ffffff' }}
-          onChangeText={nieuweleerlingnummer => { zetleerlingnummer(nieuweleerlingnummer); zetleerlingnummercolor("'grey'"); }}
-          value={leerlingnummer}
-        />
-      </View>
-      <View style={styles.rowContainer}>
-        <Text>Voornaam:                    </Text>
-        <TextInput
-          style={{ height: 25, borderColor: voornaamcolor, borderWidth: 1, backgroundColor: '#ffffff' }}
-          onChangeText={nieuwevoornaam => { zetvoornaam(nieuwevoornaam); zetvoornaamcolor("'grey'") }}
-          value={voornaam}
-        />
-      </View>
-      <View style={styles.rowContainer}>
-        <Text>Tussenvoegsel:             </Text>
-        <TextInput
-          style={{ height: 25, borderColor: 'gray', borderWidth: 1, backgroundColor: '#ffffff' }}
-          onChangeText={nieuwetussenvoegsel => zettussenvoegsel(nieuwetussenvoegsel)}
-          value={tussenvoegsel}
-        />
-      </View>
-      <View style={styles.rowContainer}>
-        <Text>Achternaam:                 </Text>
-        <TextInput
-          style={{ height: 25, borderColor: achternaamcolor, borderWidth: 1, backgroundColor: '#ffffff' }}
-          onChangeText={nieuweachternaam => { zetachternaam(nieuweachternaam); zetachternaamcolor("'grey'") }}
-          value={achternaam}
-        />
-      </View>
-      <View style={{ zIndex: 2, flexDirection: 'row' }}>
-        <Text>Klas:                                                           </Text>
-        <DropDownMenu
-          opties={klassen}
-          onChangeText={nieuweklas => zetklas(nieuweklas)}
-          value={klas}
-        />
-      </View>
-      <View style={styles.rowContainer}>
-        <Text>Wachtwoord:                </Text>
-        <TextInput
-          style={{ height: 25, borderColor: wachtwoordcolor, borderWidth: 1, backgroundColor: '#ffffff' }}
-          onChangeText={nieuwewachtwoord => { zetwachtwoord(nieuwewachtwoord); zetwachtwoordcolor("'grey'") }}
-          value={wachtwoord}
-          secureTextEntry={true}
-        />
-      </View>
-      <View style={styles.rowContainer}>
-        <Text>Wachtwoord herhalen: </Text>
-        <TextInput
-          style={{ height: 25, borderColor: wachtwoordherhalencolor, borderWidth: 1, backgroundColor: '#ffffff' }}
-          onChangeText={nieuwewachtwoordherhalen => { zetwachtwoordherhalen(nieuwewachtwoordherhalen); zetwachtwoordherhalencolor("'grey'") }}
-          value={wachtwoordherhalen}
-          secureTextEntry={true}
-        />
-      </View>
-      <View>
-        <Text>{"\n"}</Text>
-        <Button
-          title="Registreren"
-          onPress={registreren}
-        />
-        <Text>{"\n"}</Text>
-        <Button
-          title="Heeft u al een account? Log dan in!"
-          onPress={() => navigation.navigate('inloggen')}
-        />
+      <View style={{width: 450, height: 800 , backgroundColor: 'powderblue', alignItems: 'center', justifyContent: 'center'}}>
+        <Text style={{ marginBottom: 20, fontSize: 25 }}>
+          <TouchableOpacity
+            onPress={veranderfahne}
+          >
+            <Text>Hier kunt u zich</Text>
+          </TouchableOpacity>
+          {" "}
+          <TouchableOpacity
+            onPress={veranderterug}
+          >
+            <Text>registreren!</Text>
+          </TouchableOpacity>
+        </Text>
+        <Text style={{ color: '#ff0000' }}>{error1}</Text>
+        <Text style={{ color: '#ff0000', alignItems: 'center', justifyContent: 'center' }}>{error2}</Text>
+        <Text style={{ color: '#ff0000' }}>{error3}</Text>
+        <View style={styles.rowContainer}>
+          <Text>Leerlingnummer:          </Text>
+          <TextInput
+            style={{ height: 25, borderColor: leerlingnummercolor, borderWidth: 1, backgroundColor: '#ffffff' }}
+            onChangeText={nieuweleerlingnummer => { zetleerlingnummer(nieuweleerlingnummer); zetleerlingnummercolor("'grey'"); }}
+            value={leerlingnummer}
+          />
+        </View>
+        <View style={styles.rowContainer}>
+          <Text>Voornaam:                    </Text>
+          <TextInput
+            style={{ height: 25, borderColor: voornaamcolor, borderWidth: 1, backgroundColor: '#ffffff' }}
+            onChangeText={nieuwevoornaam => { zetvoornaam(nieuwevoornaam); zetvoornaamcolor("'grey'") }}
+            value={voornaam}
+          />
+        </View>
+        <View style={styles.rowContainer}>
+          <Text>Tussenvoegsel:             </Text>
+          <TextInput
+            style={{ height: 25, borderColor: 'gray', borderWidth: 1, backgroundColor: '#ffffff' }}
+            onChangeText={nieuwetussenvoegsel => zettussenvoegsel(nieuwetussenvoegsel)}
+            value={tussenvoegsel}
+          />
+        </View>
+        <View style={styles.rowContainer}>
+          <Text>Achternaam:                 </Text>
+          <TextInput
+            style={{ height: 25, borderColor: achternaamcolor, borderWidth: 1, backgroundColor: '#ffffff' }}
+            onChangeText={nieuweachternaam => { zetachternaam(nieuweachternaam); zetachternaamcolor("'grey'") }}
+            value={achternaam}
+          />
+        </View>
+        <View style={{ zIndex: 2, flexDirection: 'row' }}>
+          <Text>Klas:                                                           </Text>
+          <DropDownMenu
+            opties={klassen}
+            onChangeText={nieuweklas => zetklas(nieuweklas)}
+            value={klas}
+          />
+        </View>
+        <View style={styles.rowContainer}>
+          <Text>Wachtwoord:                </Text>
+          <TextInput
+            style={{ height: 25, borderColor: wachtwoordcolor, borderWidth: 1, backgroundColor: '#ffffff' }}
+            onChangeText={nieuwewachtwoord => { zetwachtwoord(nieuwewachtwoord); zetwachtwoordcolor("'grey'") }}
+            value={wachtwoord}
+            secureTextEntry={true}
+          />
+        </View>
+        <View style={styles.rowContainer}>
+          <Text>Wachtwoord herhalen: </Text>
+          <TextInput
+            style={{ height: 25, borderColor: wachtwoordherhalencolor, borderWidth: 1, backgroundColor: '#ffffff' }}
+            onChangeText={nieuwewachtwoordherhalen => { zetwachtwoordherhalen(nieuwewachtwoordherhalen); zetwachtwoordherhalencolor("'grey'") }}
+            value={wachtwoordherhalen}
+            secureTextEntry={true}
+          />
+        </View>
+        <View>
+          <Text>{"\n"}</Text>
+          <Button
+            title="Registreren"
+            onPress={registreren}
+          />
+          <Text>{"\n"}</Text>
+          <Button
+            title="Heeft u al een account? Log dan in!"
+            onPress={() => navigation.navigate('inloggen')}
+          />
+        </View>
       </View>
     </View>
   );
