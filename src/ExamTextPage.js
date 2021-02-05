@@ -7,7 +7,7 @@ import fetchData from './server/fetchData';
 import { styles } from './Styles';
 
 export default function ExamEditPage({ route, navigation }) {
-  const { tekstid, vraagid } = route.params;
+  const { tekstid, vraagvolgorde } = route.params;
   const [text, setText] = useState(undefined);
   const [vraag, setVraag] = useState(undefined);
 
@@ -21,12 +21,11 @@ export default function ExamEditPage({ route, navigation }) {
 
   useEffect(() => {
     if (vraag === undefined) {
-      console.log(vraagid);
-      fetchData("vraag", { vraagid: vraagid }).then(data => {
+      fetchData("vraagvolgorde", { tekstid: tekstid, vraagvolgorde: vraagvolgorde }).then(data => {
         setVraag(JSON.parse(data.vraaginhoud));
       });
     }
-  }, [vraag, vraagid]);
+  }, [vraag, tekstid, vraagvolgorde]);
 
   return (
     <View style={styles.rowContainer}>

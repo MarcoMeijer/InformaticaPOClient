@@ -10,12 +10,11 @@ export default function Barten3({ navigation }) {
 
   useEffect(() => {
     if (teksten.length === 0) {
-      fetchData('tekstniveau', { tekstniveau: 1 })
+      fetchData('teksten')
         .then(data => {
           zetTeksten(data.map(tekst => {
             let nieuweTekst = JSON.parse(tekst.tekstinhoud);
             nieuweTekst.tekstid = tekst.tekstid;
-            nieuweTekst.vraagid = tekst.vraagid;
             return nieuweTekst;
           }));
         });
@@ -43,7 +42,7 @@ export default function Barten3({ navigation }) {
             <Button
               title={tekst.title}
               onPress={() => {
-                navigation.navigate('Examen tekst', { tekstid: tekst.tekstid, vraagid: tekst.vraagid });
+                navigation.navigate('Examen tekst', { tekstid: tekst.tekstid, vraagvolgorde: 1 });
               }}
             />
           )
