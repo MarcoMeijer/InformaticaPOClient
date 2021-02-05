@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Button, Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import logoPng from './afbeeldingen/logo.png';
+import { Button, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import Logo from './Gui/Logo';
 import useFahneKleur from './Hooks/FahneKleur';
 import fetchData from './server/fetchData';
 import { styles } from './Styles';
@@ -44,11 +44,8 @@ export default function Barten2({ navigation }) {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: fahnekleur }}>
-      <View style={{width: 450, height: 800 , backgroundColor: 'powderblue', alignItems: 'center', justifyContent: 'center'}}>
-        <Image
-          style={{width: 169, height: 74}}
-          source={logoPng}
-        />
+      <View style={{ width: 450, height: 800, backgroundColor: 'powderblue', alignItems: 'center', justifyContent: 'center' }}>
+        <Logo />
         <Text style={{ marginBottom: 20, fontSize: 25 }}>
           <TouchableOpacity
             onPress={veranderfahne}

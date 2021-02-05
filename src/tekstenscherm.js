@@ -28,7 +28,7 @@ export default function Barten3({ navigation }) {
           onPress={veranderfahne}
         >
           <Text>Hier kunt u alle teksten</Text>
-            </TouchableOpacity>
+        </TouchableOpacity>
         {" "}
         <TouchableOpacity
           onPress={veranderterug}
