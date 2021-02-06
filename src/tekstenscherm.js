@@ -42,7 +42,7 @@ export default function Barten3({ navigation }) {
             <Button
               title={tekst.title}
               onPress={() => {
-                navigation.navigate('Examen tekst', { tekstid: tekst.tekstid, vraagvolgorde: 1 });
+                navigation.navigate('Examen tekst', { tekstid: tekst.tekstid });
               }}
             />
           )

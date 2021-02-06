@@ -21,7 +21,7 @@ export default function ExamEditPage() {
   };
 
   return (
-    <View style={{flex: 1, flexDirection: 'row'}}>
+    <View style={{ flex: 1, flexDirection: 'row' }}>
       <View style={styles.box}>
         <Text style={styles.text}>
           Titel:
@@ -37,7 +37,7 @@ export default function ExamEditPage() {
         </Text>
         <TextInput
           multiline
-          style={[styles.textBox, {flex: 1}]}
+          style={[styles.textBox, { flex: 1 }]}
           onChangeText={text => changeText(text)}
           value={text}
         />

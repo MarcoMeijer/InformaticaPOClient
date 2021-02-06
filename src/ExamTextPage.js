@@ -1,31 +1,41 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Button, View } from 'react-native';
+import { ActivityIndicator, Button, Text, View } from 'react-native';
 import ExamTextComp from './Gui/ExamTextComp';
 import QuestionComp from './Gui/QuestionComp';
 import fetchData from './server/fetchData';
 import { styles } from './Styles';
 
 export default function ExamEditPage({ route, navigation }) {
-  const { tekstid, vraagvolgorde } = route.params;
-  const [text, setText] = useState(undefined);
-  const [vraag, setVraag] = useState(undefined);
+  const { tekstid } = route.params;
+  const [vraagvolgorde, zetVraagvolgorde] = useState(0);
+  const [text, zetText] = useState(undefined);
+  const [vragen, zetVragen] = useState(undefined);
+  const [correct, zetCorrect] = useState([]);
 
   useEffect(() => {
     if (text === undefined) {
       fetchData("tekst", { tekstid: tekstid }).then(data => {
-        setText(JSON.parse(data.tekstinhoud));
+        zetText(JSON.parse(data.tekstinhoud));
       });
     }
   }, [text, tekstid]);
 
   useEffect(() => {
-    if (vraag === undefined) {
-      fetchData("vraagvolgorde", { tekstid: tekstid, vraagvolgorde: vraagvolgorde }).then(data => {
-        setVraag(JSON.parse(data.vraaginhoud));
+    if (vragen === undefined) {
+      fetchData("vragen", { tekstid: tekstid }).then(data => {
+        zetVragen(data.map(object => JSON.parse(object.vraaginhoud)));
+        zetCorrect(data.map(() => false));
       });
     }
-  }, [vraag, tekstid, vraagvolgorde]);
+  }, [vragen, tekstid, vraagvolgorde]);
+
+  const volgende = () => {
+    zetVraagvolgorde(vraagvolgorde + 1);
+  };
+  const vorige = () => {
+    zetVraagvolgorde(vraagvolgorde - 1);
+  };
 
   return (
     <View style={styles.rowContainer}>
@@ -39,15 +49,32 @@ export default function ExamEditPage({ route, navigation }) {
       </View>
       <View style={styles.box}>
         {
-          vraag === undefined ?
+          vragen === undefined ?
             <ActivityIndicator /> :
-            <QuestionComp data={vraag}>
-            </QuestionComp>
+            <View>
+              <View style={styles.rowContainer}>
+                {
+                  vraagvolgorde !== 0 &&
+                  <Button
+                    title="Vorige"
+                    onPress={vorige}
+                  />
+                }
+                {
+                  vraagvolgorde !== vragen.length-1 &&
+                  <Button
+                    title="Volgende"
+                    onPress={volgende}
+                  />
+                }
+              </View>
+              <QuestionComp
+                data={vragen[vraagvolgorde]}
+                zetCorrect={() => {}}
+              />
+            </View>
         }
-        <Button
-          title="Submit"
-          onPress={() => { }}
-        />
+        <Text>{correct[vraagvolgorde] ? 'Correct' : 'Fout'}</Text>
       </View>
     </View>
   );

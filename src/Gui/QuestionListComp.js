@@ -7,7 +7,7 @@ export default function QuestionListComp(props) {
     <View>
       {
         props.questions.map((object, index) => {
-          return <QuestionComp key={index} data={object}/>;
+          return <QuestionComp key={index} data={object} />;
         })
       }
     </View>

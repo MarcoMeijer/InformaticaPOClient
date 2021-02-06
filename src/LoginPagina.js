@@ -20,7 +20,7 @@ export default function LoginPagina({ navigation }) {
           setResult("fail");
         } else {
           setResult("success")
-          (naarhome)
+            (naarhome)
         }
       });
   }

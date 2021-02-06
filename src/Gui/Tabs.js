@@ -9,24 +9,24 @@ export function Tab({ name, component, tabNavigator }) {
     <Button
       title={name}
       onPress={() => {
-        tabNavigator({f: component});
+        tabNavigator({ f: component });
       }}
     />
   );
 }
 export function TabsHeader({ navigation, children }) {
-  const [selectedComponent, setSelectedComponent] = useState({f: children[0].props.component});
+  const [selectedComponent, setSelectedComponent] = useState({ f: children[0].props.component });
 
   const childrenWithProps = React.Children.map(children, child => {
     return React.cloneElement(child, { tabNavigator: setSelectedComponent });
   });
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <View style={styles.rowContainer}>
         {childrenWithProps}
       </View>
-      {<selectedComponent.f style={{flex: 1}} navigation={navigation}/>}
+      {<selectedComponent.f style={{ flex: 1 }} navigation={navigation} />}
     </View>
   );
 }

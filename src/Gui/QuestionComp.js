@@ -3,11 +3,29 @@ import { Text, View } from 'react-native';
 import { styles } from '../Styles';
 import RadioChoices from './RadioChoices';
 
-export default function QuestionComp(props) {
+function MultipleChoiceQuestion({ data, zetCorrect }) {
+  const { vraag, opties, antwoord } = data;
+
   return (
     <View>
-      <Text style={styles.text}>{props.data.vraag}</Text>
-      <RadioChoices {...props.data} />
+      <Text style={styles.text}>{vraag}</Text>
+      <RadioChoices
+        opties={opties}
+        onChangeText={geselecteerdeOptie => {
+          if (geselecteerdeOptie === antwoord) {
+            zetCorrect(true);
+          } else {
+            zetCorrect(false);
+          }
+        }}
+      />
     </View>
   )
+}
+
+export default function QuestionComp(props) {
+  const { data } = props;
+
+  if (data.opties !== undefined)
+    return MultipleChoiceQuestion(props);
 }

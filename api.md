@@ -36,7 +36,7 @@ Deze array is leeg als de llnr of wachtwoord fout is.
 Anders heeft de array precies 1 leerling.
 
 ## klas
-Selecteerd alle informatie over de klas, inclusief alle leerlingen die er in zitten.
+Selecteerd alle leerlingen die in een klas zitten.
 
 **Argumenten**:
 * klas
