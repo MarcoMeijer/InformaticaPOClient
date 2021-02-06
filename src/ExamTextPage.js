@@ -1,17 +1,18 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Button, Text, View } from 'react-native';
+import { ActivityIndicator, Button, View } from 'react-native';
 import ExamTextComp from './Gui/ExamTextComp';
 import QuestionComp from './Gui/QuestionComp';
+import useArrayState from './Hooks/arrayState';
 import fetchData from './server/fetchData';
 import { styles } from './Styles';
 
-export default function ExamEditPage({ route, navigation }) {
+export default function ExamEditPage({ route }) {
   const { tekstid } = route.params;
   const [vraagvolgorde, zetVraagvolgorde] = useState(0);
   const [text, zetText] = useState(undefined);
   const [vragen, zetVragen] = useState(undefined);
-  const [correct, zetCorrect] = useState([]);
+  const [correct, zetCorrect, zetIndexCorrect] = useArrayState();
 
   useEffect(() => {
     if (text === undefined) {
@@ -28,7 +29,7 @@ export default function ExamEditPage({ route, navigation }) {
         zetCorrect(data.map(() => false));
       });
     }
-  }, [vragen, tekstid, vraagvolgorde]);
+  }, [vragen, correct, zetCorrect, tekstid, vraagvolgorde]);
 
   const volgende = () => {
     zetVraagvolgorde(vraagvolgorde + 1);
@@ -61,20 +62,25 @@ export default function ExamEditPage({ route, navigation }) {
                   />
                 }
                 {
-                  vraagvolgorde !== vragen.length-1 &&
+                  vraagvolgorde !== vragen.length - 1 &&
                   <Button
                     title="Volgende"
                     onPress={volgende}
                   />
                 }
               </View>
-              <QuestionComp
-                data={vragen[vraagvolgorde]}
-                zetCorrect={() => {}}
-              />
+              {
+                vragen.map((vraag, index) => {
+                  return <View style={{ display: index === vraagvolgorde ? null : 'none' }}>
+                    <QuestionComp
+                      data={vraag}
+                      zetCorrect={zetIndexCorrect(index)}
+                    />
+                  </View>;
+                })
+              }
             </View>
         }
-        <Text>{correct[vraagvolgorde] ? 'Correct' : 'Fout'}</Text>
       </View>
     </View>
   );

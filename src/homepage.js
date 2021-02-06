@@ -10,10 +10,6 @@ export default function HomePage({ navigation }) {
       </Text>
 
       <Button
-        title="Ga naar login pagina"
-        onPress={() => navigation.navigate('Login pagina')}
-      />
-      <Button
         title="Ga naar leraren home paginga"
         onPress={() => navigation.navigate('Leraren home pagina')}
       />

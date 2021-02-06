@@ -4,8 +4,8 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { styles } from '../Styles';
 import RadioButton from './RadioButton';
 
-export default function RadioChoices({ backgroundColor, opties, onChangeText }) {
-  const [selected, setSelected] = useState(undefined);
+export default function RadioChoices({ backgroundColor, opties, onChangeText, value }) {
+  const [selected, setSelected] = useState(value);
 
   let color = backgroundColor;
 

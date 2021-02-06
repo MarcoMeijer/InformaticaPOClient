@@ -48,11 +48,6 @@ export default function Barten3({ navigation }) {
           )
         })
       }
-      <Text>{"\n"}</Text>
-      <Button
-        title="Hier kunt u all teksten bekijken"
-        onPress={() => navigation.navigate('registreren')}
-      />
     </View>
   );
 }

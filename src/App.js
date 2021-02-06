@@ -7,7 +7,6 @@ import HomePage from './homepage';
 import HomePageLeerlingen from './homepageleerlingen';
 import HomePageLeraren from './homepageleraren';
 import Barten2 from './inloggen';
-import LoginPagina from './LoginPagina';
 import Barten from './registreren';
 import Barten3 from './tekstenscherm';
 
@@ -24,7 +23,6 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Home" component={HomePage} />
-          <Stack.Screen name="Login pagina" component={LoginPagina} />
           <Stack.Screen name="Examen tekst" component={ExamTextPage} />
           <Stack.Screen name="Leerlingen home pagina" component={HomePageLeerlingen} />
           <Stack.Screen name="Leraren home pagina" component={HomePageLeraren} />
