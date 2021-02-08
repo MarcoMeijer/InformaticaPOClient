@@ -54,7 +54,17 @@ export default function Barten({ navigation }) {
       zeterror3("Uw wachtwoord komt niet overeen met het wachtwoord dat u heeft herhaald. \n\n");
     }
     else {
-      fetchData('register', { llnr: leerlingnummer, voornaam: voornaam, tussenvoegsel: tussenvoegsel, achternaam: achternaam, klas: klas, wachtwoord: wachtwoord, wachtwoordherhalen: wachtwoordherhalen })
+      const data = {
+        llnr: leerlingnummer,
+        voornaam: voornaam,
+        tussenvoegsel: tussenvoegsel,
+        achternaam: achternaam,
+        klas: klas,
+        wachtwoord: wachtwoord,
+        wachtwoordherhalen: wachtwoordherhalen
+      };
+
+      fetchData('register', data)
         .then(naarhome)
         .catch(() => { zeterror2("De server is niet online op dit moment. probeer het op een ander moment. \n\n") })
     }

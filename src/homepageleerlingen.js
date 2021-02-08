@@ -1,12 +1,16 @@
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import { Tab, TabsHeader } from './Gui/Tabs';
-import Barten3 from './tekstenscherm';
+import * as React from "react";
+import { Text, View } from "react-native";
+import { Tab, TabsHeader } from "./Gui/Tabs";
+import Barten3 from "./tekstenscherm";
 
 function HomeScreen() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Geachte leerling, welkom op jouw online examenteksten oefenen portal. Zie rechts de bijbeltekst van vandaag, met dagopening van meneer Stamhuis.</Text>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text>
+        Geachte leerling, welkom op jouw online examenteksten oefenen portal.
+        Zie rechts de bijbeltekst van vandaag, met dagopening van meneer
+        Stamhuis.
+      </Text>
     </View>
   );
 }

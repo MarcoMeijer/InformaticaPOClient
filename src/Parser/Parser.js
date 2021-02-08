@@ -1,4 +1,11 @@
-import { arrayToLinkedList, cons, curry, foldr, foldr1, reverseLinkedList } from './LinkedList';
+import {
+  arrayToLinkedList,
+  cons,
+  curry,
+  foldr,
+  foldr1,
+  reverseLinkedList,
+} from "./LinkedList";
 
 // functor
 export function fMap(f, parser) {
@@ -56,7 +63,7 @@ export function sequenceA(array) {
 // alternative
 export function empty() {
   return () => {
-    return []
+    return [];
   };
 }
 export function alter(p1, p2) {
@@ -85,13 +92,17 @@ export function charFuncP(f) {
 }
 
 export function charP(c) {
-  return charFuncP(x => x === c);
+  return charFuncP((x) => x === c);
 }
 
 export function stringP(str) {
-  return sequenceA(arrayToLinkedList(Array.from(str).map((object,) => {
-    return charP(object);
-  })));
+  return sequenceA(
+    arrayToLinkedList(
+      Array.from(str).map((object) => {
+        return charP(object);
+      })
+    )
+  );
 }
 
 export function spanP(f) {
@@ -100,13 +111,13 @@ export function spanP(f) {
     while (str !== null && f(str.head)) {
       res = {
         head: str.head,
-        tail: res
+        tail: res,
       };
       str = str.tail;
     }
     res = reverseLinkedList(res);
     return [str, res];
-  }
+  };
 }
 
 export function notEmpty(parser) {
@@ -116,5 +127,5 @@ export function notEmpty(parser) {
       return [];
     }
     return result;
-  }
+  };
 }

@@ -1,4 +1,3 @@
-
 export function curry(func) {
   return function curried(...args) {
     if (args.length >= func.length) {
@@ -6,7 +5,7 @@ export function curry(func) {
     } else {
       return function (...args2) {
         return curried.apply(this, args.concat(args2));
-      }
+      };
     }
   };
 }
@@ -14,7 +13,7 @@ export function curry(func) {
 export function cons(x, head) {
   return {
     head: x,
-    tail: head
+    tail: head,
   };
 }
 
@@ -24,7 +23,7 @@ export function reverseLinkedList(head) {
   while (current !== null) {
     result = {
       head: current.head,
-      tail: result
+      tail: result,
     };
     current = current.tail;
   }
@@ -66,7 +65,7 @@ export function arrayToLinkedList(str) {
   for (let c of str) {
     result = {
       head: c,
-      tail: result
+      tail: result,
     };
   }
   return reverseLinkedList(result);
@@ -79,5 +78,5 @@ export function linkedListToString(head) {
     arr.push(current.head);
     current = current.tail;
   }
-  return arr.join('');
+  return arr.join("");
 }

@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { Text, View } from 'react-native';
-import ExamEditPage from './ExamEditPage';
-import { Tab, TabsHeader } from './Gui/Tabs';
+import * as React from "react";
+import { Text, View } from "react-native";
+import ExamEditPage from "./ExamEditPage";
+import { Tab, TabsHeader } from "./Gui/Tabs";
 
 function HomeScreen() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>Leraren home pagina</Text>
     </View>
   );

@@ -1,13 +1,12 @@
-
-const serverURL = 'http://94.214.161.27:4000';
+const serverURL = "http://94.214.161.27:4000";
 
 export default async function fetchData(url, body) {
   const response = await fetch(`${serverURL}/${url}`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(body)
+    body: JSON.stringify(body),
   });
   return await response.json();
 }

@@ -1,13 +1,30 @@
-import { linkedListToString } from './LinkedList';
-import { alterA, apply, applyL, applyR, notEmpty, pure, spanP, stringP } from './Parser';
+import { linkedListToString } from "./LinkedList";
+import {
+  alterA,
+  apply,
+  applyL,
+  applyR,
+  notEmpty,
+  pure,
+  spanP,
+  stringP,
+} from "./Parser";
 
 export function ParseText() {
-  return apply(pure(linkedListToString), notEmpty(spanP((c) => c !== '<')));
+  return apply(pure(linkedListToString), notEmpty(spanP((c) => c !== "<")));
 }
 
 export function ParseTag(tagName) {
-  let tagParser = applyR(stringP(`<${tagName}>`), applyL(ParseElementArray(), stringP(`</${tagName}>`)));
-  return apply(pure((elements) => { return { tag: tagName, inside: elements } }), tagParser);
+  let tagParser = applyR(
+    stringP(`<${tagName}>`),
+    applyL(ParseElementArray(), stringP(`</${tagName}>`))
+  );
+  return apply(
+    pure((elements) => {
+      return { tag: tagName, inside: elements };
+    }),
+    tagParser
+  );
 }
 export function ParseParagraph() {
   return ParseTag("p");
@@ -21,8 +38,10 @@ export function ParseItalics() {
 
 export function ParseElement() {
   return (str) => {
-    return alterA([ParseParagraph(), ParseBold(), ParseItalics(), ParseText()])(str);
-  }
+    return alterA([ParseParagraph(), ParseBold(), ParseItalics(), ParseText()])(
+      str
+    );
+  };
 }
 export function ParseElementArray() {
   return (str) => {
