@@ -9,7 +9,6 @@ import HomePageLeraren from "./homepageleraren";
 import Barten2 from "./inloggen";
 import Barten from "./registreren";
 import Barten3 from "./tekstenscherm";
-import Barten4 from "./leerlingstatestiek";
 
 const Stack = createStackNavigator();
 

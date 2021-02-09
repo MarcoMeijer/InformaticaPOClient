@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Text, View } from "react-native";
 import { Tab, TabsHeader } from "./Gui/Tabs";
+import Barten4 from "./leerlingstatistieken";
 import Barten3 from "./tekstenscherm";
 
 function HomeScreen() {
