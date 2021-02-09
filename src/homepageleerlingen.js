@@ -20,6 +20,7 @@ export default function HomePageLeerlingen({ navigation }) {
     <TabsHeader navigation={navigation}>
       <Tab name="Home" component={HomeScreen} />
       <Tab name="Teksten oefenen" component={Barten3} />
+      <Tab name="Statestieken bekijken" component={Barten4} />
     </TabsHeader>
   );
 }
