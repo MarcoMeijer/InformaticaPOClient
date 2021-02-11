@@ -3,6 +3,7 @@
 # dependencies
 .vscode
 .eslintcache
+.codesandbox
 /node_modules
 /.pnp
 .pnp.js
