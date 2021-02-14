@@ -1,23 +1,23 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import fetchData from "./server/fetchData";
 
 export default function Barten4() {
-  const [gemaakt] = useState("");
-  const [tekst, zettekst] = useState("");
+  const [gemaakt, zetGemaakt] = useState(undefined);
 
   useEffect(() => {
-    if (gemaakt.length === 0) {
-      fetchData("gemaakt")
-      .then(data => {zettekst(JSON.stringify(data))})
-      .catch(() => {});
-            }
-  }, [gemaakt]);  
-  
+    if (gemaakt === undefined) {
+      fetchData("gemaakt", {persoonid: 2})
+        .then((data) => {
+          console.log(data);
+        })
+    }
+  }, [gemaakt]);
+
   return (
     <View>
-      <Text>{tekst}</Text>
+      
     </View>
   );
 }

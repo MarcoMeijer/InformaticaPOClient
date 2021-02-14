@@ -25,13 +25,28 @@ export default function ExamEditPage({ route }) {
   useEffect(() => {
     if (vragen === undefined) {
       fetchData("vragen", { tekstid: tekstid }).then((data) => {
-        zetVragen(data.map((object) => JSON.parse(object.vraaginhoud)));
+        zetVragen(
+          data.map((object) => {
+            let res = JSON.parse(object.vraaginhoud);
+            res.vraagid = object.vraagid;
+            return res;
+          })
+        );
         zetCorrect(data.map(() => false));
       });
     }
   }, [vragen, correct, zetCorrect, tekstid, vraagvolgorde]);
 
-  const submit = () => {};
+  const submit = () => {
+    for(let index in vragen) {
+      const vraag = vragen[index];
+      fetchData("maak", {
+        persoonid: 2,
+        vraagid: vraag.vraagid,
+        punten: correct[index] ? 1 : 0,
+      });
+    }
+  };
   const volgende = () => {
     zetVraagvolgorde(vraagvolgorde + 1);
   };
