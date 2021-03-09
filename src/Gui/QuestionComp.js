@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, View } from "react-native";
+import { Text, View, TextInput } from "react-native";
 import { styles } from "../Styles";
 import RadioChoices from "./RadioChoices";
 
@@ -12,13 +12,25 @@ function MultipleChoiceQuestion({ data, zetCorrect }) {
       <RadioChoices
         opties={opties}
         onChangeText={(geselecteerdeOptie) => {
-          if (geselecteerdeOptie === antwoord) {
-            zetCorrect(true);
-          } else {
-            zetCorrect(false);
+          if (zetCorrect !== undefined) {
+            if (geselecteerdeOptie === antwoord) {
+              zetCorrect(true);
+            } else {
+              zetCorrect(false);
+            }
           }
         }}
       />
+    </View>
+  );
+}
+function OpenVraag({ data }) {
+  const { vraag } = data;
+
+  return (
+    <View>
+      <Text style={styles.text}>{vraag}</Text>
+      <TextInput multiline numberOfLines={10} style={styles.textBox} />
     </View>
   );
 }
@@ -27,4 +39,5 @@ export default function QuestionComp(props) {
   const { data } = props;
 
   if (data.opties !== undefined) return MultipleChoiceQuestion(props);
+  return OpenVraag(props);
 }

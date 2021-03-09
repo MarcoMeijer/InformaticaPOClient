@@ -7,7 +7,7 @@ import {
   notEmpty,
   pure,
   spanP,
-  stringP,
+  stringP
 } from "./Parser";
 
 export function ParseText() {

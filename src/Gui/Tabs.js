@@ -5,12 +5,18 @@ import { styles } from "../Styles";
 
 export function Tab({ name, tabNavigator }) {
   return (
-    <Button
-      title={name}
-      onPress={() => {
-        tabNavigator(name);
+    <View
+      style={{
+        marginRight: 2
       }}
-    />
+    >
+      <Button
+        title={name}
+        onPress={() => {
+          tabNavigator(name);
+        }}
+      />
+    </View>
   );
 }
 export function TabsHeader({ navigation, children }) {
@@ -30,7 +36,12 @@ export function TabsHeader({ navigation, children }) {
 
         if (name === selectedComponent) {
           return (
-            <View style={{ flex: 1 }} key={name}>
+            <View
+              style={{
+                flex: 1
+              }}
+              key={name}
+            >
               <child.props.component navigation={navigation} />;
             </View>
           );

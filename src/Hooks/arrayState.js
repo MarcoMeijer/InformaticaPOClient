@@ -1,7 +1,8 @@
 import { useState } from "react";
 
-export default function useArrayState() {
-  const [array, zetArray] = useState([]);
+export default function useArrayState(initial) {
+  if (initial === undefined) initial = [];
+  const [array, zetArray] = useState(initial);
 
   const zetIndex = (i) => (value) => {
     let res = [...array];

@@ -1,6 +1,15 @@
 const serverURL = "https://marco-meijer.nl";
 
+let key = "";
+
+export function setKey(newKey) {
+  key = newKey;
+}
 export default async function fetchData(url, body) {
+  if (body === undefined) {
+    body = {};
+  }
+  body.key = key;
   const response = await fetch(`${serverURL}/${url}`, {
     method: "POST",
     headers: {
