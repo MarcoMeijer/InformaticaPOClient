@@ -1,26 +1,10 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
-import { Button, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import useFahneKleur from "./Hooks/FahneKleur";
-import fetchData from "./server/fetchData";
+import TekstenLijst from "./Gui/TekstenLijst";
 
-export default function Barten3({ navigation }) {
+export default function TekstenScherm({ navigation }) {
   const [fahnekleur, veranderfahne, veranderterug] = useFahneKleur();
-  const [teksten, zetTeksten] = useState([]);
-
-  useEffect(() => {
-    if (teksten.length === 0) {
-      fetchData("teksten").then((data) => {
-        zetTeksten(
-          data.map((tekst) => {
-            let nieuweTekst = JSON.parse(tekst.tekstinhoud);
-            nieuweTekst.tekstid = tekst.tekstid;
-            return nieuweTekst;
-          })
-        );
-      });
-    }
-  }, [teksten]);
 
   return (
     <View
@@ -53,24 +37,13 @@ export default function Barten3({ navigation }) {
             </Text>
           </TouchableOpacity>
         </Text>
-        {teksten.map((tekst, index) => {
-          return (
-            <View
-              style={{
-                margin: 2
-              }}
-            >
-              <Button
-                title={tekst.title}
-                onPress={() => {
-                  navigation.navigate("Examen tekst", {
-                    tekstid: tekst.tekstid
-                  });
-                }}
-              />
-            </View>
-          );
-        })}
+        <TekstenLijst
+          onPress={(tekstid) => {
+            navigation.navigate("Examen tekst", {
+              tekstid: tekstid
+            });
+          }}
+        />
       </View>
     </View>
   );

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Text, View } from "react-native";
 import ExamEditPage from "./ExamEditPage";
-import ProblemEditPage from "./ProblemEditPage";
+import TekstenLijst from "./Gui/TekstenLijst";
 import { Tab, TabsHeader } from "./Gui/Tabs";
 
 function HomeScreen() {
@@ -12,12 +12,27 @@ function HomeScreen() {
   );
 }
 
-export default function HomePageLeraren() {
+function VraagMakenScherm({ navigation }) {
   return (
-    <TabsHeader>
+    <View>
+      <Text>Selecteer aan welke tekst je een vraag wilt toevoegen: </Text>
+      <TekstenLijst
+        onPress={(tekstid) => {
+          navigation.navigate("Vraag maken", {
+            tekstid: tekstid
+          });
+        }}
+      />
+    </View>
+  );
+}
+
+export default function HomePageLeraren({ navigation }) {
+  return (
+    <TabsHeader navigation={navigation}>
       <Tab name="Home" component={HomeScreen} />
       <Tab name="Tekst maken" component={ExamEditPage} />
-      <Tab name="Vraag maken" component={ProblemEditPage} />
+      <Tab name="Vraag maken" component={VraagMakenScherm} />
     </TabsHeader>
   );
 }

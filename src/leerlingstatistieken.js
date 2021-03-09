@@ -16,9 +16,11 @@ export default function Barten4({ navigation }) {
   }, [gemaakt]);
 
   let punten = 0;
+  let maximaalPunten = 0;
   if (gemaakt !== undefined) {
     for (let x of gemaakt) {
       punten += x.punten;
+      maximaalPunten += x.maximaalPunten;
     }
   }
 
@@ -37,7 +39,9 @@ export default function Barten4({ navigation }) {
         <b>kijk hieronder hoe je de vragen hebt beantwoord:</b>
       </Text>
       <Text>
-        <b>Je hebt {punten} punten.</b>
+        <b>
+          Je hebt {punten} van de {maximaalPunten} punten.
+        </b>
       </Text>
     </View>
   );

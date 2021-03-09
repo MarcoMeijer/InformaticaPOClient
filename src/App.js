@@ -7,7 +7,8 @@ import HomePage from "./homepage";
 import HomePageLeerlingen from "./homepageleerlingen";
 import HomePageLeraren from "./homepageleraren";
 import Barten from "./registreren";
-import Barten3 from "./tekstenscherm";
+import TekstenScherm from "./tekstenscherm";
+import ProblemEditPage from "./ProblemEditPage";
 
 const Stack = createStackNavigator();
 
@@ -32,7 +33,8 @@ export default function App() {
             component={HomePageLeraren}
           />
           <Stack.Screen name="registreren" component={Barten} />
-          <Stack.Screen name="tekstenscherm" component={Barten3} />
+          <Stack.Screen name="Vraag maken" component={ProblemEditPage} />
+          <Stack.Screen name="tekstenscherm" component={TekstenScherm} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>

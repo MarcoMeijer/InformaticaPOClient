@@ -2,7 +2,7 @@ import * as React from "react";
 import { Text, View } from "react-native";
 import { Tab, TabsHeader } from "./Gui/Tabs";
 import Barten4 from "./leerlingstatistieken";
-import Barten3 from "./tekstenscherm";
+import TekstenScherm from "./tekstenscherm";
 
 function HomeScreen() {
   return (
@@ -34,7 +34,7 @@ export default function HomePageLeerlingen({ navigation }) {
   return (
     <TabsHeader navigation={navigation}>
       <Tab name="Home" component={HomeScreen} />
-      <Tab name="Teksten oefenen" component={Barten3} />
+      <Tab name="Teksten oefenen" component={TekstenScherm} />
       <Tab name="Statestieken bekijken" component={Barten4} />
     </TabsHeader>
   );

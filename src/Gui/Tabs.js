@@ -42,7 +42,7 @@ export function TabsHeader({ navigation, children }) {
               }}
               key={name}
             >
-              <child.props.component navigation={navigation} />;
+              <child.props.component navigation={navigation} />
             </View>
           );
         } else {

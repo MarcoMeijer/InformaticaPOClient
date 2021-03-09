@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, Button, View } from "react-native";
+import { Text, ActivityIndicator, Button, View } from "react-native";
 import ExamTextComp from "./Gui/ExamTextComp";
 import QuestionComp from "./Gui/QuestionComp";
 import useArrayState from "./Hooks/arrayState";
@@ -12,7 +12,7 @@ export default function ExamEditPage({ route, navigation }) {
   const [vraagvolgorde, zetVraagvolgorde] = useState(0);
   const [text, zetText] = useState(undefined);
   const [vragen, zetVragen] = useState(undefined);
-  const [correct, zetCorrect, zetIndexCorrect] = useArrayState();
+  const [punten, zetPunten, zetIndexPunten] = useArrayState();
 
   useEffect(() => {
     if (text === undefined) {
@@ -32,18 +32,18 @@ export default function ExamEditPage({ route, navigation }) {
             return res;
           })
         );
-        zetCorrect(data.map(() => false));
+        zetPunten(data.map(() => 0));
       });
     }
-  }, [vragen, correct, zetCorrect, tekstid, vraagvolgorde]);
+  }, [vragen, punten, zetPunten, tekstid, vraagvolgorde]);
 
   const submit = () => {
     for (let index in vragen) {
       const vraag = vragen[index];
       fetchData("maak", {
-        persoonid: 2,
         vraagid: vraag.vraagid,
-        punten: correct[index] ? 1 : 0
+        punten: punten[index] ? 1 : 0,
+        maximaalPunten: vraag.score ? vraag.score : 1
       });
     }
     navigation.navigate("Leerlingen home pagina");
@@ -86,8 +86,9 @@ export default function ExamEditPage({ route, navigation }) {
                 >
                   <QuestionComp
                     data={vraag}
-                    zetCorrect={zetIndexCorrect(index)}
+                    zetPunten={zetIndexPunten(index)}
                   />
+                  <Text>{punten[index]}</Text>
                 </View>
               );
             })}

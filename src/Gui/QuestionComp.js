@@ -3,8 +3,8 @@ import { Text, View, TextInput } from "react-native";
 import { styles } from "../Styles";
 import RadioChoices from "./RadioChoices";
 
-function MultipleChoiceQuestion({ data, zetCorrect }) {
-  const { vraag, opties, antwoord } = data;
+function MultipleChoiceQuestion({ data, zetPunten }) {
+  const { vraag, opties, antwoord, score } = data;
 
   return (
     <View>
@@ -12,11 +12,11 @@ function MultipleChoiceQuestion({ data, zetCorrect }) {
       <RadioChoices
         opties={opties}
         onChangeText={(geselecteerdeOptie) => {
-          if (zetCorrect !== undefined) {
+          if (zetPunten !== undefined) {
             if (geselecteerdeOptie === antwoord) {
-              zetCorrect(true);
+              zetPunten(score ? score : 1);
             } else {
-              zetCorrect(false);
+              zetPunten(0);
             }
           }
         }}

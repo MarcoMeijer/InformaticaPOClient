@@ -44,6 +44,7 @@ function EditMeerKeuze({ zetVraagMethode }) {
 
   return (
     <View>
+      <Text style={styles.text}>Mogelijke antwoorden:</Text>
       {antwoorden.map((value, index) => {
         return (
           <TextInput
@@ -68,19 +69,19 @@ function EditMeerKeuze({ zetVraagMethode }) {
   );
 }
 
-export default function ProblemEditPage() {
+export default function ProblemEditPage({ route }) {
   const [vraag, zetVraag] = useState("");
   const [score, zetScore] = useState(1);
   const [probleemType, zetProbleemType] = useState("");
   const [vraagMethode, zetVraagMethode] = useState({});
+
+  const { tekstid } = route;
 
   let vraagInhoud = {
     vraag: vraag,
     score: score,
     ...vraagMethode
   };
-
-  let code = JSON.stringify(vraagInhoud, null, 4);
 
   return (
     <View style={{ flex: 1, flexDirection: "row" }}>
@@ -112,9 +113,10 @@ export default function ProblemEditPage() {
           title="Voeg vraag toe"
           onPress={() => {
             fetchData("insertvraag", {
-              vraagInhoud: code,
+              vraagInhoud: JSON.stringify(vraagInhoud),
               vraagSoort: 1,
-              vraagVolgorde: 1
+              vraagVolgorde: 1,
+              tekstid: tekstid
             });
           }}
         />
