@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Text, View } from "react-native";
 import ExamEditPage from "./ExamEditPage";
+import ProblemEditPage from "./ProblemEditPage";
 import { Tab, TabsHeader } from "./Gui/Tabs";
 
 function HomeScreen() {
@@ -16,6 +17,7 @@ export default function HomePageLeraren() {
     <TabsHeader>
       <Tab name="Home" component={HomeScreen} />
       <Tab name="Tekst maken" component={ExamEditPage} />
+      <Tab name="Vraag maken" component={ProblemEditPage} />
     </TabsHeader>
   );
 }

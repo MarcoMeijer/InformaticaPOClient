@@ -7,7 +7,7 @@ import useArrayState from "./Hooks/arrayState";
 import fetchData from "./server/fetchData";
 import { styles } from "./Styles";
 
-export default function ExamEditPage({ route }) {
+export default function ExamEditPage({ route, navigation }) {
   const { tekstid } = route.params;
   const [vraagvolgorde, zetVraagvolgorde] = useState(0);
   const [text, zetText] = useState(undefined);
@@ -38,14 +38,15 @@ export default function ExamEditPage({ route }) {
   }, [vragen, correct, zetCorrect, tekstid, vraagvolgorde]);
 
   const submit = () => {
-    for(let index in vragen) {
+    for (let index in vragen) {
       const vraag = vragen[index];
       fetchData("maak", {
         persoonid: 2,
         vraagid: vraag.vraagid,
-        punten: correct[index] ? 1 : 0,
+        punten: correct[index] ? 1 : 0
       });
     }
+    navigation.navigate("Leerlingen home pagina");
   };
   const volgende = () => {
     zetVraagvolgorde(vraagvolgorde + 1);

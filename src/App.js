@@ -6,7 +6,6 @@ import ExamTextPage from "./ExamTextPage";
 import HomePage from "./homepage";
 import HomePageLeerlingen from "./homepageleerlingen";
 import HomePageLeraren from "./homepageleraren";
-import Barten2 from "./inloggen";
 import Barten from "./registreren";
 import Barten3 from "./tekstenscherm";
 
@@ -17,7 +16,7 @@ export default function App() {
     <View
       style={{
         height: Dimensions.get("window").height,
-        width: Dimensions.get("window").width,
+        width: Dimensions.get("window").width
       }}
     >
       <NavigationContainer>
@@ -33,7 +32,6 @@ export default function App() {
             component={HomePageLeraren}
           />
           <Stack.Screen name="registreren" component={Barten} />
-          <Stack.Screen name="inloggen" component={Barten2} />
           <Stack.Screen name="tekstenscherm" component={Barten3} />
         </Stack.Navigator>
       </NavigationContainer>

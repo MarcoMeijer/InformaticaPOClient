@@ -6,11 +6,25 @@ import Barten3 from "./tekstenscherm";
 
 function HomeScreen() {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>
-        Geachte leerling, welkom op jouw online examenteksten oefenen portal.
-        Zie rechts de bijbeltekst van vandaag, met dagopening van meneer
-        Stamhuis.
+    <View
+      style={{
+        width: 450,
+        height: 800,
+        alignSelf: "center",
+        backgroundColor: "powderblue",
+        alignItems: "center",
+        justifyContent: "center"
+      }}
+    >
+      <Text
+        style={{
+          margin: 35
+        }}
+      >
+        <b>
+          Geachte leerling, welkom op jouw online examenteksten portal. Hier kun
+          je teksten oefenen en je resultaten bekijken, veel succes!
+        </b>
       </Text>
     </View>
   );
