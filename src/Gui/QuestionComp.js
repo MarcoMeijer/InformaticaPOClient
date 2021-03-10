@@ -1,8 +1,9 @@
 import * as React from "react";
-import { useEffect } from "react";
-import { Text, View, TextInput } from "react-native";
+import { useState, useEffect } from "react";
+import { Text, View, TextInput, Button } from "react-native";
 import useArrayState from "../Hooks/arrayState";
 import { styles } from "../Styles";
+import NumberInput from "./NumberInput";
 import RadioChoices from "./RadioChoices";
 
 function MultipleChoiceQuestion({ data, zetPunten }) {
@@ -16,7 +17,7 @@ function MultipleChoiceQuestion({ data, zetPunten }) {
         onChangeText={(geselecteerdeOptie) => {
           if (zetPunten !== undefined) {
             if (geselecteerdeOptie === antwoord) {
-              zetPunten(score ? score : 1);
+              zetPunten(score);
             } else {
               zetPunten(0);
             }
@@ -26,20 +27,41 @@ function MultipleChoiceQuestion({ data, zetPunten }) {
     </View>
   );
 }
-function OpenVraag({ data }) {
-  const { vraag } = data;
+function OpenVraag({ data, zetPunten }) {
+  const [ingevuldNummer, zetIngevuldNummer] = useState(0);
+  const [antwoordOpen, zetAntwoordOpen] = useState(false);
+  const { vraag, antwoord, score } = data;
 
   return (
     <View>
       <Text style={styles.text}>{vraag}</Text>
       <TextInput multiline numberOfLines={10} style={styles.textBox} />
+      <Button
+        title="Klik hier om je antwoord na te kijken"
+        onPress={() => {
+          zetAntwoordOpen(!antwoordOpen);
+        }}
+      />
+      {antwoordOpen && (
+        <View>
+          <Text>{antwoord}</Text>
+          <Text>Vul hier je behaalde punten in (maximaal {score}):</Text>
+          <NumberInput
+            number={ingevuldNummer}
+            onChangeNumber={(punten) => {
+              if (zetPunten !== undefined) zetPunten(punten);
+              zetIngevuldNummer(punten);
+            }}
+            min={0}
+            max={score}
+          />
+        </View>
+      )}
     </View>
   );
 }
 function WaarNietWaarVraag({ data, zetPunten }) {
-  const { juist, vraag, antwoord } = data;
-
-  const maxPunten = data.score === undefined ? 1 : data.score;
+  const { juist, vraag, antwoord, score } = data;
 
   const [goed, , zetGoedIndex] = useArrayState(antwoord.map(() => false));
 
@@ -47,7 +69,7 @@ function WaarNietWaarVraag({ data, zetPunten }) {
     if (zetPunten === undefined) return;
 
     let totaalFout = goed.reduce((a, b) => a + (b ? 0 : 1), 0);
-    zetPunten(Math.max(maxPunten - totaalFout, 0));
+    zetPunten(Math.max(score - totaalFout, 0));
   }, [goed]);
 
   return (
@@ -72,9 +94,12 @@ function WaarNietWaarVraag({ data, zetPunten }) {
 }
 
 export default function QuestionComp(props) {
-  const { data } = props;
+  let newProps = { ...props };
+  if (newProps.data.score === undefined) newProps.data.score = 1;
+  let { data } = newProps;
 
-  if (data.opties !== undefined) return MultipleChoiceQuestion(props);
-  if (data.juist !== undefined) return WaarNietWaarVraag(props);
-  return OpenVraag(props);
+  if (data.opties !== undefined)
+    return <MultipleChoiceQuestion {...newProps} />;
+  if (data.juist !== undefined) return <WaarNietWaarVraag {...newProps} />;
+  return <OpenVraag {...newProps} />;
 }

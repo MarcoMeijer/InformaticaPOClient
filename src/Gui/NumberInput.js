@@ -10,7 +10,7 @@ export default function NumberInput({ onChangeNumber, number, min, max }) {
     if (min !== undefined) result = Math.max(min, result);
     if (max !== undefined) result = Math.min(max, result);
     onChangeNumber(result);
-  }, [onChangeNumber, tekst, min, max]);
+  }, [tekst, min, max]);
 
   return (
     <TextInput style={styles.textBox} onChangeText={zetTekst} value={tekst} />

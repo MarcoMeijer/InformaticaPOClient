@@ -173,7 +173,7 @@ export default function ProblemEditPage({ route }) {
         />
       </View>
       <View style={styles.box}>
-        <QuestionComp data={vraagInhoud} />
+        <QuestionComp key={probleemType} data={vraagInhoud} />
       </View>
     </View>
   );

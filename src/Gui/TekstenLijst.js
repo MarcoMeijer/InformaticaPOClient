@@ -21,9 +21,10 @@ export default function TekstenLijst({ onPress }) {
 
   return (
     <View>
-      {teksten.map((tekst) => {
+      {teksten.map((tekst, index) => {
         return (
           <View
+            key={index}
             style={{
               margin: 2
             }}
