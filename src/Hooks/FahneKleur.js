@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 export default function useFahneKleur() {
-  const [fahnekleur, zetfahnekleur] = useState("#ffffff");
+  const [fahnekleur, zetfahnekleur] = useState("#f2f2f2");
 
   let veranderfahne = () => {
-    if (fahnekleur === "#ffffff") {
+    if (fahnekleur === "#f2f2f2") {
       zetfahnekleur("#171717");
     } else if (fahnekleur === "#ffeb33") {
       zetfahnekleur("#171717");
@@ -16,7 +16,7 @@ export default function useFahneKleur() {
   };
 
   let veranderterug = () => {
-    zetfahnekleur("#ffffff");
+    zetfahnekleur("#f2f2f2");
   };
 
   return [fahnekleur, veranderfahne, veranderterug];
