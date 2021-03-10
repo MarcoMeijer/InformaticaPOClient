@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { Button, Text, TextInput, View } from "react-native";
+import { Button, CheckBox, Text, TextInput, View } from "react-native";
 import DropDownMenu from "./Gui/DropDownMenu";
 import QuestionComp from "./Gui/QuestionComp";
 import useArrayState from "./Hooks/arrayState";
@@ -69,6 +69,50 @@ function EditMeerKeuze({ zetVraagMethode }) {
   );
 }
 
+function EditWaarNietWaarVraag({ zetVraagMethode }) {
+  const [stellingen, zetStellingen, zetStelling] = useArrayState();
+
+  useEffect(() => {
+    zetVraagMethode({
+      juist: stellingen.map(({ tekst }) => tekst),
+      antwoord: stellingen.map(({ waar }) => waar)
+    });
+  }, [stellingen, zetVraagMethode]);
+
+  return (
+    <View>
+      <Text style={styles.text}>Stellingen:</Text>
+      {stellingen.map((value, index) => {
+        return (
+          <View style={{ flexDirection: "row" }} key={index}>
+            <TextInput
+              style={[styles.textBox, { flex: 1 }]}
+              onChangeText={(tekst) => {
+                zetStelling(index)({ ...stellingen[index], tekst: tekst });
+              }}
+              value={value.tekst}
+            />
+            <Text>{` Waar?  `}</Text>
+            <CheckBox
+              value={value.waar}
+              onValueChange={(waar) => {
+                zetStelling(index)({ ...stellingen[index], waar: waar });
+              }}
+            />
+          </View>
+        );
+      })}
+      <Button
+        title="Voeg stelling toe."
+        onPress={() =>
+          zetStellingen([...stellingen, { tekst: "", waar: false }])
+        }
+      />
+      <Text>Voor elk fout antwoord wordt een punt weggehaald.</Text>
+    </View>
+  );
+}
+
 export default function ProblemEditPage({ route }) {
   const [vraag, zetVraag] = useState("");
   const [score, zetScore] = useState(1);
@@ -97,7 +141,11 @@ export default function ProblemEditPage({ route }) {
         <Text style={styles.text}>Vraag type:</Text>
         <View style={{ zIndex: 1 }}>
           <DropDownMenu
-            opties={["meer keuze vraag", "open vraag"]}
+            opties={[
+              "meer keuze vraag",
+              "open vraag",
+              "Waar of niet waar vraag"
+            ]}
             onChangeText={zetProbleemType}
           />
         </View>
@@ -107,6 +155,9 @@ export default function ProblemEditPage({ route }) {
           )}
           {probleemType === "open vraag" && (
             <EditOpen zetVraagMethode={zetVraagMethode} />
+          )}
+          {probleemType === "Waar of niet waar vraag" && (
+            <EditWaarNietWaarVraag zetVraagMethode={zetVraagMethode} />
           )}
         </View>
         <Button
