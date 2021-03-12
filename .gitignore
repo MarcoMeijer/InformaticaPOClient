@@ -2,6 +2,7 @@
 
 # dependencies
 .vscode
+.codesandbox
 .eslintcache
 .codesandbox
 /node_modules
