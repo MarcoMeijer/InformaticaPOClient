@@ -1,4 +1,4 @@
-import { Modal, View } from "react-native";
+import { View } from "react-native";
 import ErrorBox from "./ErrorBox";
 
 export default function ErrorBoxList({ errors }) {
@@ -11,8 +11,14 @@ export default function ErrorBoxList({ errors }) {
           alignSelf: "flex-end"
         }}
       >
-        {errors.map((message, index) => (
-          <ErrorBox message={message} key={index} />
+        {errors.messages.map((message) => (
+          <ErrorBox
+            message={message.error}
+            key={message.id}
+            onClose={() => {
+              errors.closeError(message.id);
+            }}
+          />
         ))}
       </View>
     </View>
