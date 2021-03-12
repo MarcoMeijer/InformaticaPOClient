@@ -1,16 +1,15 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Dimensions, View } from "react-native";
 import ExamTextPage from "./ExamTextPage";
 import HomePage from "./homepage";
 import HomePageLeerlingen from "./homepageleerlingen";
 import HomePageLeraren from "./homepageleraren";
+import ProblemEditPage from "./ProblemEditPage";
 import Barten from "./registreren";
 import TekstenScherm from "./tekstenscherm";
-import ProblemEditPage from "./ProblemEditPage";
-import Header from "./Gui/Header";
 
 const Stack = createStackNavigator();
 

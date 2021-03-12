@@ -5,8 +5,8 @@ import ExamTextComp from "./Gui/ExamTextComp";
 import Pagina from "./Gui/Pagina";
 import QuestionComp from "./Gui/QuestionComp";
 import useArrayState from "./Hooks/arrayState";
-import fetchData from "./server/fetchData";
 import useErrorState from "./Hooks/errorState";
+import fetchData from "./server/fetchData";
 import { styles } from "./Styles";
 
 export default function ExamEditPage({ route, navigation }) {

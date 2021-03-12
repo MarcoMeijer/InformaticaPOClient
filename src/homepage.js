@@ -1,14 +1,15 @@
 import * as React from "react";
 import { useState } from "react";
-import { Button, Text, TextInput, TouchableOpacity, View } from "react-native";
-import Pagina from "./Gui/Pagina";
+import { Button, Text, TouchableOpacity, View } from "react-native";
 import Enter from "./Gui/Enter";
+import Jacket from "./Gui/Jacket";
 import Logo from "./Gui/Logo";
+import Pagina from "./Gui/Pagina";
+import TextBox from "./Gui/TextBox";
+import useErrorState from "./Hooks/errorState";
 import useFahneKleur from "./Hooks/FahneKleur";
 import fetchData, { setKey } from "./server/fetchData";
 import { styles } from "./Styles";
-import Jacket from "./Gui/Jacket";
-import useErrorState from "./Hooks/errorState";
 
 export default function HomePage({ navigation }) {
   const [leerlingnummer, zetleerlingnummer] = useState("");
@@ -60,30 +61,26 @@ export default function HomePage({ navigation }) {
             <Text>inloggen!</Text>
           </TouchableOpacity>
         </Text>
-        <View style={{ flexDirection: "row" }}>
-          <View style={{ flexDirection: "collumn", justifyContent: "center" }}>
-            <Text>Leerlingnummer: </Text>
-            <Text>Wachtwoord: </Text>
-          </View>
-          <View style={{ flexDirection: "collumn" }}>
-            <TextInput
-              style={[styles.inputBox, { borderColor: leerlingnummercolor }]}
-              onChangeText={(nieuweleerlingnummer) => {
+        <View style={{ flexDirection: "collumn" }}>
+        <TextBox
+            title={"Leerling nummer"}
+            style={[styles.inputBox, { borderColor: leerlingnummercolor }]}
+            onChangeText={(nieuweleerlingnummer) => {
                 zetleerlingnummer(nieuweleerlingnummer);
                 zetleerlingnummercolor("'grey'");
-              }}
-              value={leerlingnummer}
-            />
-            <TextInput
-              style={[styles.inputBox, { borderColor: wachtwoordcolor }]}
-              onChangeText={(nieuwewachtwoord) => {
+            }}
+            value={leerlingnummer}
+        />
+        <TextBox
+            title={"Wachtwoord"}
+            style={[styles.inputBox, { borderColor: wachtwoordcolor }]}
+            onChangeText={(nieuwewachtwoord) => {
                 zetwachtwoord(nieuwewachtwoord);
                 zetwachtwoordcolor("'grey'");
-              }}
-              value={wachtwoord}
-              secureTextEntry={true}
-            />
-          </View>
+            }}
+            value={wachtwoord}
+            secureTextEntry={true}
+        />
         </View>
         <Enter />
         <Button title="Inloggen" onPress={inloggen} />
