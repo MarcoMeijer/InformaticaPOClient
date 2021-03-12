@@ -1,23 +1,27 @@
 import * as React from "react";
 import { useState } from "react";
-import { Button, View } from "react-native";
-import { styles } from "../Styles";
+import { Text, View, TouchableOpacity, ScrollView } from "react-native";
+import Header from "./Header";
 
-export function Tab({ name, tabNavigator }) {
-  return (
-    <View
-      style={{
-        marginRight: 2
-      }}
-    >
-      <Button
-        title={name}
+export function Tab({ name, tabNavigator, current }) {
+  if (current === name) {
+    return (
+      <Text style={{ marginLeft: 20, alignSelf: "center" }}>
+        <b>{name}</b>
+      </Text>
+    );
+  } else {
+    return (
+      <TouchableOpacity
         onPress={() => {
           tabNavigator(name);
         }}
-      />
-    </View>
-  );
+        style={{ alignSelf: "center" }}
+      >
+        <Text style={{ marginLeft: 20 }}>{name}</Text>
+      </TouchableOpacity>
+    );
+  }
 }
 export function TabsHeader({ navigation, children }) {
   const [selectedComponent, setSelectedComponent] = useState(
@@ -25,25 +29,30 @@ export function TabsHeader({ navigation, children }) {
   );
 
   const childrenWithProps = React.Children.map(children, (child) => {
-    return React.cloneElement(child, { tabNavigator: setSelectedComponent });
+    return React.cloneElement(child, {
+      tabNavigator: setSelectedComponent,
+      current: selectedComponent
+    });
   });
 
   return (
     <View style={{ flex: 1 }}>
-      <View style={styles.rowContainer}>{childrenWithProps}</View>
+      <Header navigation={navigation}>{childrenWithProps}</Header>
       {children.map((child) => {
         const { name } = child.props;
 
         if (name === selectedComponent) {
           return (
-            <View
-              style={{
-                flex: 1
-              }}
-              key={name}
+            <ScrollView
+              style={{ height: 1 }}
+              contentContainerStyle={{ flexGrow: 1 }}
             >
-              <child.props.component navigation={navigation} />
-            </View>
+              <View style={{ flex: 1 }} key={name}>
+                <View style={{ flexDirection: "collumn", flex: 1 }}>
+                  <child.props.component navigation={navigation} />
+                </View>
+              </View>
+            </ScrollView>
           );
         } else {
           return (

@@ -3,19 +3,26 @@ import { Text, View } from "react-native";
 import ExamEditPage from "./ExamEditPage";
 import TekstenLijst from "./Gui/TekstenLijst";
 import { Tab, TabsHeader } from "./Gui/Tabs";
+import Jacket from "./Gui/Jacket";
+import Enter from "./Gui/Enter";
 
 function HomeScreen() {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Leraren home pagina</Text>
-    </View>
+    <Jacket>
+      <Text>
+        <b>Leraren home pagina</b>
+      </Text>
+    </Jacket>
   );
 }
 
 function VraagMakenScherm({ navigation }) {
   return (
-    <View>
-      <Text>Selecteer aan welke tekst je een vraag wilt toevoegen: </Text>
+    <Jacket>
+      <Text>
+        <b>Selecteer aan welke tekst je een vraag wilt toevoegen:</b>
+      </Text>
+      <Enter />
       <TekstenLijst
         onPress={(tekstid) => {
           navigation.navigate("Vraag maken", {
@@ -23,7 +30,7 @@ function VraagMakenScherm({ navigation }) {
           });
         }}
       />
-    </View>
+    </Jacket>
   );
 }
 

@@ -2,10 +2,13 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { Button, Text, TextInput, TouchableOpacity, View } from "react-native";
 import DropDownMenu from "./Gui/DropDownMenu";
+import Enter from "./Gui/Enter";
+import Pagina from "./Gui/Pagina";
 import Logo from "./Gui/Logo";
 import useFahneKleur from "./Hooks/FahneKleur";
 import fetchData from "./server/fetchData";
 import { styles } from "./Styles";
+import Jacket from "./Gui/Jacket";
 
 export default function Barten({ navigation }) {
   const [leerlingnummer, zetleerlingnummer] = useState("");
@@ -92,29 +95,16 @@ export default function Barten({ navigation }) {
   }, [klassen]);
 
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: fahnekleur
-      }}
-    >
-      <View
-        style={{
-          width: 450,
-          height: 800,
-          backgroundColor: "powderblue",
-          alignItems: "center",
-          justifyContent: "center"
-        }}
-      >
-        <Logo />
+    <Pagina navigation={navigation}>
+      <Jacket kleur={fahnekleur}>
+        <Logo size={0.9} />
         <Text style={{ marginBottom: 20, fontSize: 25 }}>
           <TouchableOpacity onPress={veranderfahne}>
+            <Enter />
             <Text>Hier kunt u zich</Text>
           </TouchableOpacity>{" "}
           <TouchableOpacity onPress={veranderterug}>
+            <Enter />
             <Text>registreren!</Text>
           </TouchableOpacity>
         </Text>
@@ -131,7 +121,10 @@ export default function Barten({ navigation }) {
         <Text style={{ color: "#ff0000" }}>{error3}</Text>
         <View style={{ flexDirection: "row", zIndex: 2 }}>
           <View
-            style={{ flexDirection: "collumn", justifyContent: "space-around" }}
+            style={{
+              flexDirection: "collumn",
+              justifyContent: "space-around"
+            }}
           >
             <Text>Leerlingnummer: </Text>
             <Text>Voornaam: </Text>
@@ -143,12 +136,7 @@ export default function Barten({ navigation }) {
           </View>
           <View style={{ flexDirection: "collumn" }}>
             <TextInput
-              style={{
-                height: 25,
-                borderColor: leerlingnummercolor,
-                borderWidth: 1,
-                backgroundColor: "#ffffff"
-              }}
+              style={[styles.inputBox, { borderColor: leerlingnummercolor }]}
               onChangeText={(nieuweleerlingnummer) => {
                 zetleerlingnummer(nieuweleerlingnummer);
                 zetleerlingnummercolor("'grey'");
@@ -156,12 +144,7 @@ export default function Barten({ navigation }) {
               value={leerlingnummer}
             />
             <TextInput
-              style={{
-                height: 25,
-                borderColor: voornaamcolor,
-                borderWidth: 1,
-                backgroundColor: "#ffffff"
-              }}
+              style={[styles.inputBox, { borderColor: voornaamcolor }]}
               onChangeText={(nieuwevoornaam) => {
                 zetvoornaam(nieuwevoornaam);
                 zetvoornaamcolor("'grey'");
@@ -169,24 +152,14 @@ export default function Barten({ navigation }) {
               value={voornaam}
             />
             <TextInput
-              style={{
-                height: 25,
-                borderColor: "gray",
-                borderWidth: 1,
-                backgroundColor: "#ffffff"
-              }}
+              style={[styles.inputBox]}
               onChangeText={(nieuwetussenvoegsel) =>
                 zettussenvoegsel(nieuwetussenvoegsel)
               }
               value={tussenvoegsel}
             />
             <TextInput
-              style={{
-                height: 25,
-                borderColor: achternaamcolor,
-                borderWidth: 1,
-                backgroundColor: "#ffffff"
-              }}
+              style={[styles.inputBox, { borderColor: achternaamcolor }]}
               onChangeText={(nieuweachternaam) => {
                 zetachternaam(nieuweachternaam);
                 zetachternaamcolor("'grey'");
@@ -199,12 +172,7 @@ export default function Barten({ navigation }) {
               value={klas}
             />
             <TextInput
-              style={{
-                height: 25,
-                borderColor: wachtwoordcolor,
-                borderWidth: 1,
-                backgroundColor: "#ffffff"
-              }}
+              style={[styles.inputBox, { borderColor: wachtwoordcolor }]}
               onChangeText={(nieuwewachtwoord) => {
                 zetwachtwoord(nieuwewachtwoord);
                 zetwachtwoordcolor("'grey'");
@@ -213,12 +181,10 @@ export default function Barten({ navigation }) {
               secureTextEntry={true}
             />
             <TextInput
-              style={{
-                height: 25,
-                borderColor: wachtwoordherhalencolor,
-                borderWidth: 1,
-                backgroundColor: "#ffffff"
-              }}
+              style={[
+                styles.inputBox,
+                { borderColor: wachtwoordherhalencolor }
+              ]}
               onChangeText={(nieuwewachtwoordherhalen) => {
                 zetwachtwoordherhalen(nieuwewachtwoordherhalen);
                 zetwachtwoordherhalencolor("'grey'");
@@ -228,18 +194,16 @@ export default function Barten({ navigation }) {
             />
           </View>
         </View>
-        <View style={{ flex: 1, flexDirection: "collumn" }}>
-          <Text>{"\n"}</Text>
-          <Button title="Registreren" onPress={registreren} />
-          <Text>{"\n"}</Text>
-          <Text
-            style={{ color: "blue" }}
-            onPress={() => navigation.navigate("Home")}
-          >
-            Heeft u al een account? Log dan in!
-          </Text>
-        </View>
-      </View>
-    </View>
+        <Enter />
+        <Button title="Registreren" onPress={registreren} />
+        <Enter />
+        <Text
+          style={{ color: "blue" }}
+          onPress={() => navigation.navigate("Home")}
+        >
+          Heeft u al een account? Log dan in!
+        </Text>
+      </Jacket>
+    </Pagina>
   );
 }

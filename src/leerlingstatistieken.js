@@ -1,9 +1,10 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { ActivityIndicator, Text, View } from "react-native";
 import fetchData from "./server/fetchData";
+import Jacket from "./Gui/Jacket";
 
-export default function Barten4({ navigation }) {
+export default function LeerlingenStatistieken({ navigation }) {
   const [gemaakt, zetGemaakt] = useState(undefined);
 
   useEffect(() => {
@@ -25,24 +26,21 @@ export default function Barten4({ navigation }) {
   }
 
   return (
-    <View
-      style={{
-        width: 450,
-        height: 800,
-        alignSelf: "center",
-        backgroundColor: "powderblue",
-        alignItems: "center",
-        justifyContent: "center"
-      }}
-    >
-      <Text>
-        <b>kijk hieronder hoe je de vragen hebt beantwoord:</b>
-      </Text>
-      <Text>
-        <b>
-          Je hebt {punten} van de {maximaalPunten} punten.
-        </b>
-      </Text>
-    </View>
+    <Jacket>
+      {gemaakt === undefined ? (
+        <ActivityIndicator />
+      ) : (
+        <View>
+          <Text>
+            <b>kijk hieronder hoe je de vragen hebt beantwoord:</b>
+          </Text>
+          <Text>
+            <b>
+              Je hebt {punten} van de {maximaalPunten} punten.
+            </b>
+          </Text>
+        </View>
+      )}
+    </Jacket>
   );
 }

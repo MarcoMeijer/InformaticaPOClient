@@ -7,6 +7,7 @@ import useArrayState from "./Hooks/arrayState";
 import fetchData from "./server/fetchData";
 import { styles } from "./Styles";
 import NumberInput from "./Gui/NumberInput";
+import Pagina from "./Gui/Pagina";
 
 function EditOpen({ zetVraagMethode }) {
   const [nakijkAntwoord, zetNakijkAntwoord] = useState("");
@@ -113,7 +114,7 @@ function EditWaarNietWaarVraag({ zetVraagMethode }) {
   );
 }
 
-export default function ProblemEditPage({ route }) {
+export default function ProblemEditPage({ navigation, route }) {
   const [vraag, zetVraag] = useState("");
   const [score, zetScore] = useState(1);
   const [probleemType, zetProbleemType] = useState("");
@@ -128,53 +129,55 @@ export default function ProblemEditPage({ route }) {
   };
 
   return (
-    <View style={{ flex: 1, flexDirection: "row" }}>
-      <View style={styles.box}>
-        <Text style={styles.text}>Vraag:</Text>
-        <TextInput
-          style={styles.textBox}
-          onChangeText={(text) => zetVraag(text)}
-          value={vraag}
-        />
-        <Text style={styles.text}>Aantal te behalen punten:</Text>
-        <NumberInput onChangeNumber={zetScore} number={score} />
-        <Text style={styles.text}>Vraag type:</Text>
-        <View style={{ zIndex: 1 }}>
-          <DropDownMenu
-            opties={[
-              "meer keuze vraag",
-              "open vraag",
-              "Waar of niet waar vraag"
-            ]}
-            onChangeText={zetProbleemType}
+    <Pagina navigation={navigation}>
+      <View style={{ flex: 1, flexDirection: "row" }}>
+        <View style={styles.box}>
+          <Text style={styles.text}>Vraag:</Text>
+          <TextInput
+            style={styles.textBox}
+            onChangeText={(text) => zetVraag(text)}
+            value={vraag}
+          />
+          <Text style={styles.text}>Aantal te behalen punten:</Text>
+          <NumberInput onChangeNumber={zetScore} number={score} />
+          <Text style={styles.text}>Vraag type:</Text>
+          <View style={{ zIndex: 1 }}>
+            <DropDownMenu
+              opties={[
+                "meer keuze vraag",
+                "open vraag",
+                "Waar of niet waar vraag"
+              ]}
+              onChangeText={zetProbleemType}
+            />
+          </View>
+          <View style={{ zIndex: -1 }}>
+            {probleemType === "meer keuze vraag" && (
+              <EditMeerKeuze zetVraagMethode={zetVraagMethode} />
+            )}
+            {probleemType === "open vraag" && (
+              <EditOpen zetVraagMethode={zetVraagMethode} />
+            )}
+            {probleemType === "Waar of niet waar vraag" && (
+              <EditWaarNietWaarVraag zetVraagMethode={zetVraagMethode} />
+            )}
+          </View>
+          <Button
+            title="Voeg vraag toe"
+            onPress={() => {
+              fetchData("insertvraag", {
+                vraagInhoud: JSON.stringify(vraagInhoud),
+                vraagSoort: 1,
+                vraagVolgorde: 1,
+                tekstid: tekstid
+              });
+            }}
           />
         </View>
-        <View style={{ zIndex: -1 }}>
-          {probleemType === "meer keuze vraag" && (
-            <EditMeerKeuze zetVraagMethode={zetVraagMethode} />
-          )}
-          {probleemType === "open vraag" && (
-            <EditOpen zetVraagMethode={zetVraagMethode} />
-          )}
-          {probleemType === "Waar of niet waar vraag" && (
-            <EditWaarNietWaarVraag zetVraagMethode={zetVraagMethode} />
-          )}
+        <View style={styles.box}>
+          <QuestionComp key={probleemType} data={vraagInhoud} />
         </View>
-        <Button
-          title="Voeg vraag toe"
-          onPress={() => {
-            fetchData("insertvraag", {
-              vraagInhoud: JSON.stringify(vraagInhoud),
-              vraagSoort: 1,
-              vraagVolgorde: 1,
-              tekstid: tekstid
-            });
-          }}
-        />
       </View>
-      <View style={styles.box}>
-        <QuestionComp key={probleemType} data={vraagInhoud} />
-      </View>
-    </View>
+    </Pagina>
   );
 }

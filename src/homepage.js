@@ -1,87 +1,65 @@
 import * as React from "react";
 import { useState } from "react";
 import { Button, Text, TextInput, TouchableOpacity, View } from "react-native";
+import Pagina from "./Gui/Pagina";
+import Enter from "./Gui/Enter";
 import Logo from "./Gui/Logo";
 import useFahneKleur from "./Hooks/FahneKleur";
-import fetchData, { key, setKey } from "./server/fetchData";
+import fetchData, { setKey } from "./server/fetchData";
 import { styles } from "./Styles";
+import Jacket from "./Gui/Jacket";
+import useErrorState from "./Hooks/errorState";
 
 export default function HomePage({ navigation }) {
   const [leerlingnummer, zetleerlingnummer] = useState("");
   const [wachtwoord, zetwachtwoord] = useState("");
-  const [error1, zeterror1] = useState("");
-  const [error2, zeterror2] = useState("");
-  const [error3, zeterror3] = useState("");
+  const [errors, addError] = useErrorState();
   const [leerlingnummercolor, zetleerlingnummercolor] = useState("grey");
   const [wachtwoordcolor, zetwachtwoordcolor] = useState("grey");
   const [fahnekleur, veranderfahne, veranderterug] = useFahneKleur();
 
   let inloggen = () => {
     if (leerlingnummer === "") {
-      zeterror1("U heeft het leerlingnummer niet ingevuld. \n\n");
+      addError("U heeft het leerlingnummer niet ingevuld.");
       zetleerlingnummercolor("#ff0000");
     } else if (wachtwoord === "") {
-      zeterror1("U heeft uw wachtwoord niet ingevuld. \n\n");
+      addError("U heeft uw wachtwoord niet ingevuld.");
       zetwachtwoordcolor("#ff0000");
     } else {
       fetchData("login", { llnr: leerlingnummer, wachtwoord: wachtwoord })
         .then((data) => {
           if (data === "fail") {
-            zeterror2("Uw wachtwoord of gebruikersnaam is niet juist. \n\n");
+            addError("Uw wachtwoord of gebruikersnaam is niet juist.");
           } else {
             setKey(data.token);
             if (data.bevoegdheid === "docent") {
-              naardocent();
+              navigation.navigate("Leraren home pagina");
             } else {
-              naarhome();
+              navigation.navigate("Leerlingen home pagina");
             }
           }
         })
         .catch((error) => {
           console.log(error);
-          zeterror3("De server is niet online op dit moment. \n\n");
+          addError("De server is niet online op dit moment.");
         });
     }
   };
 
-  let naarhome = () => {
-    navigation.navigate("Leerlingen home pagina");
-  };
-
-  let naardocent = () => {
-    navigation.navigate("Leraren home pagina");
-  };
-
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: fahnekleur
-      }}
-    >
-      <View
-        style={{
-          width: 450,
-          height: 800,
-          backgroundColor: "powderblue",
-          alignItems: "center",
-          justifyContent: "center"
-        }}
-      >
-        <Logo />
+    <Pagina navigation={navigation} errors={errors}>
+      <Jacket kleur={fahnekleur}>
+        <Logo size={0.9} />
         <Text style={{ marginBottom: 20, fontSize: 25 }}>
           <TouchableOpacity onPress={veranderfahne}>
+            <Enter />
             <Text>Hier kunt u</Text>
           </TouchableOpacity>{" "}
           <TouchableOpacity onPress={veranderterug}>
+            <Enter />
             <Text>inloggen!</Text>
           </TouchableOpacity>
         </Text>
-        <Text style={{ color: "#ff0000" }}>{error1}</Text>
-        <Text style={{ color: "#ff0000" }}>{error2}</Text>
-        <Text style={{ color: "#ff0000" }}>{error3}</Text>
         <View style={{ flexDirection: "row" }}>
           <View style={{ flexDirection: "collumn", justifyContent: "center" }}>
             <Text>Leerlingnummer: </Text>
@@ -89,12 +67,7 @@ export default function HomePage({ navigation }) {
           </View>
           <View style={{ flexDirection: "collumn" }}>
             <TextInput
-              style={{
-                height: 25,
-                borderColor: leerlingnummercolor,
-                borderWidth: 1,
-                backgroundColor: "#ffffff"
-              }}
+              style={[styles.inputBox, { borderColor: leerlingnummercolor }]}
               onChangeText={(nieuweleerlingnummer) => {
                 zetleerlingnummer(nieuweleerlingnummer);
                 zetleerlingnummercolor("'grey'");
@@ -102,12 +75,7 @@ export default function HomePage({ navigation }) {
               value={leerlingnummer}
             />
             <TextInput
-              style={{
-                height: 25,
-                borderColor: wachtwoordcolor,
-                borderWidth: 1,
-                backgroundColor: "#ffffff"
-              }}
+              style={[styles.inputBox, { borderColor: wachtwoordcolor }]}
               onChangeText={(nieuwewachtwoord) => {
                 zetwachtwoord(nieuwewachtwoord);
                 zetwachtwoordcolor("'grey'");
@@ -117,18 +85,16 @@ export default function HomePage({ navigation }) {
             />
           </View>
         </View>
-        <View>
-          <Text>{"\n"}</Text>
-          <Button title="Inloggen" onPress={inloggen} />
-          <Text>{"\n"}</Text>
-          <Text
-            style={{ color: "blue" }}
-            onPress={() => navigation.navigate("registreren")}
-          >
-            Geen account? Maak een account!
-          </Text>
-        </View>
-      </View>
-    </View>
+        <Enter />
+        <Button title="Inloggen" onPress={inloggen} />
+        <Enter />
+        <Text
+          style={{ color: "blue" }}
+          onPress={() => navigation.navigate("registreren")}
+        >
+          Geen account? Maak een account!
+        </Text>
+      </Jacket>
+    </Pagina>
   );
 }

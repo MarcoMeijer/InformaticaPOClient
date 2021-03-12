@@ -6,7 +6,7 @@ import { styles } from "../Styles";
 import NumberInput from "./NumberInput";
 import RadioChoices from "./RadioChoices";
 
-function MultipleChoiceQuestion({ data, zetPunten }) {
+function MultipleChoiceQuestion({ data, zetPunten, zetIngevuld }) {
   const { vraag, opties, antwoord, score } = data;
 
   return (
@@ -15,6 +15,7 @@ function MultipleChoiceQuestion({ data, zetPunten }) {
       <RadioChoices
         opties={opties}
         onChangeText={(geselecteerdeOptie) => {
+          if (zetIngevuld !== undefined) zetIngevuld(true);
           if (zetPunten !== undefined) {
             if (geselecteerdeOptie === antwoord) {
               zetPunten(score);
@@ -27,7 +28,7 @@ function MultipleChoiceQuestion({ data, zetPunten }) {
     </View>
   );
 }
-function OpenVraag({ data, zetPunten }) {
+function OpenVraag({ data, zetPunten, zetIngevuld }) {
   const [ingevuldNummer, zetIngevuldNummer] = useState(0);
   const [antwoordOpen, zetAntwoordOpen] = useState(false);
   const { vraag, antwoord, score } = data;
@@ -39,6 +40,7 @@ function OpenVraag({ data, zetPunten }) {
       <Button
         title="Klik hier om je antwoord na te kijken"
         onPress={() => {
+          if (zetIngevuld !== undefined) zetIngevuld(true);
           zetAntwoordOpen(!antwoordOpen);
         }}
       />
@@ -60,7 +62,7 @@ function OpenVraag({ data, zetPunten }) {
     </View>
   );
 }
-function WaarNietWaarVraag({ data, zetPunten }) {
+function WaarNietWaarVraag({ data, zetPunten, zetIngevuld }) {
   const { juist, vraag, antwoord, score } = data;
 
   const [goed, , zetGoedIndex] = useArrayState(antwoord.map(() => false));
@@ -84,6 +86,7 @@ function WaarNietWaarVraag({ data, zetPunten }) {
               onChangeText={(geselecteerdeOptie) => {
                 let waar = geselecteerdeOptie === "Waar";
                 zetGoedIndex(index)(waar === antwoord[index]);
+                if (zetIngevuld !== undefined) zetIngevuld(true);
               }}
             />
           </View>

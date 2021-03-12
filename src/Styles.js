@@ -1,9 +1,6 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  rowContainer: {
-    flexDirection: "row"
-  },
   box: {
     justifyContent: "flex-start",
     borderColor: "white",
@@ -21,25 +18,26 @@ export const styles = StyleSheet.create({
     backgroundColor: "#eeeeee",
     borderWidth: 1
   },
-  barten: {
-    height: 25,
-    borderColor: "gray",
-    borderWidth: 1
-  },
-  //loginstyle
-  loginbutton: {
-    width: "250px",
-    marginTop: "5px"
-  },
-  loginbutton2: {
-    width: "250px",
-    marginTop: "5px"
-  },
-  loginmain: {
+  setupNormal: {
     flex: 1,
-    alignItems: "Left",
-    justifyContent: "Left",
-    marginLeft: "10px",
-    width: "500px"
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#f2f2f2"
+  },
+  blueBackground: {
+    width: 450,
+    height: 800,
+    backgroundColor: "powderblue",
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: "powderblue",
+    borderWidth: "10px",
+    borderRadius: "10px"
+  },
+  inputBox: {
+    height: 25,
+    borderWidth: 1,
+    backgroundColor: "#ffffff",
+    borderColor: "grey"
   }
 });
