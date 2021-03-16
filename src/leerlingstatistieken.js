@@ -1,8 +1,10 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, Text, View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
+import Text from "./Gui/Text";
 import fetchData from "./server/fetchData";
 import Jacket from "./Gui/Jacket";
+import { VictoryPie } from "victory";
 
 export default function LeerlingenStatistieken({ navigation }) {
   const [gemaakt, zetGemaakt] = useState(undefined);
@@ -39,6 +41,13 @@ export default function LeerlingenStatistieken({ navigation }) {
               Je hebt {punten} van de {maximaalPunten} punten.
             </b>
           </Text>
+          <VictoryPie
+            colorScale={["gold", "tomato"]}
+            data={[
+              { x: "Goed", y: punten },
+              { x: "Fout", y: maximaalPunten - punten }
+            ]}
+          />
         </View>
       )}
     </Jacket>

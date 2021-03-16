@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useTheme } from "@react-navigation/native";
 
-export default function useFahneKleur() {
-  const [fahnekleur, zetfahnekleur] = useState("#f2f2f2");
+export default function useFahneKleur(props) {
+  const { colors } = useTheme();
+
+  if (props === undefined) props = {};
+  let { kleur } = props;
+  if (kleur === undefined) kleur = colors.achtergrondKleur;
+  const [fahnekleur, zetfahnekleur] = useState(kleur);
 
   let veranderfahne = () => {
-    if (fahnekleur === "#f2f2f2") {
+    if (fahnekleur === kleur) {
       zetfahnekleur("#171717");
     } else if (fahnekleur === "#ffeb33") {
       zetfahnekleur("#171717");
@@ -16,8 +22,12 @@ export default function useFahneKleur() {
   };
 
   let veranderterug = () => {
-    zetfahnekleur("#f2f2f2");
+    zetfahnekleur(kleur);
   };
+
+  useEffect(() => {
+    zetfahnekleur(kleur);
+  }, [kleur]);
 
   return [fahnekleur, veranderfahne, veranderterug];
 }

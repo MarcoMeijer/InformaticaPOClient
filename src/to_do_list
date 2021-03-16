@@ -9,3 +9,60 @@ meer doen met vraagsoorten zodat er meer inzicht is in wat er goed en niet goed 
 Overzicht examenteksten verbeteren: ipv knop met titel, layout zoals google search doen.
 dus titel met eronder de eerst paar regels vd tekst. kan je aanklikken om naar die tekst te gaan.
 
+Overal:
+	-Balk meer reactive maken. (Bij kleine schermen de knoppen over laten gaan in een dropdownmenu.)
+	-Pagina's meer reactive maken. (beetje laten uitzoomen bij kleinere schermen. Geen margin met px maar met %)
+	-Smartphone support functies. (klas selecteren ding bij registreren.)
+	-De foutmelding ook als gelukt meldingen toevoegen (bv: "je bent succesvol uitgelogd.";"Je voortgang is opgeslagen.")
+
+Inlogscherm:
+	-Wachtwoord vergeten knop die een melding stuurt naar de leraar.
+
+Leerlingenschermen:
+	-De tekstenknoppen overzetten naar examenknoppen.
+	-Bij de examenknoppen een zoekbalkje waarmee je kunt zoeken.
+	-Bij de examenknoppen examens sorteren door examens waarmee je al een beetje begonnen bent boven de andere te zetten.
+	-Bij de examens die waarbij je al bent begonnen een % voortgang of zoveel vragen gemaakt van de zoveel vragen.
+	-Bij statestiek bekijken een mooi overzichtje van de gemaakte examens en de behaalde resultaten.
+	-De resultaten kunnen met % een groen en rood vlak maken net zoals bij MyEnglishLab.
+	-Een mijn gegevens tabblad maken waarbij je je gegevens kunt aanpassen (bv wachtwoord).
+	-Een voortgangopslaanknop bij de vragen.
+	-Teksten opslaan als afbeeldingen zodat afbeeldingen bij teksten op te zien zijn op de website.
+	-Inzoom en uitzoom knoppen bij de afbeeldingen van de teksten.
+	-Een tabblad met alle klassen en de gegevens van de leerlingen.
+
+Lerarenscherm:
+	-Bij teksten maken een submitknop die automatisch de tekst in de database zet.
+	-Bij teksten maken het rechten outputvoorbeeld vervangen met een uitlegje.
+	-Bij teksten maken een knop om linksboven om je tekst uit een lijst van examens toe te voegen.
+	-Bij vragen maken de knoppen toevoegen in de balk.
+	-Bij vragen maken dat tussenscherm in het hoofdscherm voegen.
+	-Bij vragen maken een uitleg en submitknop?
+	-Bij vragen maken de keuze bij openvraag op leraar- of leerlingcontrole.
+
+Wat mevrouw wil:
+-Dat wij uitvogelen met welke opdrachten je wat oefend en zo'n gekke toets die meet waar je goed in bent, weet alleen niet hoe dit zou moeten....
+
+Optioneel/ volgende stadium:
+	Overal:
+		-Mooi fond voor alle tekst.
+		-Mogelijkheid tot meerdere talen toevoegen.
+		-Meerdere leraren toevoegen die gekoppeld zijn aan een taal en klas/leerlingen.
+
+	Inloggen- & Registrerenpagina:
+		-Mijn inloggen onthouden checkbox.
+
+	Leerlingen- & Lerarenscherm:
+		-Een meldingen tabblad met een aantal ernaast. (bv: Meldingen (0); Meldingen (3). Bv dat een leraar een bericht krijgt dat een leerling zijn wachtwoord wil wijzigen.)
+
+	Leerlingenschermen:
+		-Een huiswerk tablad met deadlines en opdrachten en voorgang.
+
+	Lerarenscherm:
+		-De mogelijkheid dat een leraar een foto van een opdracht kan maken, die kan uploaden en daar opdrachten bij kan zetten.
+		-De mogelijkheid dat leraren huiswerk op kunnen geven met deadline, en een overzicht van de voortgangen van de leerlingen/ klassen.
+		-Op touchscreendevices bij teksten- en vragenmaken double finger movement support en een overlay outleg/ waarschuwing	.
+
+	Optioneel optioneel:
+		-Frikandelbroodjes calculator easteregg.
+		-Een fake werkschema voor op straat zijn na 21:00 easteregg.

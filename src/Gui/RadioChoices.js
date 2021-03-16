@@ -8,13 +8,17 @@ export default function RadioChoices({
   backgroundColor,
   opties,
   onChangeText,
-  value,
+  value
 }) {
   const [selected, setSelected] = useState(value);
 
   let color = backgroundColor;
 
   if (color === undefined) color = "#fff";
+
+  React.useEffect(() => {
+    setSelected(value);
+  }, [value]);
 
   return (
     <View>

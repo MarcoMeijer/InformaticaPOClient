@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Animated, TextInput, View } from "react-native";
+import { useTheme } from "@react-navigation/native";
 
 export default function TextBox({
   title,
@@ -7,6 +8,7 @@ export default function TextBox({
   value,
   secureTextEntry
 }) {
+  const { colors } = useTheme();
   const [isFocused, setFocused] = useState(false);
   const animation = useRef(new Animated.Value(0)).current;
 
@@ -34,7 +36,7 @@ export default function TextBox({
     }),
     color: animation.interpolate({
       inputRange: [0, 1],
-      outputRange: ["#777", "#222"]
+      outputRange: ["#999", colors.tekstKleur]
     })
   };
 
@@ -42,14 +44,19 @@ export default function TextBox({
     <View
       style={{
         marginTop: 20,
-        backgroundColor: "#fff",
+        backgroundColor: colors.achtergrondKleur,
         borderRadius: 5,
         borderBottomWidth: 1,
         borderBottomColor: "#555"
       }}
     >
       <TextInput
-        style={{ fontSize: 24, margin: 4 }}
+        style={{
+          color: colors.tekstKleur,
+          fontSize: 24,
+          margin: 4,
+          outlineWidth: 0
+        }}
         onChangeText={onChangeText}
         value={value}
         onFocus={() => setFocused(true)}

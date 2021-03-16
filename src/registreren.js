@@ -1,18 +1,20 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { Button, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
+import Text from "./Gui/Text";
 import DropDownMenu from "./Gui/DropDownMenu";
 import Enter from "./Gui/Enter";
-import Pagina from "./Gui/Pagina";
+import Button from "./Gui/Button";
 import Logo from "./Gui/Logo";
 import useFahneKleur from "./Hooks/FahneKleur";
 import fetchData from "./server/fetchData";
 import { styles } from "./Styles";
 import Jacket from "./Gui/Jacket";
-import useErrorState from "./Hooks/errorState";
 import TextBox from "./Gui/TextBox";
+import { useTheme } from "@react-navigation/native";
 
 export default function Barten({ navigation }) {
+  const { addError } = useTheme();
   const [leerlingnummer, zetleerlingnummer] = useState("");
   const [voornaam, zetvoornaam] = useState("");
   const [tussenvoegsel, zettussenvoegsel] = useState("");
@@ -20,7 +22,6 @@ export default function Barten({ navigation }) {
   const [klas, zetklas] = useState("");
   const [wachtwoord, zetwachtwoord] = useState("");
   const [wachtwoordherhalen, zetwachtwoordherhalen] = useState("");
-  const [errors, addError] = useErrorState();
   const [klassen, zetklassen] = useState([]);
   const [fahnekleur, veranderfahne, veranderterug] = useFahneKleur();
 
@@ -53,17 +54,15 @@ export default function Barten({ navigation }) {
       };
 
       fetchData("register", data)
-        .then(naarhome)
+        .then(() => {
+          navigation.navigate("Home");
+        })
         .catch(() => {
           addError(
             "De server is niet online op dit moment. probeer het op een ander moment."
           );
         });
     }
-  };
-
-  let naarhome = () => {
-    navigation.navigate("Home");
   };
 
   useEffect(() => {
@@ -85,7 +84,7 @@ export default function Barten({ navigation }) {
   }, [klassen]);
 
   return (
-    <Pagina navigation={navigation} errors={errors}>
+    <View style={{ flex: 1 }}>
       <Jacket kleur={fahnekleur}>
         <Logo size={0.9} />
         <Text style={{ marginBottom: 10, fontSize: 25 }}>
@@ -138,11 +137,11 @@ export default function Barten({ navigation }) {
             secureTextEntry={true}
           />
           <View style={{ flexDirection: "row", margin: 8 }}>
-            <Text style={{ fontSize: 20, alignSelf: "center" }}>Klas: </Text>
             <DropDownMenu
               opties={klassen}
               onChangeText={(nieuweklas) => zetklas(nieuweklas)}
               value={klas}
+              title="Selecteer een klas"
             />
           </View>
         </View>
@@ -156,6 +155,6 @@ export default function Barten({ navigation }) {
           Heeft u al een account? Log dan in!
         </Text>
       </Jacket>
-    </Pagina>
+    </View>
   );
 }

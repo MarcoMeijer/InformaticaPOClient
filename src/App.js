@@ -4,9 +4,11 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { Dimensions, View } from "react-native";
 import ExamTextPage from "./ExamTextPage";
+import ErrorBoxList from "./Gui/ErrorBoxList";
 import HomePage from "./homepage";
 import HomePageLeerlingen from "./homepageleerlingen";
 import HomePageLeraren from "./homepageleraren";
+import useErrorState from "./Hooks/errorState";
 import ProblemEditPage from "./ProblemEditPage";
 import Barten from "./registreren";
 import TekstenScherm from "./tekstenscherm";
@@ -17,6 +19,41 @@ export default function App() {
   const window = Dimensions.get("window");
   const screen = Dimensions.get("screen");
   const [dimensions, setDimensions] = useState({ window, screen });
+  const [darkMode, zetDarkMode] = useState(false);
+  const [errors, addError] = useErrorState();
+
+  const LightTheme = {
+    colors: {
+      achtergrondKleur: "#f2f2f2",
+      headerKleur: "#ffffff",
+      tekstKleur: "#000000",
+      tekstKleurInverted: "#ffffff",
+      headerLijnKleur: "#bbb",
+      textboxAchtergrondKleur: "#ffffff",
+      blueboxKleur: "powderblue",
+      buttonKleur: "blue",
+      logo: "logoPng"
+    },
+    zetDarkMode: zetDarkMode,
+    darkMode: darkMode,
+    addError: addError
+  };
+  const DarkTheme = {
+    colors: {
+      achtergrondKleur: "#202124",
+      headerKleur: "#101012",
+      tekstKleur: "#999",
+      tekstKleurInverted: "#999",
+      headerLijnKleur: "#141417",
+      textboxAchtergrondKleur: "#282a2e",
+      blueboxKleur: "#101012",
+      buttonKleur: "#000069",
+      logo: "logoPng1"
+    },
+    zetDarkMode: zetDarkMode,
+    darkMode: darkMode,
+    addError: addError
+  };
 
   const onChange = ({ window, screen }) => {
     setDimensions({ window, screen });
@@ -36,7 +73,8 @@ export default function App() {
         width: dimensions.window.width
       }}
     >
-      <NavigationContainer>
+      {errors && <ErrorBoxList errors={errors} />}
+      <NavigationContainer theme={darkMode ? DarkTheme : LightTheme}>
         <Stack.Navigator
           screenOptions={{
             headerShown: false

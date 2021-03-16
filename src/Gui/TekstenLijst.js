@@ -1,39 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { Button, View } from "react-native";
+import { View } from "react-native";
 import fetchData from "../server/fetchData";
+import ExamTextSelector from "./ExamTextSelector";
 
 export default function TekstenLijst({ onPress }) {
-  const [teksten, zetTeksten] = useState([]);
+  const [examens, zetExamens] = useState([]);
 
   useEffect(() => {
-    if (teksten.length === 0) {
-      fetchData("teksten").then((data) => {
-        zetTeksten(
-          data.map((tekst) => {
-            let nieuweTekst = JSON.parse(tekst.tekstinhoud);
-            nieuweTekst.tekstid = tekst.tekstid;
-            return nieuweTekst;
-          })
-        );
+    if (examens.length === 0) {
+      fetchData("examens").then((data) => {
+        zetExamens(data);
       });
     }
-  }, [teksten]);
+  }, [examens]);
 
   return (
-    <View>
-      {teksten.map((tekst, index) => {
+    <View style={{ alignSelf: "stretch" }}>
+      {examens.map(({ examenid, examennaam }, index) => {
         return (
-          <View
+          <ExamTextSelector
             key={index}
-            style={{
-              margin: 2
-            }}
-          >
-            <Button
-              title={tekst.title}
-              onPress={() => onPress(tekst.tekstid)}
-            />
-          </View>
+            examenid={examenid}
+            titel={examennaam}
+            onPress={onPress}
+          />
         );
       })}
     </View>

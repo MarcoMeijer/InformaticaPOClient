@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { Button, CheckBox, Text, TextInput, View } from "react-native";
+import { CheckBox, Text, TextInput, View } from "react-native";
+import Button from "./Gui/Button";
 import DropDownMenu from "./Gui/DropDownMenu";
 import QuestionComp from "./Gui/QuestionComp";
 import useArrayState from "./Hooks/arrayState";

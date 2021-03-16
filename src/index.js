@@ -5,5 +5,5 @@ import App from "./App";
 AppRegistry.registerComponent("app", () => App);
 AppRegistry.runApplication("app", {
   initialProps: {},
-  rootTag: document.getElementById("root"),
+  rootTag: document.getElementById("root")
 });

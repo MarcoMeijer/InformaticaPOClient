@@ -1,15 +1,16 @@
 import * as React from "react";
 import { useState } from "react";
-import { Button, View } from "react-native";
+import { View } from "react-native";
+import Button from "./Button";
 
-export default function DropDownMenu({ opties, onChangeText }) {
+export default function DropDownMenu({ title, opties, onChangeText }) {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(undefined);
 
   let OpenButton = () => {
     return (
       <Button
-        title={selected === undefined ? "Selecteer optie" : selected}
+        title={selected === undefined ? title : selected}
         onPress={() => setOpen(!open)}
       />
     );
@@ -26,7 +27,8 @@ export default function DropDownMenu({ opties, onChangeText }) {
               <Button
                 key={index}
                 title={object}
-                color="#83cceb"
+                color="#01013c"
+                bordercolor="#01013c"
                 onPress={() => {
                   onChangeText(object);
                   setSelected(object);

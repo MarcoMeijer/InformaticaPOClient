@@ -1,11 +1,15 @@
 import { useEffect, useRef } from "react";
 import { Text, Animated, TouchableOpacity } from "react-native";
 
-export default function ErrorBox({ message, onClose }) {
-  const borderColor = "#c20834";
-  const backgroundColor = "#ffcccc";
+export default function ErrorBox({ message, onClose, type }) {
+  let borderColor = "#23cf30";
+  let backgroundColor = "#6def3c";
+  if (type === "success") {
+    borderColor = "#c20834";
+    backgroundColor = "#ffcccc";
+  }
 
-  const fadeAnim = useRef(new Animated.Value(10)).current; // Initial value for opacity: 0
+  const fadeAnim = useRef(new Animated.Value(10)).current;
   const onFinish = useRef(onClose);
   onFinish.current = onClose;
 
@@ -33,7 +37,7 @@ export default function ErrorBox({ message, onClose }) {
         style={{
           position: "absolute",
           right: "3px",
-          top: "-6px",
+          top: "-12px",
           backgroundColor: backgroundColor,
           borderColor: borderColor,
           borderWidth: "2px",

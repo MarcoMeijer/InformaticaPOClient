@@ -1,22 +1,24 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, Button, View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
+import Button from "./Gui/Button";
 import ExamTextComp from "./Gui/ExamTextComp";
 import Pagina from "./Gui/Pagina";
 import QuestionComp from "./Gui/QuestionComp";
 import useArrayState from "./Hooks/arrayState";
-import useErrorState from "./Hooks/errorState";
 import fetchData from "./server/fetchData";
+import { useTheme } from "@react-navigation/native";
 import { styles } from "./Styles";
 
 export default function ExamEditPage({ route, navigation }) {
+  const { colors, addError } = useTheme();
   const { tekstid } = route.params;
   const [vraagvolgorde, zetVraagvolgorde] = useState(0);
   const [text, zetText] = useState(undefined);
   const [vragen, zetVragen] = useState(undefined);
   const [punten, zetPunten, zetIndexPunten] = useArrayState();
   const [ingevuld, zetIngevuld, zetIndexIngevuld] = useArrayState();
-  const [errors, addError] = useErrorState();
+  const [state, zetState, zetStateIndex] = useArrayState();
 
   useEffect(() => {
     if (text === undefined) {
@@ -39,6 +41,9 @@ export default function ExamEditPage({ route, navigation }) {
         zetPunten(data.map(() => 0));
         zetIngevuld(data.map(() => false));
       });
+      fetchData("voortgang", { tekstid: tekstid }).then((data) => {
+        zetState(data);
+      });
     }
   }, [vragen, tekstid]);
 
@@ -59,6 +64,14 @@ export default function ExamEditPage({ route, navigation }) {
     }
     navigation.navigate("Leerlingen home pagina");
   };
+  const slaOp = () => {
+    fetchData("slaop", {
+      tekstid: tekstid,
+      inhoud: JSON.stringify(state)
+    }).then(() => {
+      navigation.goBack();
+    });
+  };
   const volgende = () => {
     zetVraagvolgorde(vraagvolgorde + 1);
   };
@@ -67,8 +80,14 @@ export default function ExamEditPage({ route, navigation }) {
   };
 
   return (
-    <Pagina navigation={navigation} errors={errors}>
-      <View style={{ flexDirection: "row" }}>
+    <Pagina navigation={navigation}>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          backgroundColor: colors.achtergrondKleur
+        }}
+      >
         <View style={styles.box}>
           {text === undefined ? (
             <ActivityIndicator />
@@ -83,18 +102,25 @@ export default function ExamEditPage({ route, navigation }) {
             <View>
               <View style={{ flexDirection: "row" }}>
                 {vraagvolgorde !== 0 && (
-                  <Button title="Vorige" onPress={vorige} />
+                  <Button
+                    style={{ margin: 3 }}
+                    title="Vorige"
+                    onPress={vorige}
+                  />
                 )}
-                {vraagvolgorde === vragen.length - 1 ? (
-                  <Button title="Submit" onPress={submit} />
-                ) : (
-                  <Button title="Volgende" onPress={volgende} />
+                {vraagvolgorde !== vragen.length - 1 && (
+                  <Button
+                    style={{ margin: 3 }}
+                    title="Volgende"
+                    onPress={volgende}
+                  />
                 )}
               </View>
               {vragen.map((vraag, index) => {
                 return (
                   <View
                     style={{
+                      margin: 3,
                       display: index === vraagvolgorde ? null : "none"
                     }}
                   >
@@ -102,10 +128,20 @@ export default function ExamEditPage({ route, navigation }) {
                       data={vraag}
                       zetPunten={zetIndexPunten(index)}
                       zetIngevuld={zetIndexIngevuld(index)}
+                      state={state[index]}
+                      zetState={zetStateIndex(index)}
                     />
                   </View>
                 );
               })}
+              <View style={{ flexDirection: "row" }}>
+                <Button
+                  style={{ margin: 3 }}
+                  title="Sla progressie op"
+                  onPress={slaOp}
+                />
+                <Button style={{ margin: 3 }} title="Submit" onPress={submit} />
+              </View>
             </View>
           )}
         </View>

@@ -2,11 +2,20 @@ import * as React from "react";
 import { useState } from "react";
 import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import Header from "./Header";
+import { useTheme } from "@react-navigation/native";
 
 export function Tab({ name, tabNavigator, current }) {
+  const { colors } = useTheme();
+
   if (current === name) {
     return (
-      <Text style={{ marginLeft: 20, alignSelf: "center" }}>
+      <Text
+        style={{
+          color: colors.tekstKleur,
+          marginLeft: 20,
+          alignSelf: "center"
+        }}
+      >
         <b>{name}</b>
       </Text>
     );
@@ -18,7 +27,7 @@ export function Tab({ name, tabNavigator, current }) {
         }}
         style={{ alignSelf: "center" }}
       >
-        <Text style={{ marginLeft: 20 }}>{name}</Text>
+        <Text style={{ color: colors.tekstKleur, marginLeft: 20 }}>{name}</Text>
       </TouchableOpacity>
     );
   }

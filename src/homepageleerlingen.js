@@ -1,18 +1,17 @@
 import * as React from "react";
-import { Text, View } from "react-native";
+import Text from "./Gui/Text";
 import { Tab, TabsHeader } from "./Gui/Tabs";
 import Jacket from "./Gui/Jacket";
 import LeerlingenStatistieken from "./leerlingstatistieken";
 import TekstenScherm from "./tekstenscherm";
+import { useTheme } from "@react-navigation/native";
 
 function HomeScreen() {
+  const { colors } = useTheme();
+
   return (
-    <Jacket>
-      <Text
-        style={{
-          margin: 35
-        }}
-      >
+    <Jacket kleur={colors.achtergrondKleur}>
+      <Text style={{ margin: 30 }}>
         <b>
           Geachte leerling, welkom op jouw online examenteksten portal. Hier kun
           je teksten oefenen en je resultaten bekijken, veel succes!
