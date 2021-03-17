@@ -15,6 +15,13 @@ export default function useErrorState() {
     zetHuidigeID(huidigID + 1);
     zetMessages([...messages, { id: huidigID, error: newError }]);
   };
+  const addSucces = (newSucces) => {
+    zetHuidigeID(huidigID + 1);
+    zetMessages([
+      ...messages,
+      { id: huidigID, error: newSucces, type: "success" }
+    ]);
+  };
 
-  return [{ messages: messages, closeError: closeError }, addError];
+  return [{ messages: messages, closeError: closeError }, addError, addSucces];
 }
