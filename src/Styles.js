@@ -13,11 +13,6 @@ export const styles = StyleSheet.create({
   text: {
     fontSize: "16px"
   },
-  textBox: {
-    borderColor: "deepskyblue",
-    backgroundColor: "#eeeeee",
-    borderWidth: 1
-  },
   setupNormal: {
     flex: 1,
     alignItems: "center",
@@ -39,5 +34,10 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: "#ffffff",
     borderColor: "grey"
+  },
+  textBox: {
+    borderColor: "deepskyblue",
+    backgroundColor: "#eeeeee",
+    borderWidth: 1
   }
 });

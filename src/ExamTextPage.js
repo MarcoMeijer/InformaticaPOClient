@@ -80,7 +80,7 @@ export default function ExamEditPage({ route, navigation }) {
   };
 
   return (
-    <Pagina navigation={navigation}>
+    <Pagina navigation={navigation} back={true}>
       <View
         style={{
           flex: 1,

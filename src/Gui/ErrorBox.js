@@ -2,11 +2,11 @@ import { useEffect, useRef } from "react";
 import { Text, Animated, TouchableOpacity } from "react-native";
 
 export default function ErrorBox({ message, onClose, type }) {
-  let borderColor = "#23cf30";
-  let backgroundColor = "#6def3c";
+  let borderColor = "#c20834";
+  let backgroundColor = "#ffcccc";
   if (type === "success") {
-    borderColor = "#c20834";
-    backgroundColor = "#ffcccc";
+    borderColor = "#23cf30";
+    backgroundColor = "#6def3c";
   }
 
   const fadeAnim = useRef(new Animated.Value(10)).current;

@@ -120,6 +120,7 @@ export default function ProblemEditPage({ navigation, route }) {
   const [score, zetScore] = useState(1);
   const [probleemType, zetProbleemType] = useState("");
   const [vraagMethode, zetVraagMethode] = useState({});
+  const [state, zetState] = useState(undefined);
 
   const { tekstid } = route;
 
@@ -130,7 +131,7 @@ export default function ProblemEditPage({ navigation, route }) {
   };
 
   return (
-    <Pagina navigation={navigation}>
+    <Pagina navigation={navigation} back={true}>
       <View style={{ flex: 1, flexDirection: "row" }}>
         <View style={styles.box}>
           <Text style={styles.text}>Vraag:</Text>
@@ -149,7 +150,10 @@ export default function ProblemEditPage({ navigation, route }) {
                 "open vraag",
                 "Waar of niet waar vraag"
               ]}
-              onChangeText={zetProbleemType}
+              onChangeText={(newType) => {
+                zetState(undefined);
+                zetProbleemType(newType);
+              }}
             />
           </View>
           <View style={{ zIndex: -1 }}>
@@ -176,7 +180,12 @@ export default function ProblemEditPage({ navigation, route }) {
           />
         </View>
         <View style={styles.box}>
-          <QuestionComp key={probleemType} data={vraagInhoud} />
+          <QuestionComp
+            key={probleemType}
+            data={vraagInhoud}
+            state={state}
+            zetState={zetState}
+          />
         </View>
       </View>
     </Pagina>

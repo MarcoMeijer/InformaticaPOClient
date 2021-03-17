@@ -5,9 +5,8 @@ import Logo from "./Logo";
 import DarkModeSwitch from "./DarkModeSwitch";
 import Button from "./Button";
 
-export default function Header({ navigation, children }) {
+export default function Header({ navigation, children, back }) {
   const { colors } = useTheme();
-
   return (
     <View
       style={{
@@ -18,13 +17,15 @@ export default function Header({ navigation, children }) {
         alignItems: "center"
       }}
     >
-      <Button
-        style={{ margin: 1 }}
-        title="Vorige pagina"
-        onPress={() => {
-          navigation.goBack();
-        }}
-      ></Button>
+      {back && (
+        <Button
+          style={{ margin: 1 }}
+          title="Vorige pagina"
+          onPress={() => {
+            navigation.goBack();
+          }}
+        />
+      )}
       <View style={{ flexDirection: "row", flex: 1 }}>
         <View
           style={{
@@ -32,13 +33,7 @@ export default function Header({ navigation, children }) {
             margin: 6
           }}
         >
-          <TouchableOpacity
-            onPress={() => {
-              navigation.goBack();
-            }}
-          >
-            <Logo size={0.25} />
-          </TouchableOpacity>
+          <Logo size={0.25} />
         </View>
 
         {children}

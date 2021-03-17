@@ -15,6 +15,7 @@ export default function ErrorBoxList({ errors }) {
           <ErrorBox
             message={message.error}
             key={message.id}
+            type={message.type}
             onClose={() => {
               errors.closeError(message.id);
             }}

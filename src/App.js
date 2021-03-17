@@ -20,7 +20,7 @@ export default function App() {
   const screen = Dimensions.get("screen");
   const [dimensions, setDimensions] = useState({ window, screen });
   const [darkMode, zetDarkMode] = useState(false);
-  const [errors, addError] = useErrorState();
+  const [errors, addError, addSucces] = useErrorState();
 
   const LightTheme = {
     colors: {
@@ -32,11 +32,14 @@ export default function App() {
       textboxAchtergrondKleur: "#ffffff",
       blueboxKleur: "powderblue",
       buttonKleur: "blue",
-      logo: "logoPng"
+      logo: "logoPng",
+      inputTextBoxBorderKleur: "#deepskyblue",
+      inputTextBoxBackgroundKleur: "#eeeeee"
     },
     zetDarkMode: zetDarkMode,
     darkMode: darkMode,
-    addError: addError
+    addError: addError,
+    addSucces: addSucces
   };
   const DarkTheme = {
     colors: {
@@ -48,11 +51,14 @@ export default function App() {
       textboxAchtergrondKleur: "#282a2e",
       blueboxKleur: "#101012",
       buttonKleur: "#000069",
-      logo: "logoPng1"
+      logo: "logoPng1",
+      inputTextBoxBorderKleur: "#555555",
+      inputTextBoxBackgroundKleur: "#282a2e"
     },
     zetDarkMode: zetDarkMode,
     darkMode: darkMode,
-    addError: addError
+    addError: addError,
+    addSucces: addSucces
   };
 
   const onChange = ({ window, screen }) => {

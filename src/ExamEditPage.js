@@ -1,11 +1,15 @@
 import * as React from "react";
-import { Text, TextInput, View } from "react-native";
+import { View } from "react-native";
+import Text from "./Gui/Text";
+import InputTextBox from "./Gui/InputTextBox";
 import ExamTextComp from "./Gui/ExamTextComp";
 import { styles } from "./Styles";
+import { useTheme } from "@react-navigation/native";
 
 export default function ExamEditPage() {
   const [title, changeTitle] = React.useState("");
   const [text, changeText] = React.useState("");
+  const { colors } = useTheme();
 
   let examText = {
     title: title,
@@ -13,27 +17,57 @@ export default function ExamEditPage() {
   };
 
   return (
-    <View style={{ flex: 1, flexDirection: "row" }}>
-      <View style={styles.box}>
+    <View
+      style={{
+        flex: 1,
+        flexDirection: "row",
+        backgroundColor: colors.achtergrondKleur
+      }}
+    >
+      <View
+        style={[
+          styles.box,
+          {
+            backgroundColor: colors.blueboxKleur,
+            borderColor: colors.blueboxKleur
+          }
+        ]}
+      >
         <Text style={styles.text}>Titel:</Text>
-        <TextInput
-          style={styles.textBox}
+        <InputTextBox
+          style={[styles.textBox]}
           onChangeText={(text) => changeTitle(text)}
           value={title}
         />
 
         <Text style={styles.text}>Tekst:</Text>
-        <TextInput
+        <InputTextBox
           multiline
           style={[styles.textBox, { flex: 1 }]}
           onChangeText={(text) => changeText(text)}
           value={text}
         />
       </View>
-      <View style={styles.box}>
+      <View
+        style={[
+          styles.box,
+          {
+            backgroundColor: colors.blueboxKleur,
+            borderColor: colors.blueboxKleur
+          }
+        ]}
+      >
         <ExamTextComp text={examText}></ExamTextComp>
       </View>
-      <View style={styles.box}>
+      <View
+        style={[
+          styles.box,
+          {
+            backgroundColor: colors.blueboxKleur,
+            borderColor: colors.blueboxKleur
+          }
+        ]}
+      >
         <Text>
           <b>Tools om de tekst te stylen:</b> <br />
           <br />

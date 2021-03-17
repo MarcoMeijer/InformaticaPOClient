@@ -14,7 +14,7 @@ import { styles } from "./Styles";
 import DarkModeSwitch from "./Gui/DarkModeSwitch";
 
 export default function HomePage({ navigation }) {
-  const { colors, addError } = useTheme();
+  const { colors, addError, addSucces } = useTheme();
   const [leerlingnummer, zetleerlingnummer] = useState("");
   const [wachtwoord, zetwachtwoord] = useState("");
   const [leerlingnummercolor, zetleerlingnummercolor] = useState("grey");
@@ -37,7 +37,7 @@ export default function HomePage({ navigation }) {
             addError("Uw wachtwoord of leerling nummer is niet juist.");
           } else {
             setKey(data.token);
-            addError("U bent succesvol ingelogd.");
+            addSucces("U bent succesvol ingelogd.");
             if (data.bevoegdheid === "docent") {
               navigation.navigate("Leraren home pagina");
             } else {

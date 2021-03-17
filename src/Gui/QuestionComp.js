@@ -14,25 +14,16 @@ function MultipleChoiceQuestion({
   state,
   zetState
 }) {
-  const [geselecteerd, zetGeselecteerd] = useState("");
   const { vraag, opties, antwoord, score } = data;
-
-  useEffect(() => {
-    if (state !== undefined) zetGeselecteerd(state);
-  }, [state]);
-
-  useEffect(() => {
-    if (zetState !== undefined) zetState(geselecteerd);
-  }, [geselecteerd]);
 
   return (
     <View>
       <Text style={styles.text}>{vraag}</Text>
       <RadioChoices
         opties={opties}
-        value={geselecteerd}
+        value={state}
         onChangeText={(geselecteerdeOptie) => {
-          zetGeselecteerd(geselecteerdeOptie);
+          zetState(geselecteerdeOptie);
           if (zetIngevuld !== undefined) zetIngevuld(true);
           if (zetPunten !== undefined) {
             if (geselecteerdeOptie === antwoord) {
@@ -47,26 +38,25 @@ function MultipleChoiceQuestion({
   );
 }
 function OpenVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
-  const [ingevuldNummer, zetIngevuldNummer] = useState(0);
   const [antwoordOpen, zetAntwoordOpen] = useState(false);
-  const [ingevuldAntwoord, zetIngevuldAntwoord] = useState("");
   const { vraag, antwoord, score } = data;
 
-  const huidigeState = {
-    ingevuldNummer: ingevuldNummer,
-    ingevuldAntwoord: ingevuldAntwoord
+  if (state === undefined) {
+    zetState({
+      ingevuldAntwoord: "",
+      ingevuldNummer: 0
+    });
+    return <View></View>;
+  }
+
+  const { ingevuldAntwoord, ingevuldNummer } = state;
+
+  const zetIngevuldAntwoord = (nieuwAntwoord) => {
+    zetState({ ...state, ingevuldAntwoord: nieuwAntwoord });
   };
-
-  useEffect(() => {
-    if (state !== undefined) {
-      zetIngevuldNummer(state.ingevuldNummer);
-      zetIngevuldAntwoord(state.ingevuldAntwoord);
-    }
-  }, [state]);
-
-  useEffect(() => {
-    if (zetState !== undefined) zetState(huidigeState);
-  }, [ingevuldNummer, ingevuldAntwoord]);
+  const zetIngevuldNummer = (nieuwNummer) => {
+    zetState({ ...state, ingevuldNummer: nieuwNummer });
+  };
 
   return (
     <View>
@@ -106,11 +96,13 @@ function OpenVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
 function WaarNietWaarVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
   const { juist, vraag, antwoord, score } = data;
 
-  const [antwoorden, zetAntwoorden, zetAntwoordenIndex] = useArrayState(
-    antwoord.map(() => undefined)
-  );
+  if (!Array.isArray(state)) {
+    zetState([]);
 
-  const goed = antwoorden.map((x, index) => x === antwoord[index]);
+    return <View></View>;
+  }
+
+  const goed = state.map((x, index) => x === antwoord[index]);
 
   useEffect(() => {
     if (zetPunten === undefined) return;
@@ -119,21 +111,19 @@ function WaarNietWaarVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
     zetPunten(Math.max(score - totaalFout, 0));
   }, [goed]);
 
-  useEffect(() => {
-    if (state !== undefined) zetAntwoorden(state);
-  }, [state]);
-
-  useEffect(() => {
-    if (zetState !== undefined) zetState(antwoorden);
-  }, [antwoorden]);
+  const zetStateIndex = (index) => (newValue) => {
+    let res = [...state];
+    res[index] = newValue;
+    zetState(res);
+  };
 
   return (
     <View>
       <Text style={styles.text}>{vraag}</Text>
       {juist.map((stelling, index) => {
         let antwoord = "";
-        if (antwoorden[index] === true) antwoord = "Waar";
-        if (antwoorden[index] === false) antwoord = "Niet waar";
+        if (state[index] === true) antwoord = "Waar";
+        if (state[index] === false) antwoord = "Niet waar";
         return (
           <View key={index}>
             <Text>{stelling}</Text>
@@ -142,7 +132,7 @@ function WaarNietWaarVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
               value={antwoord}
               onChangeText={(geselecteerdeOptie) => {
                 let waar = geselecteerdeOptie === "Waar";
-                zetAntwoordenIndex(index)(waar);
+                zetStateIndex(index)(waar);
                 if (zetIngevuld !== undefined) zetIngevuld(true);
               }}
             />

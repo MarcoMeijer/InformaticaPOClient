@@ -13,7 +13,6 @@ Overal:
 	-Balk meer reactive maken. (Bij kleine schermen de knoppen over laten gaan in een dropdownmenu.)
 	-Pagina's meer reactive maken. (beetje laten uitzoomen bij kleinere schermen. Geen margin met px maar met %)
 	-Smartphone support functies. (klas selecteren ding bij registreren.)
-	-De foutmelding ook als gelukt meldingen toevoegen (bv: "je bent succesvol uitgelogd.";"Je voortgang is opgeslagen.")
 
 Inlogscherm:
 	-Wachtwoord vergeten knop die een melding stuurt naar de leraar.
