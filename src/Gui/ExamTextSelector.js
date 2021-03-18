@@ -25,13 +25,14 @@ export default function ExamTextSelector({ examenid, titel, onPress }) {
     <View>
       <Button
         title={titel}
-        style={{ margin: 5 }} //
+        style={{ margin: 5 }}
         onPress={() => zetOpen(!open)}
       />
       {open &&
         teksten.map((tekst, index) => {
           return (
             <View
+              key={index}
               style={{
                 backgroundColor: colors.textboxAchtergrondKleur,
                 borderRadius: 3,

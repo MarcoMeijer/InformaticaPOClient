@@ -123,7 +123,7 @@ function WaarNietWaarVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
 
     let totaalFout = goed.reduce((a, b) => a + (b ? 0 : 1), 0);
     zetPunten(Math.max(score - totaalFout, 0));
-  }, [goed]);
+  }, goed);
 
   const zetStateIndex = (index) => (newValue) => {
     let res = [...state];

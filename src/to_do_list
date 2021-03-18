@@ -6,9 +6,6 @@ teksten voorschrijven op de homepagina leerlingen (zodat mensen weten welke test
 meer doen met vraagsoorten zodat er meer inzicht is in wat er goed en niet goed gaat
        -> aan de hand daarvan statistieken bedenken, en vragen voorschrijven (wat veel fout is, veel oefenen)
 
-Overzicht examenteksten verbeteren: ipv knop met titel, layout zoals google search doen.
-dus titel met eronder de eerst paar regels vd tekst. kan je aanklikken om naar die tekst te gaan.
-
 Overal:
 	-Balk meer reactive maken. (Bij kleine schermen de knoppen over laten gaan in een dropdownmenu.)
 	-Pagina's meer reactive maken. (beetje laten uitzoomen bij kleinere schermen. Geen margin met px maar met %)
