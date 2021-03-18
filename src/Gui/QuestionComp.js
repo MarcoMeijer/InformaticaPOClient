@@ -2,10 +2,9 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { Text, View, TextInput } from "react-native";
 import Button from "./Button";
-import useArrayState from "../Hooks/arrayState";
-import { styles } from "../Styles";
 import NumberInput from "./NumberInput";
 import RadioChoices from "./RadioChoices";
+import { useTheme } from "@react-navigation/native";
 
 function MultipleChoiceQuestion({
   data,
@@ -15,11 +14,15 @@ function MultipleChoiceQuestion({
   zetState
 }) {
   const { vraag, opties, antwoord, score } = data;
+  const { colors } = useTheme();
 
   return (
     <View>
-      <Text style={styles.text}>{vraag}</Text>
+      <Text style={{ fontSize: "16px", color: colors.tekstKleur }}>
+        {vraag}
+      </Text>
       <RadioChoices
+        backgroundColor={colors.radioButtonKleur}
         opties={opties}
         value={state}
         onChangeText={(geselecteerdeOptie) => {
@@ -40,6 +43,7 @@ function MultipleChoiceQuestion({
 function OpenVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
   const [antwoordOpen, zetAntwoordOpen] = useState(false);
   const { vraag, antwoord, score } = data;
+  const { colors } = useTheme();
 
   if (state === undefined) {
     zetState({
@@ -60,11 +64,18 @@ function OpenVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
 
   return (
     <View>
-      <Text style={styles.text}>{vraag}</Text>
+      <Text style={{ fontSize: "16px", color: colors.tekstKleur }}>
+        {vraag}
+      </Text>
       <TextInput
+        style={{
+          backgroundColor: colors.inputTextBoxBackgroundKleur,
+          borderColor: colors.inputTextBoxBorderKleur,
+          borderWidth: 1,
+          color: colors.tekstKleur
+        }}
         multiline
         numberOfLines={10}
-        style={styles.textBox}
         value={ingevuldAntwoord}
         onChangeText={zetIngevuldAntwoord}
       />
@@ -77,8 +88,10 @@ function OpenVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
       />
       {antwoordOpen && (
         <View>
-          <Text>{antwoord}</Text>
-          <Text>Vul hier je behaalde punten in (maximaal {score}):</Text>
+          <Text style={{ color: colors.tekstKleur }}>{antwoord}</Text>
+          <Text style={{ color: colors.tekstKleur }}>
+            Vul hier je behaalde punten in (maximaal {score}):
+          </Text>
           <NumberInput
             number={ingevuldNummer}
             onChangeNumber={(punten) => {
@@ -95,6 +108,7 @@ function OpenVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
 }
 function WaarNietWaarVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
   const { juist, vraag, antwoord, score } = data;
+  const { colors } = useTheme();
 
   if (!Array.isArray(state)) {
     zetState([]);
@@ -119,15 +133,18 @@ function WaarNietWaarVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
 
   return (
     <View>
-      <Text style={styles.text}>{vraag}</Text>
+      <Text style={{ fontSize: "16px", color: colors.tekstKleur }}>
+        {vraag}
+      </Text>
       {juist.map((stelling, index) => {
         let antwoord = "";
         if (state[index] === true) antwoord = "Waar";
         if (state[index] === false) antwoord = "Niet waar";
         return (
           <View key={index}>
-            <Text>{stelling}</Text>
+            <Text style={{ color: colors.tekstKleur }}>{stelling}</Text>
             <RadioChoices
+              backgroundColor={colors.radioButtonKleur}
               opties={["Waar", "Niet waar"]}
               value={antwoord}
               onChangeText={(geselecteerdeOptie) => {

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { TextInput } from "react-native";
 import { styles } from "../Styles";
+import { useTheme } from "@react-navigation/native";
 
 export default function NumberInput({ onChangeNumber, number, min, max }) {
   const [tekst, zetTekst] = useState(number.toString());
+  const { colors } = useTheme();
 
   useEffect(() => {
     let result = parseInt(tekst, 10);
@@ -13,6 +15,16 @@ export default function NumberInput({ onChangeNumber, number, min, max }) {
   }, [tekst, min, max]);
 
   return (
-    <TextInput style={styles.textBox} onChangeText={zetTekst} value={tekst} />
+    <TextInput
+      style={[
+        styles.textBox,
+        {
+          backgroundColor: colors.inputTextBoxBackgroundKleur,
+          color: colors.tekstKleur
+        }
+      ]}
+      onChangeText={zetTekst}
+      value={tekst}
+    />
   );
 }
