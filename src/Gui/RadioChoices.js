@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { styles } from "../Styles";
 import RadioButton from "./RadioButton";
-import { useTheme } from "@react-navigation/native";
 
 export default function RadioChoices({
   backgroundColor,
@@ -12,7 +11,6 @@ export default function RadioChoices({
   value
 }) {
   const [selected, setSelected] = useState(value);
-  const { colors } = useTheme();
 
   let color = backgroundColor;
 
@@ -42,11 +40,7 @@ export default function RadioChoices({
                 backgroundColor={color}
               />
             </TouchableOpacity>
-            <Text
-              style={{ ...styles.text, margin: 5, color: colors.tekstKleur }}
-            >
-              {object}
-            </Text>
+            <Text style={{ ...styles.text, margin: 5 }}>{object}</Text>
           </View>
         );
       })}

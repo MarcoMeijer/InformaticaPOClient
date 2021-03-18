@@ -45,7 +45,8 @@ export default function HomePage({ navigation }) {
             }
           }
         })
-        .catch(() => {
+        .catch((error) => {
+          console.log(error);
           addError("De server is niet online op dit moment.");
         });
     }

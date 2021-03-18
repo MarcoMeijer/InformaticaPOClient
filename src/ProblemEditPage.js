@@ -9,11 +9,9 @@ import fetchData from "./server/fetchData";
 import { styles } from "./Styles";
 import NumberInput from "./Gui/NumberInput";
 import Pagina from "./Gui/Pagina";
-import { useTheme } from "@react-navigation/native";
 
 function EditOpen({ zetVraagMethode }) {
   const [nakijkAntwoord, zetNakijkAntwoord] = useState("");
-  const { colors } = useTheme();
 
   useEffect(() => {
     zetVraagMethode({
@@ -23,25 +21,11 @@ function EditOpen({ zetVraagMethode }) {
 
   return (
     <View>
-      <Text
-        style={{
-          color: colors.tekstKleur,
-          fontSize: "16px"
-        }}
-      >
-        Nakijk opmerkingen:
-      </Text>
+      <Text style={styles.text}>Nakijk opmerkingen:</Text>
       <TextInput
         multiline
         numberOfLines={10}
-        style={[
-          styles.textBox,
-          {
-            flex: 1,
-            backgroundColor: colors.inputTextBoxBackgroundKleur,
-            borderColor: colors.inputTextBoxBackgroundKleur
-          }
-        ]}
+        style={[styles.textBox, { flex: 1 }]}
         onChangeText={zetNakijkAntwoord}
         value={nakijkAntwoord}
       />
@@ -52,7 +36,6 @@ function EditOpen({ zetVraagMethode }) {
 function EditMeerKeuze({ zetVraagMethode }) {
   const [antwoorden, zetAntwoorden, zetAntwoord] = useArrayState();
   const [juisteAntwoord, zetJuisteAntwoord] = useState("");
-  const { colors } = useTheme();
 
   useEffect(() => {
     zetVraagMethode({
@@ -63,25 +46,12 @@ function EditMeerKeuze({ zetVraagMethode }) {
 
   return (
     <View>
-      <Text
-        style={{
-          color: colors.tekstKleur,
-          fontSize: "16px"
-        }}
-      >
-        Mogelijke antwoorden:
-      </Text>
+      <Text style={styles.text}>Mogelijke antwoorden:</Text>
       {antwoorden.map((value, index) => {
         return (
           <TextInput
             key={index}
-            style={[
-              styles.textBox,
-              {
-                backgroundColor: colors.inputTextBoxBackgroundKleur,
-                borderColor: colors.inputTextBoxBackgroundKleur
-              }
-            ]}
+            style={styles.textBox}
             onChangeText={zetAntwoord(index)}
             value={value}
           />
@@ -91,22 +61,9 @@ function EditMeerKeuze({ zetVraagMethode }) {
         title="Voeg antwoord optie toe."
         onPress={() => zetAntwoorden([...antwoorden, ""])}
       />
-      <Text
-        style={{
-          color: colors.tekstKleur,
-          fontSize: "16px"
-        }}
-      >
-        Juiste antwoord:
-      </Text>
+      <Text style={styles.text}>Juiste antwoord:</Text>
       <TextInput
-        style={[
-          styles.textBox,
-          {
-            backgroundColor: colors.inputTextBoxBackgroundKleur,
-            borderColor: colors.inputTextBoxBackgroundKleur
-          }
-        ]}
+        style={styles.textBox}
         onChangeText={zetJuisteAntwoord}
         value={juisteAntwoord}
       />
@@ -116,7 +73,6 @@ function EditMeerKeuze({ zetVraagMethode }) {
 
 function EditWaarNietWaarVraag({ zetVraagMethode }) {
   const [stellingen, zetStellingen, zetStelling] = useArrayState();
-  const { colors } = useTheme();
 
   useEffect(() => {
     zetVraagMethode({
@@ -127,42 +83,19 @@ function EditWaarNietWaarVraag({ zetVraagMethode }) {
 
   return (
     <View>
-      <Text
-        style={{
-          color: colors.tekstKleur,
-          fontSize: "16px"
-        }}
-      >
-        Stellingen:
-      </Text>
+      <Text style={styles.text}>Stellingen:</Text>
       {stellingen.map((value, index) => {
         return (
           <View style={{ flexDirection: "row" }} key={index}>
             <TextInput
-              style={[
-                styles.textBox,
-                {
-                  backgroundColor: colors.inputTextBoxBackgroundKleur,
-                  flex: 1,
-                  borderColor: colors.inputTextBoxBackgroundKleur
-                }
-              ]}
+              style={[styles.textBox, { flex: 1 }]}
               onChangeText={(tekst) => {
                 zetStelling(index)({ ...stellingen[index], tekst: tekst });
               }}
               value={value.tekst}
             />
-            <Text
-              style={{
-                color: colors.tekstKleur,
-                fontSize: "16px"
-              }}
-            >{` Waar?  `}</Text>
+            <Text>{` Waar?  `}</Text>
             <CheckBox
-              style={{
-                backgroundColor: colors.textboxAchtergrondKleur,
-                borderColor: colors.inputTextBoxBackgroundKleur
-              }}
               value={value.waar}
               onValueChange={(waar) => {
                 zetStelling(index)({ ...stellingen[index], waar: waar });
@@ -177,20 +110,12 @@ function EditWaarNietWaarVraag({ zetVraagMethode }) {
           zetStellingen([...stellingen, { tekst: "", waar: false }])
         }
       />
-      <Text
-        style={{
-          color: colors.tekstKleur,
-          fontSize: "16px"
-        }}
-      >
-        Voor elk fout antwoord wordt een punt weggehaald.
-      </Text>
+      <Text>Voor elk fout antwoord wordt een punt weggehaald.</Text>
     </View>
   );
 }
 
 export default function ProblemEditPage({ navigation, route }) {
-  const { colors } = useTheme();
   const [vraag, zetVraag] = useState("");
   const [score, zetScore] = useState(1);
   const [probleemType, zetProbleemType] = useState("");
@@ -207,59 +132,17 @@ export default function ProblemEditPage({ navigation, route }) {
 
   return (
     <Pagina navigation={navigation} back={true}>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          backgroundColor: colors.achtergrondKleur
-        }}
-      >
-        <View
-          style={[
-            styles.box,
-            {
-              borderColor: colors.blueboxKleur,
-              backgroundColor: colors.blueboxKleur
-            }
-          ]}
-        >
-          <Text
-            style={{
-              color: colors.tekstKleur,
-              fontSize: "16px"
-            }}
-          >
-            Vraag:
-          </Text>
+      <View style={{ flex: 1, flexDirection: "row" }}>
+        <View style={styles.box}>
+          <Text style={styles.text}>Vraag:</Text>
           <TextInput
-            style={[
-              styles.textBox,
-              {
-                backgroundColor: colors.inputTextBoxBackgroundKleur,
-                borderColor: colors.inputTextBoxBackgroundKleur
-              }
-            ]}
+            style={styles.textBox}
             onChangeText={(text) => zetVraag(text)}
             value={vraag}
           />
-          <Text
-            style={{
-              color: colors.tekstKleur,
-              fontSize: "16px"
-            }}
-          >
-            Aantal te behalen punten:
-          </Text>
+          <Text style={styles.text}>Aantal te behalen punten:</Text>
           <NumberInput onChangeNumber={zetScore} number={score} />
-          <Text
-            style={{
-              color: colors.tekstKleur,
-              fontSize: "16px",
-              borderColor: colors.inputTextBoxBackgroundKleur
-            }}
-          >
-            Vraag type:
-          </Text>
+          <Text style={styles.text}>Vraag type:</Text>
           <View style={{ zIndex: 1 }}>
             <DropDownMenu
               opties={[
@@ -296,15 +179,7 @@ export default function ProblemEditPage({ navigation, route }) {
             }}
           />
         </View>
-        <View
-          style={[
-            styles.box,
-            {
-              borderColor: colors.blueboxKleur,
-              backgroundColor: colors.blueboxKleur
-            }
-          ]}
-        >
+        <View style={styles.box}>
           <QuestionComp
             key={probleemType}
             data={vraagInhoud}

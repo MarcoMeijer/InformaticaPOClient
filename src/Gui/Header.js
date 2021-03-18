@@ -1,12 +1,12 @@
 import * as React from "react";
-import { View } from "react-native";
+import { TouchableOpacity, View, Text } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import Logo from "./Logo";
 import DarkModeSwitch from "./DarkModeSwitch";
 import Button from "./Button";
 
-export default function Header({ navigation, children }) {
-  const { colors, addSucces } = useTheme();
+export default function Header({ navigation, children, back }) {
+  const { colors } = useTheme();
   return (
     <View
       style={{
@@ -17,6 +17,15 @@ export default function Header({ navigation, children }) {
         alignItems: "center"
       }}
     >
+      {back && (
+        <Button
+          style={{ margin: 1 }}
+          title="Vorige pagina"
+          onPress={() => {
+            navigation.goBack();
+          }}
+        />
+      )}
       <View style={{ flexDirection: "row", flex: 1 }}>
         <View
           style={{
@@ -36,7 +45,6 @@ export default function Header({ navigation, children }) {
         title="Uitloggen"
         onPress={() => {
           navigation.navigate("Home");
-          addSucces("U bent succesvol uitgelogd.");
         }}
       ></Button>
     </View>
