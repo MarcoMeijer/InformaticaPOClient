@@ -1,25 +1,33 @@
-import { useTheme } from "@react-navigation/native";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
-import fetchData from "../../Database/fetchData";
-import Button from "../../Gui/Basic/Button";
-import ExamenTekst from "../../Gui/ExamenTekst/ExamenTekst";
-import Vraag from "../../Gui/ExamenTekst/Vraag";
-import Pagina from "../../Gui/Pagina-layout/Pagina";
+import { useTheme } from "@react-navigation/native";
 import useArrayState from "../../Hooks/arrayState";
-import useFetch from "../../Hooks/useFetch";
+import fetchData from "../../Database/fetchData";
+import Pagina from "../../Gui/Pagina-layout/Pagina";
 import { styles } from "../../Styles";
+import ExamenTekst from "../../Gui/ExamenTekst/ExamenTekst";
+import Button from "../../Gui/Basic/Button";
+import Enter from "../../Gui/Basic/Enter";
+import Vraag from "../../Gui/ExamenTekst/Vraag";
 
 export default function TekstOefenenPagina({ route, navigation }) {
-  const { colors, addError } = useTheme();
+  const { colors, addError, addSucces } = useTheme();
   const { tekstid } = route.params;
   const [vraagvolgorde, zetVraagvolgorde] = useState(0);
+  const [text, zetText] = useState(undefined);
   const [vragen, zetVragen] = useState(undefined);
   const [punten, zetPunten, zetIndexPunten] = useArrayState();
   const [ingevuld, zetIngevuld, zetIndexIngevuld] = useArrayState();
   const [state, zetState, zetStateIndex] = useArrayState();
-  const [text] = useFetch("tekst", { tekstid: tekstid }, data => JSON.parse(data.tekstinhoud));
+
+  useEffect(() => {
+    if (text === undefined) {
+      fetchData("tekst", { tekstid: tekstid }).then((data) => {
+        zetText(JSON.parse(data.tekstinhoud));
+      });
+    }
+  }, [text, tekstid]);
 
   useEffect(() => {
     if (vragen === undefined) {
@@ -47,7 +55,6 @@ export default function TekstOefenenPagina({ route, navigation }) {
       return;
     }
 
-    // verstuur vragen naar database
     for (let index in vragen) {
       const vraag = vragen[index];
       fetchData("maak", {
@@ -56,19 +63,18 @@ export default function TekstOefenenPagina({ route, navigation }) {
         maximaalPunten: vraag.score ? vraag.score : 1
       });
     }
-    navigation.goBack();
+    navigation.navigate("Leerlingen home pagina");
+    addSucces("Uw antwoorden zijn ingediend.");
   };
-
   const slaOp = () => {
     fetchData("slaop", {
       tekstid: tekstid,
       inhoud: JSON.stringify(state)
     }).then(() => {
-      // het is opgeslagen, ga nu weer terug naar de vorige pagina
       navigation.goBack();
+      addSucces("Uw voortgang is succesvol opgeslagen.");
     });
   };
-
   const volgende = () => {
     zetVraagvolgorde(vraagvolgorde + 1);
   };
@@ -77,70 +83,103 @@ export default function TekstOefenenPagina({ route, navigation }) {
   };
 
   return (
-    <Pagina navigation={navigation} back={true}>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          backgroundColor: colors.achtergrondKleur
-        }}
-      >
-        <View style={styles.box}>
-          {text === undefined ? (
-            <ActivityIndicator />
-          ) : (
-            <ExamenTekst text={text}></ExamenTekst>
-          )}
-        </View>
-        <View style={styles.box}>
-          {vragen === undefined ? (
-            <ActivityIndicator />
-          ) : (
-            <View>
-              <View style={{ flexDirection: "row" }}>
-                {vraagvolgorde !== 0 && (
-                  <Button
-                    style={{ margin: 3 }}
-                    title="Vorige"
-                    onPress={vorige}
-                  />
-                )}
-                {vraagvolgorde !== vragen.length - 1 && (
-                  <Button
-                    style={{ margin: 3 }}
-                    title="Volgende"
-                    onPress={volgende}
-                  />
-                )}
-              </View>
-              {vragen.map((vraag, index) => {
-                return (
-                  <View
-                    style={{
-                      margin: 3,
-                      display: index === vraagvolgorde ? null : "none"
-                    }}
-                  >
-                    <Vraag
-                      data={vraag}
-                      zetPunten={zetIndexPunten(index)}
-                      zetIngevuld={zetIndexIngevuld(index)}
-                      state={state[index]}
-                      zetState={zetStateIndex(index)}
+    <Pagina
+      style={{ backgroundColor: colors.achtergrondKleur }}
+      navigation={navigation}
+      back={true}
+    >
+      <View style={{ alignItems: "center" }}>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            backgroundColor: colors.achtergrondKleur
+          }}
+        >
+          <View
+            style={[
+              styles.bluebackBox,
+              {
+                borderColor: colors.blueboxKleur,
+                backgroundColor: colors.blueboxKleur
+              }
+            ]}
+          >
+            {text === undefined ? (
+              <ActivityIndicator />
+            ) : (
+              <ExamenTekst text={text}></ExamenTekst>
+            )}
+          </View>
+          <View
+            style={[
+              styles.bluebackBox,
+              {
+                borderColor: colors.blueboxKleur,
+                backgroundColor: colors.blueboxKleur
+              }
+            ]}
+          >
+            {vragen === undefined ? (
+              <ActivityIndicator />
+            ) : (
+              <View>
+                <View style={{ flexDirection: "row" }}>
+                  {vraagvolgorde !== 0 && (
+                    <Button
+                      style={{ margin: 3, flex: 1 }}
+                      title="Vorige vraag"
+                      onPress={vorige}
                     />
-                  </View>
-                );
-              })}
-              <View style={{ flexDirection: "row" }}>
-                <Button
-                  style={{ margin: 3 }}
-                  title="Sla progressie op"
-                  onPress={slaOp}
-                />
-                <Button style={{ margin: 3 }} title="Submit" onPress={submit} />
+                  )}
+                  {vraagvolgorde !== vragen.length - 1 && (
+                    <Button
+                      style={{ margin: 3, flex: 1 }}
+                      title="Volgende vraag"
+                      onPress={volgende}
+                    />
+                  )}
+                </View>
+                <Enter />
+                {vragen.map((vraag, index) => {
+                  return (
+                    <View
+                      style={{
+                        margin: 3,
+                        display: index === vraagvolgorde ? null : "none"
+                      }}
+                    >
+                      <Vraag
+                        data={vraag}
+                        zetPunten={zetIndexPunten(index)}
+                        zetIngevuld={zetIndexIngevuld(index)}
+                        state={state[index]}
+                        zetState={zetStateIndex(index)}
+                      />
+                    </View>
+                  );
+                })}
+                <Enter />
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "row"
+                  }}
+                >
+                  <Button
+                    style={{ margin: 3, flex: 1 }}
+                    title="Opslaan / Vorige pagina"
+                    onPress={slaOp}
+                  />
+                  <Button
+                    style={{ margin: 3, flex: 1 }}
+                    title="Antwoorden indienen"
+                    onPress={submit}
+                  />
+                </View>
               </View>
-            </View>
-          )}
+            )}
+          </View>
         </View>
       </View>
     </Pagina>

@@ -1,3 +1,4 @@
+import { useTheme } from "@react-navigation/native";
 import { useEffect } from "react";
 import { CheckBox, TextInput, View } from "react-native";
 import Button from "../../../Gui/Basic/Button";
@@ -7,6 +8,7 @@ import { styles } from "../../../Styles";
 
 export default function MaakWaarNietWaarVraag({ zetVraagMethode }) {
   const [stellingen, zetStellingen, zetStelling] = useArrayState();
+  const { colors } = useTheme();
 
   useEffect(() => {
     zetVraagMethode({
@@ -22,7 +24,14 @@ export default function MaakWaarNietWaarVraag({ zetVraagMethode }) {
         return (
           <View style={{ flexDirection: "row" }} key={index}>
             <TextInput
-              style={[styles.textBox, { flex: 1 }]}
+              style={[
+                styles.textBox,
+                {
+                  backgroundColor: colors.inputTextBoxBackgroundKleur,
+                  flex: 1,
+                  borderColor: colors.inputTextBoxBackgroundKleur
+                }
+              ]}
               onChangeText={(tekst) => {
                 zetStelling(index)({ ...stellingen[index], tekst: tekst });
               }}
@@ -30,6 +39,10 @@ export default function MaakWaarNietWaarVraag({ zetVraagMethode }) {
             />
             <Text>{` Waar?  `}</Text>
             <CheckBox
+              style={{
+                backgroundColor: colors.textboxAchtergrondKleur,
+                borderColor: colors.inputTextBoxBackgroundKleur
+              }}
               value={value.waar}
               onValueChange={(waar) => {
                 zetStelling(index)({ ...stellingen[index], waar: waar });

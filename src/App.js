@@ -33,7 +33,12 @@ export default function App() {
       buttonKleur: "blue",
       logo: "logoPng",
       inputTextBoxBorderKleur: "#deepskyblue",
-      inputTextBoxBackgroundKleur: "#eeeeee"
+      inputTextBoxBackgroundKleur: "#eeeeee",
+      radioButtonKleur: "#ffffff",
+      errorBorderKleur: "#c20834",
+      errorBackgroundKleur: "#ffcccc",
+      succesBorderKleur: "#23cf30",
+      succesBackgroundKleur: "#e4ffcc"
     },
     zetDarkMode: zetDarkMode,
     darkMode: darkMode,
@@ -51,8 +56,13 @@ export default function App() {
       blueboxKleur: "#101012",
       buttonKleur: "#000069",
       logo: "logoPng1",
-      inputTextBoxBorderKleur: "#555555",
-      inputTextBoxBackgroundKleur: "#282a2e"
+      inputTextBoxBorderKleur: "#003547",
+      inputTextBoxBackgroundKleur: "#282a2e",
+      radioButtonKleur: "#999",
+      errorBorderKleur: "#750620",
+      errorBackgroundKleur: "#594848",
+      succesBorderKleur: "#0b4710",
+      succesBackgroundKleur: "#464f3d"
     },
     zetDarkMode: zetDarkMode,
     darkMode: darkMode,

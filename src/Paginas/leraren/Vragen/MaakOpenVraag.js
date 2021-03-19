@@ -1,9 +1,11 @@
+import { useTheme } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { TextInput, View } from "react-native";
 import Text from "../../../Gui/Basic/Text";
 import { styles } from "../../../Styles";
 
 export default function MaakOpenVraag({ zetVraagMethode }) {
+  const { colors } = useTheme();
   const [nakijkAntwoord, zetNakijkAntwoord] = useState("");
 
   useEffect(() => {
@@ -14,11 +16,18 @@ export default function MaakOpenVraag({ zetVraagMethode }) {
 
   return (
     <View>
-      <Text style={styles.text}>Nakijk opmerkingen:</Text>
+      <Text>Nakijk opmerkingen:</Text>
       <TextInput
         multiline
         numberOfLines={10}
-        style={[styles.textBox, { flex: 1 }]}
+        style={[
+          styles.textBox,
+          {
+            flex: 1,
+            backgroundColor: colors.inputTextBoxBackgroundKleur,
+            borderColor: colors.inputTextBoxBackgroundKleur
+          }
+        ]}
         onChangeText={zetNakijkAntwoord}
         value={nakijkAntwoord}
       />

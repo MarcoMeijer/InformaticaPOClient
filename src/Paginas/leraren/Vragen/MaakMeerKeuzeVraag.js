@@ -1,3 +1,4 @@
+import { useTheme } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { TextInput, View } from "react-native";
 import Button from "../../../Gui/Basic/Button";
@@ -8,6 +9,7 @@ import { styles } from "../../../Styles";
 export default function MaakMeerKeuzeVraag({ zetVraagMethode }) {
   const [antwoorden, zetAntwoorden, zetAntwoord] = useArrayState();
   const [juisteAntwoord, zetJuisteAntwoord] = useState("");
+  const { colors } = useTheme();
 
   useEffect(() => {
     zetVraagMethode({
@@ -18,7 +20,7 @@ export default function MaakMeerKeuzeVraag({ zetVraagMethode }) {
 
   return (
     <View>
-      <Text style={styles.text}>Mogelijke antwoorden:</Text>
+      <Text>Mogelijke antwoorden:</Text>
       {antwoorden.map((value, index) => {
         return (
           <TextInput
@@ -35,7 +37,13 @@ export default function MaakMeerKeuzeVraag({ zetVraagMethode }) {
       />
       <Text style={styles.text}>Juiste antwoord:</Text>
       <TextInput
-        style={styles.textBox}
+        style={[
+          styles.textBox,
+          {
+            backgroundColor: colors.inputTextBoxBackgroundKleur,
+            borderColor: colors.inputTextBoxBackgroundKleur
+          }
+        ]}
         onChangeText={zetJuisteAntwoord}
         value={juisteAntwoord}
       />

@@ -14,20 +14,16 @@ import useFahneKleur from "../Hooks/FahneKleur";
 import { styles } from "../Styles";
 
 export default function InlogPagina({ navigation }) {
-  const { colors, addError, addSucces } = useTheme();
+  const { addError, addSucces } = useTheme();
   const [leerlingnummer, zetleerlingnummer] = useState("");
   const [wachtwoord, zetwachtwoord] = useState("");
-  const [leerlingnummercolor, zetleerlingnummercolor] = useState("grey");
-  const [wachtwoordcolor, zetwachtwoordcolor] = useState("grey");
   const [fahnekleur, veranderfahne, veranderterug] = useFahneKleur();
 
   let inloggen = () => {
     if (leerlingnummer === "") {
       addError("U heeft het leerling nummer niet ingevuld.");
-      zetleerlingnummercolor("#ff0000");
     } else if (wachtwoord === "") {
       addError("U heeft uw wachtwoord niet ingevuld.");
-      zetwachtwoordcolor("#ff0000");
     } else {
       fetchData("login", { llnr: leerlingnummer, wachtwoord: wachtwoord })
         .then((data) => {
@@ -43,8 +39,7 @@ export default function InlogPagina({ navigation }) {
             }
           }
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
           addError("De server is niet online op dit moment.");
         });
     }
@@ -67,19 +62,17 @@ export default function InlogPagina({ navigation }) {
         <View style={{ flexDirection: "collumn" }}>
           <TextBox
             title={"Leerling nummer"}
-            style={[styles.inputBox, { borderColor: leerlingnummercolor }]}
+            style={styles.inputBox}
             onChangeText={(nieuweleerlingnummer) => {
               zetleerlingnummer(nieuweleerlingnummer);
-              zetleerlingnummercolor("'grey'");
             }}
             value={leerlingnummer}
           />
           <TextBox
             title={"Wachtwoord"}
-            style={[styles.inputBox, { borderColor: wachtwoordcolor }]}
+            style={styles.inputBox}
             onChangeText={(nieuwewachtwoord) => {
               zetwachtwoord(nieuwewachtwoord);
-              zetwachtwoordcolor("'grey'");
             }}
             value={wachtwoord}
             secureTextEntry={true}
