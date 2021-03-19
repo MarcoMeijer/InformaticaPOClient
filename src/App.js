@@ -3,15 +3,14 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { Dimensions, View } from "react-native";
-import ExamTextPage from "./ExamTextPage";
-import ErrorBoxList from "./Gui/ErrorBoxList";
-import HomePage from "./homepage";
-import HomePageLeerlingen from "./homepageleerlingen";
-import HomePageLeraren from "./homepageleraren";
+import ErrorBoxList from "./Gui/Errors/ErrorBoxList";
 import useErrorState from "./Hooks/errorState";
-import ProblemEditPage from "./ProblemEditPage";
-import Barten from "./registreren";
-import TekstenScherm from "./tekstenscherm";
+import InlogPagina from "./Paginas/inlogPagina";
+import HomePageLeerlingen from "./Paginas/leerlingen/leerlingenHomePagina";
+import ExamTextPage from "./Paginas/leerlingen/TekstOefenenPagina";
+import LerarenHomePagina from "./Paginas/leraren/lerarenHomePagina";
+import VraagMakenPagina from "./Paginas/leraren/VraagMakenPagina";
+import RegistreerPagina from "./Paginas/registreerPagina";
 
 const Stack = createStackNavigator();
 
@@ -86,7 +85,7 @@ export default function App() {
             headerShown: false
           }}
         >
-          <Stack.Screen name="Home" component={HomePage} />
+          <Stack.Screen name="Home" component={InlogPagina} />
           <Stack.Screen name="Examen tekst" component={ExamTextPage} />
           <Stack.Screen
             name="Leerlingen home pagina"
@@ -94,11 +93,10 @@ export default function App() {
           />
           <Stack.Screen
             name="Leraren home pagina"
-            component={HomePageLeraren}
+            component={LerarenHomePagina}
           />
-          <Stack.Screen name="registreren" component={Barten} />
-          <Stack.Screen name="Vraag maken" component={ProblemEditPage} />
-          <Stack.Screen name="tekstenscherm" component={TekstenScherm} />
+          <Stack.Screen name="Registreren" component={RegistreerPagina} />
+          <Stack.Screen name="Vraag maken" component={VraagMakenPagina} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>

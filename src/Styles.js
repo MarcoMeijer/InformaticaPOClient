@@ -29,6 +29,13 @@ export const styles = StyleSheet.create({
     borderWidth: "10px",
     borderRadius: "10px"
   },
+  bluebackBox: {
+    backgroundColor: "powderblue",
+    borderColor: "powderblue",
+    borderWidth: "10px",
+    borderRadius: "10px",
+    margin: "7px"
+  },
   inputBox: {
     height: 25,
     borderWidth: 1,
