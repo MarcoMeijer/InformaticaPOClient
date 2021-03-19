@@ -1,10 +1,11 @@
 import { useTheme } from "@react-navigation/native";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { Text, TextInput, View } from "react-native";
+import { TextInput, View } from "react-native";
 import Button from "../Basic/Button";
 import NumberInput from "../Basic/NumberInput";
 import RadioChoices from "../Basic/RadioChoices";
+import Text from "../Basic/Text";
 
 function MeerKeuzeVraag({
   data,

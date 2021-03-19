@@ -7,11 +7,9 @@ export default function Text(props) {
   if (props === undefined) props = {};
 
   return (
-    <React.View>
-      <React.Text
-        {...props}
-        style={[{ color: colors.tekstKleur }, props.style]}
-      />
-    </React.View>
+    <React.Text
+      {...props}
+      style={[{ color: colors.tekstKleur }, props.style]}
+    />
   );
 }

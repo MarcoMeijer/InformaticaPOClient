@@ -66,71 +66,69 @@ export default function RegistreerPagina({ navigation }) {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <Jacket kleur={fahnekleur}>
-        <Logo size={0.9} />
-        <Text style={{ marginBottom: 10, fontSize: 25 }}>
-          <TouchableOpacity onPress={veranderfahne}>
-            <Enter />
-            <Text>Hier kunt u zich</Text>
-          </TouchableOpacity>{" "}
-          <TouchableOpacity onPress={veranderterug}>
-            <Enter />
-            <Text>registreren!</Text>
-          </TouchableOpacity>
-        </Text>
-        <View style={{ flexDirection: "collumn", zIndex: 2 }}>
-          <TextBox
-            title="Leerling nummer"
-            onChangeText={zetleerlingnummer}
-            value={leerlingnummer}
+    <Jacket kleur={fahnekleur}>
+      <Logo size={0.9} />
+      <Text style={{ marginBottom: 10, fontSize: 25 }}>
+        <TouchableOpacity onPress={veranderfahne}>
+          <Enter />
+          <Text>Hier kunt u zich</Text>
+        </TouchableOpacity>{" "}
+        <TouchableOpacity onPress={veranderterug}>
+          <Enter />
+          <Text>registreren!</Text>
+        </TouchableOpacity>
+      </Text>
+      <View style={{ flexDirection: "collumn", zIndex: 2 }}>
+        <TextBox
+          title="Leerling nummer"
+          onChangeText={zetleerlingnummer}
+          value={leerlingnummer}
+        />
+        <TextBox
+          title="Voornaam"
+          onChangeText={zetvoornaam}
+          value={voornaam}
+        />
+        <TextBox
+          title="Tussenvoegsel"
+          onChangeText={zettussenvoegsel}
+          value={tussenvoegsel}
+        />
+        <TextBox
+          title="Achternaam"
+          onChangeText={zetachternaam}
+          value={achternaam}
+        />
+        <TextBox
+          title="Wachtwoord"
+          onChangeText={zetwachtwoord}
+          value={wachtwoord}
+          secureTextEntry={true}
+        />
+        <TextBox
+          title="Wachtwoord herhalen"
+          onChangeText={zetwachtwoordherhalen}
+          value={wachtwoordherhalen}
+          secureTextEntry={true}
+        />
+        <View style={{ flexDirection: "row", margin: 8 }}>
+          <DropDownMenu
+            opties={klassen || []}
+            onChangeText={(nieuweklas) => zetklas(nieuweklas)}
+            value={klas}
+            title="Selecteer een klas"
           />
-          <TextBox
-            title="Voornaam"
-            onChangeText={zetvoornaam}
-            value={voornaam}
-          />
-          <TextBox
-            title="Tussenvoegsel"
-            onChangeText={zettussenvoegsel}
-            value={tussenvoegsel}
-          />
-          <TextBox
-            title="Achternaam"
-            onChangeText={zetachternaam}
-            value={achternaam}
-          />
-          <TextBox
-            title="Wachtwoord"
-            onChangeText={zetwachtwoord}
-            value={wachtwoord}
-            secureTextEntry={true}
-          />
-          <TextBox
-            title="Wachtwoord herhalen"
-            onChangeText={zetwachtwoordherhalen}
-            value={wachtwoordherhalen}
-            secureTextEntry={true}
-          />
-          <View style={{ flexDirection: "row", margin: 8 }}>
-            <DropDownMenu
-              opties={klassen || []}
-              onChangeText={(nieuweklas) => zetklas(nieuweklas)}
-              value={klas}
-              title="Selecteer een klas"
-            />
-          </View>
         </View>
-        <Enter />
-        <Button title="Registreren" onPress={registreren} />
-        <Enter />
-        <Text
-          style={{ color: "blue" }}
-          onPress={() => navigation.navigate("Home")}
-        >
-          Heeft u al een account? Log dan in!
-        </Text>
-      </Jacket>
-    </View>
+      </View>
+      <Enter />
+      <Button title="Registreren" onPress={registreren} />
+      <Enter />
+      <Text
+        style={{ color: "blue" }}
+        onPress={() => navigation.navigate("Home")}
+      >
+        Heeft u al een account? Log dan in!
+      </Text>
+    </Jacket>
   );
 }

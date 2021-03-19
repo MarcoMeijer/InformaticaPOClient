@@ -1,7 +1,8 @@
 import * as React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { ParseElementArray } from "../../Marcos-gekke-shit/Parser/ExamTextParser";
 import { arrayToLinkedList } from "../../Marcos-gekke-shit/Parser/LinkedList";
+import Text from "../Basic/Text";
 
 function ExamTextElem(props) {
   if (props.val.tag === undefined) {

@@ -46,51 +46,49 @@ export default function InlogPagina({ navigation }) {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <Jacket kleur={fahnekleur}>
-        <Logo size={0.9} />
-        <Text style={{ marginBottom: 20, fontSize: 25 }}>
-          <TouchableOpacity onPress={veranderfahne}>
-            <Enter />
-            <Text>Hier kunt u</Text>
-          </TouchableOpacity>{" "}
-          <TouchableOpacity onPress={veranderterug}>
-            <Enter />
-            <Text>inloggen!</Text>
-          </TouchableOpacity>
+    <Jacket kleur={fahnekleur}>
+      <Logo size={0.9} />
+      <Text style={{ marginBottom: 20, fontSize: 25 }}>
+        <TouchableOpacity onPress={veranderfahne}>
+          <Enter />
+          <Text>Hier kunt u</Text>
+        </TouchableOpacity>{" "}
+        <TouchableOpacity onPress={veranderterug}>
+          <Enter />
+          <Text>inloggen!</Text>
+        </TouchableOpacity>
+      </Text>
+      <View style={{ flexDirection: "collumn" }}>
+        <TextBox
+          title={"Leerling nummer"}
+          style={styles.inputBox}
+          onChangeText={(nieuweleerlingnummer) => {
+            zetleerlingnummer(nieuweleerlingnummer);
+          }}
+          value={leerlingnummer}
+        />
+        <TextBox
+          title={"Wachtwoord"}
+          style={styles.inputBox}
+          onChangeText={(nieuwewachtwoord) => {
+            zetwachtwoord(nieuwewachtwoord);
+          }}
+          value={wachtwoord}
+          secureTextEntry={true}
+        />
+        <Enter />
+        <Button title="Inloggen" onPress={inloggen} />
+        <Enter />
+        <Enter />
+        <Text
+          style={{ color: "blue", alignSelf: "center" }}
+          onPress={() => navigation.navigate("Registreren")}
+        >
+          Geen account? Maak een account!
         </Text>
-        <View style={{ flexDirection: "collumn" }}>
-          <TextBox
-            title={"Leerling nummer"}
-            style={styles.inputBox}
-            onChangeText={(nieuweleerlingnummer) => {
-              zetleerlingnummer(nieuweleerlingnummer);
-            }}
-            value={leerlingnummer}
-          />
-          <TextBox
-            title={"Wachtwoord"}
-            style={styles.inputBox}
-            onChangeText={(nieuwewachtwoord) => {
-              zetwachtwoord(nieuwewachtwoord);
-            }}
-            value={wachtwoord}
-            secureTextEntry={true}
-          />
-          <Enter />
-          <Button title="Inloggen" onPress={inloggen} />
-          <Enter />
-          <Enter />
-          <Text
-            style={{ color: "blue", alignSelf: "center" }}
-            onPress={() => navigation.navigate("Registreren")}
-          >
-            Geen account? Maak een account!
-          </Text>
-          <Enter />
-        </View>
-        <DarkModeSwitch />
-      </Jacket>
-    </View>
+        <Enter />
+      </View>
+      <DarkModeSwitch />
+    </Jacket>
   );
 }

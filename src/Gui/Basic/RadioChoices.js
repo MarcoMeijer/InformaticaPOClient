@@ -1,8 +1,9 @@
 import * as React from "react";
 import { useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { styles } from "../../Styles";
 import RadioButton from "./RadioButton";
+import Text from "./Text";
 
 export default function RadioChoices({
   backgroundColor,

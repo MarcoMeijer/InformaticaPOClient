@@ -1,20 +1,19 @@
+import { useTheme } from "@react-navigation/native";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
-import { useTheme } from "@react-navigation/native";
-import useArrayState from "../../Hooks/arrayState";
 import fetchData from "../../Database/fetchData";
-import Pagina from "../../Gui/Pagina-layout/Pagina";
-import { styles } from "../../Styles";
-import ExamenTekst from "../../Gui/ExamenTekst/ExamenTekst";
 import Button from "../../Gui/Basic/Button";
+import Doos from "../../Gui/Basic/Doos";
 import Enter from "../../Gui/Basic/Enter";
+import ExamenTekst from "../../Gui/ExamenTekst/ExamenTekst";
 import Vraag from "../../Gui/ExamenTekst/Vraag";
+import Pagina from "../../Gui/Pagina-layout/Pagina";
+import useArrayState from "../../Hooks/arrayState";
 
 export default function TekstOefenenPagina({ route, navigation }) {
   const { colors, addError, addSucces } = useTheme();
   const { tekstid } = route.params;
-  const [vraagvolgorde, zetVraagvolgorde] = useState(0);
   const [text, zetText] = useState(undefined);
   const [vragen, zetVragen] = useState(undefined);
   const [punten, zetPunten, zetIndexPunten] = useArrayState();
@@ -75,112 +74,69 @@ export default function TekstOefenenPagina({ route, navigation }) {
       addSucces("Uw voortgang is succesvol opgeslagen.");
     });
   };
-  const volgende = () => {
-    zetVraagvolgorde(vraagvolgorde + 1);
-  };
-  const vorige = () => {
-    zetVraagvolgorde(vraagvolgorde - 1);
-  };
 
   return (
-    <Pagina
-      style={{ backgroundColor: colors.achtergrondKleur }}
-      navigation={navigation}
-      back={true}
-    >
-      <View style={{ alignItems: "center" }}>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: "row",
-            backgroundColor: colors.achtergrondKleur
-          }}
-        >
-          <View
-            style={[
-              styles.bluebackBox,
-              {
-                borderColor: colors.blueboxKleur,
-                backgroundColor: colors.blueboxKleur
-              }
-            ]}
-          >
-            {text === undefined ? (
-              <ActivityIndicator />
-            ) : (
-              <ExamenTekst text={text}></ExamenTekst>
-            )}
-          </View>
-          <View
-            style={[
-              styles.bluebackBox,
-              {
-                borderColor: colors.blueboxKleur,
-                backgroundColor: colors.blueboxKleur
-              }
-            ]}
-          >
-            {vragen === undefined ? (
-              <ActivityIndicator />
-            ) : (
-              <View>
-                <View style={{ flexDirection: "row" }}>
-                  {vraagvolgorde !== 0 && (
-                    <Button
-                      style={{ margin: 3, flex: 1 }}
-                      title="Vorige vraag"
-                      onPress={vorige}
+    <Pagina navigation={navigation}>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          backgroundColor: colors.achtergrondKleur
+        }}
+      >
+        <Doos>
+          {text === undefined ? (
+            <ActivityIndicator />
+          ) : (
+            <ExamenTekst text={text}></ExamenTekst>
+          )}
+        </Doos>
+        <Doos>
+          {vragen === undefined ? (
+            <ActivityIndicator />
+          ) : (
+            <View>
+              <Enter />
+              {vragen.map((vraag, index) => {
+                return (
+                  <View
+                    key={index}
+                    style={{
+                      margin: 3,
+                      marginBottom: 30
+                    }}
+                  >
+                    <Vraag
+                      data={vraag}
+                      zetPunten={zetIndexPunten(index)}
+                      zetIngevuld={zetIndexIngevuld(index)}
+                      state={state[index]}
+                      zetState={zetStateIndex(index)}
                     />
-                  )}
-                  {vraagvolgorde !== vragen.length - 1 && (
-                    <Button
-                      style={{ margin: 3, flex: 1 }}
-                      title="Volgende vraag"
-                      onPress={volgende}
-                    />
-                  )}
-                </View>
-                <Enter />
-                {vragen.map((vraag, index) => {
-                  return (
-                    <View
-                      style={{
-                        margin: 3,
-                        display: index === vraagvolgorde ? null : "none"
-                      }}
-                    >
-                      <Vraag
-                        data={vraag}
-                        zetPunten={zetIndexPunten(index)}
-                        zetIngevuld={zetIndexIngevuld(index)}
-                        state={state[index]}
-                        zetState={zetStateIndex(index)}
-                      />
-                    </View>
-                  );
-                })}
-                <Enter />
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: "row"
-                  }}
-                >
-                  <Button
-                    style={{ margin: 3, flex: 1 }}
-                    title="Opslaan / Vorige pagina"
-                    onPress={slaOp}
-                  />
-                  <Button
-                    style={{ margin: 3, flex: 1 }}
-                    title="Antwoorden indienen"
-                    onPress={submit}
-                  />
-                </View>
+                  </View>
+                );
+              })}
+              <Enter />
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row"
+                }}
+              >
+                <Button
+                  style={{ margin: 3, flex: 1 }}
+                  title="Opslaan / Vorige pagina"
+                  onPress={slaOp}
+                />
+                <Button
+                  style={{ margin: 3, flex: 1 }}
+                  title="Antwoorden indienen"
+                  onPress={submit}
+                />
               </View>
-            )}
-          </View>
-        </View>
+            </View>
+          )}
+        </Doos>
       </View>
     </Pagina>
   );
