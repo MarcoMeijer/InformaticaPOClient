@@ -2,8 +2,14 @@ import { useEffect, useState } from "react";
 import { styles } from "../../Styles";
 import TextBox from "./TextBox";
 
-export default function NumberInput({ title, onChangeNumber, number, min, max }) {
-  const [tekst, zetTekst] = useState(number.toString());
+export default function NumberInput({
+  title,
+  onChangeNumber,
+  number,
+  min,
+  max
+}) {
+  const [tekst, zetTekst] = useState(number !== null ? number.toString() : 0);
 
   useEffect(() => {
     let result = parseInt(tekst, 10);
@@ -13,6 +19,11 @@ export default function NumberInput({ title, onChangeNumber, number, min, max })
   }, [tekst, min, max]);
 
   return (
-    <TextBox title={title} style={styles.textBox} onChangeText={zetTekst} value={tekst} />
+    <TextBox
+      title={title}
+      style={styles.textBox}
+      onChangeText={zetTekst}
+      value={tekst}
+    />
   );
 }

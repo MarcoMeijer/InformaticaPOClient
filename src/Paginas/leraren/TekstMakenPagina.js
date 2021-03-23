@@ -2,18 +2,39 @@ import { useTheme } from "@react-navigation/native";
 import * as React from "react";
 import { useState } from "react";
 import { TextInput, View } from "react-native";
+import fetchData from "../../Database/fetchData";
+import Button from "../../Gui/Basic/Button";
+import DropDownMenu from "../../Gui/Basic/DropDownMenu";
 import Text from "../../Gui/Basic/Text";
 import ExamenTekst from "../../Gui/ExamenTekst/ExamenTekst";
+import ExamenSelecteerder from "../../Gui/ExamenTekst/ExamenSelecteerder";
 import { styles } from "../../Styles";
 
 export default function TekstMakenPagina({ navigation }) {
   const [title, changeTitle] = useState("");
   const [text, changeText] = useState("");
+  const [geselecteerdExamen, zetGeselecteerdExamen] = useState("");
   const { colors } = useTheme();
 
   let examText = {
     title: title,
     text: text
+  };
+
+  const voegTekstToe = () => {
+    fetchData("inserttekst", {
+      tekstniveau: 1,
+      examenid: geselecteerdExamen,
+      teksttitel: title,
+      tekstinoud: JSON.stringify(examText)
+    })
+      .then((data) => {
+        console.log(data);
+        navigation.goBack();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -33,6 +54,7 @@ export default function TekstMakenPagina({ navigation }) {
           }
         ]}
       >
+        <ExamenSelecteerder onChangeText={zetGeselecteerdExamen} />
         <Text style={styles.text}>Titel:</Text>
         <TextInput
           style={[
@@ -97,6 +119,7 @@ export default function TekstMakenPagina({ navigation }) {
             {"\u2022"} Paragraaf maken: <br /> {`<p> text </p>`} <br />
             <br /> De titel is automatisch dikgedrukt.
           </Text>
+          <Button title="Voeg tekst toe." onPress={voegTekstToe} />
         </View>
       </View>
     </View>

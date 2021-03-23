@@ -124,12 +124,12 @@ export default function TekstOefenenPagina({ route, navigation }) {
                 }}
               >
                 <Button
-                  style={{ margin: 3, flex: 1 }}
+                  style={{ flex: 1 }}
                   title="Opslaan / Vorige pagina"
                   onPress={slaOp}
                 />
                 <Button
-                  style={{ margin: 3, flex: 1 }}
+                  style={{ flex: 1 }}
                   title="Antwoorden indienen"
                   onPress={submit}
                 />

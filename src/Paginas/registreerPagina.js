@@ -2,7 +2,7 @@ import { useTheme } from "@react-navigation/native";
 import * as React from "react";
 import { useState } from "react";
 import { TouchableOpacity, View } from "react-native";
-import fetchData from "../Database/fetchData";
+import fetchData, { setKey } from "../Database/fetchData";
 import Button from "../Gui/Basic/Button";
 import DropDownMenu from "../Gui/Basic/DropDownMenu";
 import Enter from "../Gui/Basic/Enter";
@@ -14,7 +14,7 @@ import useFahneKleur from "../Hooks/FahneKleur";
 import useFetch from "../Hooks/useFetch";
 
 export default function RegistreerPagina({ navigation }) {
-  const { addError } = useTheme();
+  const { addError, addSucces } = useTheme();
   const [leerlingnummer, zetleerlingnummer] = useState("");
   const [voornaam, zetvoornaam] = useState("");
   const [tussenvoegsel, zettussenvoegsel] = useState("");
@@ -22,8 +22,26 @@ export default function RegistreerPagina({ navigation }) {
   const [klas, zetklas] = useState("");
   const [wachtwoord, zetwachtwoord] = useState("");
   const [wachtwoordherhalen, zetwachtwoordherhalen] = useState("");
-  const [klassen] = useFetch("klassen", {}, data => data.map(klas => klas.klas))
+  const [klassen] = useFetch("klassen", {}, (data) =>
+    data.map((klas) => klas.klas)
+  );
   const [fahnekleur, veranderfahne, veranderterug] = useFahneKleur();
+
+  let inloggen = () => {
+    fetchData("login", { llnr: leerlingnummer, wachtwoord: wachtwoord }).then(
+      (data) => {
+        if (data === "fail") {
+          addError("Er is een onbekende fout opgetreden.");
+        } else {
+          setKey(data.token);
+          addSucces(
+            "Uw account is succesvol aangemaakt. U bent automatisch ingelogd."
+          );
+          navigation.navigate("Leerlingen home pagina");
+        }
+      }
+    );
+  };
 
   let registreren = () => {
     if (leerlingnummer === "") {
@@ -55,7 +73,7 @@ export default function RegistreerPagina({ navigation }) {
 
       fetchData("register", data)
         .then(() => {
-          navigation.navigate("Home");
+          inloggen();
         })
         .catch(() => {
           addError(
@@ -84,11 +102,7 @@ export default function RegistreerPagina({ navigation }) {
           onChangeText={zetleerlingnummer}
           value={leerlingnummer}
         />
-        <TextBox
-          title="Voornaam"
-          onChangeText={zetvoornaam}
-          value={voornaam}
-        />
+        <TextBox title="Voornaam" onChangeText={zetvoornaam} value={voornaam} />
         <TextBox
           title="Tussenvoegsel"
           onChangeText={zettussenvoegsel}

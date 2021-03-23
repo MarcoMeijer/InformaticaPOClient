@@ -39,12 +39,15 @@ export default function App() {
       errorBorderKleur: "#c20834",
       errorBackgroundKleur: "#ffcccc",
       succesBorderKleur: "#23cf30",
-      succesBackgroundKleur: "#e4ffcc"
+      succesBackgroundKleur: "#e4ffcc",
+      dropdownButtonKleur: "#b8fff4"
     },
     zetDarkMode: zetDarkMode,
     darkMode: darkMode,
     addError: addError,
-    addSucces: addSucces
+    addSucces: addSucces,
+    windowHeight: dimensions.window.height,
+    windowWidth: dimensions.window.width
   };
   const DarkTheme = {
     colors: {
@@ -63,12 +66,15 @@ export default function App() {
       errorBorderKleur: "#750620",
       errorBackgroundKleur: "#594848",
       succesBorderKleur: "#0b4710",
-      succesBackgroundKleur: "#464f3d"
+      succesBackgroundKleur: "#464f3d",
+      dropdownButtonKleur: "#01013c"
     },
     zetDarkMode: zetDarkMode,
     darkMode: darkMode,
     addError: addError,
-    addSucces: addSucces
+    addSucces: addSucces,
+    windowHeight: dimensions.window.height,
+    windowWidth: dimensions.window.width
   };
 
   const onChange = ({ window, screen }) => {

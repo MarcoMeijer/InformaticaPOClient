@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Text, View } from "react-native";
 import fetchData from "../../Database/fetchData";
 import Button from "../../Gui/Basic/Button";
+import Enter from "../../Gui/Basic/Enter";
 import Doos from "../../Gui/Basic/Doos";
 import DropDownMenu from "../../Gui/Basic/DropDownMenu";
 import NumberInput from "../../Gui/Basic/NumberInput";
@@ -14,7 +15,6 @@ import { styles } from "../../Styles";
 import MaakMeerKeuzeVraag from "./Vragen/MaakMeerKeuzeVraag";
 import MaakOpenVraag from "./Vragen/MaakOpenVraag";
 import MaakWaarNietWaarVraag from "./Vragen/MaakWaarNietWaarVraag";
-
 
 export default function VraagMakenPagina({ navigation, route }) {
   const [vraag, zetVraag] = useState("");
@@ -41,7 +41,7 @@ export default function VraagMakenPagina({ navigation, route }) {
           onChangeText={(text) => zetVraag(text)}
           value={vraag}
         />
-        <NumberInput 
+        <NumberInput
           title="Aantal te behalen punten"
           onChangeNumber={zetScore}
           number={score}
@@ -81,6 +81,14 @@ export default function VraagMakenPagina({ navigation, route }) {
               vraagVolgorde: 1,
               tekstid: tekstid
             });
+          }}
+        />
+        <Enter />
+        <Button
+          style={{ margin: 1 }}
+          title="Vorige pagina"
+          onPress={() => {
+            navigation.goBack();
           }}
         />
       </Doos>
