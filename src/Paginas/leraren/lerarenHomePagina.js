@@ -5,6 +5,7 @@ import TekstenLijst from "../../Gui/ExamenTekst/TekstenLijst";
 import Jacket from "../../Gui/Pagina-layout/Jacket";
 import { Tab, TabsHeader } from "../../Gui/Pagina-layout/Tabs";
 import TekstMakenPagina from "./TekstMakenPagina";
+import LeerlingGegevensPagina from "./LeerlingGegevens";
 
 function LerarenHome() {
   return (
@@ -40,6 +41,7 @@ export default function LerarenHomePagina({ navigation }) {
       <Tab name="Home" component={LerarenHome} />
       <Tab name="Tekst maken" component={TekstMakenPagina} />
       <Tab name="Vraag maken" component={VraagMakenScherm} />
+      <Tab name="Leerling statistieken" component={LeerlingGegevensPagina} />
     </TabsHeader>
   );
 }

@@ -11,6 +11,7 @@ import ExamTextPage from "./Paginas/leerlingen/TekstOefenenPagina";
 import LerarenHomePagina from "./Paginas/leraren/lerarenHomePagina";
 import VraagMakenPagina from "./Paginas/leraren/VraagMakenPagina";
 import RegistreerPagina from "./Paginas/registreerPagina";
+import LeerlingGegevens from "./Paginas/leraren/LeerlingGegevens";
 
 const Stack = createStackNavigator();
 
@@ -88,7 +89,12 @@ export default function App() {
         width: dimensions.window.width
       }}
     >
-      {errors && <ErrorBoxList errors={errors} />}
+      {errors && (
+        <ErrorBoxList
+          errors={errors}
+          theme={darkMode ? DarkTheme : LightTheme}
+        />
+      )}
       <NavigationContainer theme={darkMode ? DarkTheme : LightTheme}>
         <Stack.Navigator
           screenOptions={{
