@@ -4,11 +4,11 @@ import { useState } from "react";
 import { TextInput, View } from "react-native";
 import fetchData from "../../Database/fetchData";
 import Button from "../../Gui/Basic/Button";
-import DropDownMenu from "../../Gui/Basic/DropDownMenu";
 import Text from "../../Gui/Basic/Text";
 import ExamenTekst from "../../Gui/ExamenTekst/ExamenTekst";
 import ExamenSelecteerder from "../../Gui/ExamenTekst/ExamenSelecteerder";
 import { styles } from "../../Styles";
+import { getDocumentAsync } from "expo-document-picker";
 
 export default function TekstMakenPagina({ navigation }) {
   const [title, changeTitle] = useState("");
@@ -85,6 +85,12 @@ export default function TekstMakenPagina({ navigation }) {
           multiline
           onChangeText={(text) => changeText(text)}
           value={text}
+        />
+        <Button
+          title="Selecteer afbeelding (png)"
+          onPress={() => {
+            getDocumentAsync({ type: ".png" }).then(() => {});
+          }}
         />
       </View>
       <View

@@ -53,6 +53,7 @@ export function TabsHeader({ navigation, children }) {
         if (name === selectedComponent) {
           return (
             <ScrollView
+              key={name}
               style={{ height: 1 }}
               contentContainerStyle={{ flexGrow: 1 }}
             >

@@ -23,7 +23,9 @@ export default function TekstOefenenPagina({ route, navigation }) {
   useEffect(() => {
     if (text === undefined) {
       fetchData("tekst", { tekstid: tekstid }).then((data) => {
-        zetText(JSON.parse(data.tekstinhoud));
+        let text = JSON.parse(data.tekstinhoud);
+        text.afbeelding = data.afbeelding;
+        zetText(text);
       });
     }
   }, [text, tekstid]);
