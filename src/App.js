@@ -40,7 +40,7 @@ export default function App() {
       errorBackgroundKleur: "#ffcccc",
       succesBorderKleur: "#23cf30",
       succesBackgroundKleur: "#e4ffcc",
-      dropdownButtonKleur: "#b8fff4"
+      dropdownButtonKleur: "#bfbfbf"
     },
     zetDarkMode: zetDarkMode,
     darkMode: darkMode,

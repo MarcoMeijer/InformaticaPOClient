@@ -32,7 +32,7 @@ export default function DropDownMenu({ title, opties, onChangeText }) {
                 key={index}
                 title={object}
                 color={colors.dropdownButtonKleur}
-                bordercolor={colors.dropdownButtonKleur}
+                bordercolor={colors.buttonKleur}
                 onPress={() => {
                   onChangeText(object);
                   setSelected(object);

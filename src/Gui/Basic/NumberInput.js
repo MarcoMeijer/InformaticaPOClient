@@ -9,7 +9,9 @@ export default function NumberInput({
   min,
   max
 }) {
-  const [tekst, zetTekst] = useState(number !== null ? number.toString() : 0);
+  const [tekst, zetTekst] = useState(
+    number !== null && number !== undefined ? number.toString() : 0
+  );
 
   useEffect(() => {
     let result = parseInt(tekst, 10);
