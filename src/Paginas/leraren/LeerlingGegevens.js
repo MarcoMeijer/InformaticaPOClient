@@ -1,6 +1,5 @@
 import { View } from "react-native";
 import Button from "../../Gui/Basic/Button";
-import Enter from "../../Gui/Basic/Enter";
 import Text from "../../Gui/Basic/Text";
 import Jacket from "../../Gui/Pagina-layout/Jacket";
 import useFetch from "../../Hooks/useFetch";
@@ -27,9 +26,7 @@ export default function LeerlingGegevensPagina({ navigation }) {
               <Button
                 key={index}
                 title={klas}
-                onClick={() => {
-                  navigation;
-                }}
+                onClick={() => {}}
               />
             ))}
         </View>

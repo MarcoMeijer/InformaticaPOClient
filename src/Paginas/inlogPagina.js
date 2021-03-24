@@ -11,7 +11,6 @@ import DarkModeSwitch from "../Gui/Pagina-layout/DarkModeSwitch";
 import Jacket from "../Gui/Pagina-layout/Jacket";
 import Logo from "../Gui/Pagina-layout/Logo";
 import useFahneKleur from "../Hooks/FahneKleur";
-import { styles } from "../Styles";
 
 export default function InlogPagina({ navigation }) {
   const { addError, addSucces } = useTheme();
@@ -61,7 +60,6 @@ export default function InlogPagina({ navigation }) {
       <View style={{ flexDirection: "collumn" }}>
         <TextBox
           title={"Leerling nummer"}
-          style={styles.inputBox}
           onChangeText={(nieuweleerlingnummer) => {
             zetleerlingnummer(nieuweleerlingnummer);
           }}
@@ -69,7 +67,6 @@ export default function InlogPagina({ navigation }) {
         />
         <TextBox
           title={"Wachtwoord"}
-          style={styles.inputBox}
           onChangeText={(nieuwewachtwoord) => {
             zetwachtwoord(nieuwewachtwoord);
           }}

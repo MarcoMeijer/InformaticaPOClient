@@ -4,9 +4,9 @@ import { useState } from "react";
 import { Text, View } from "react-native";
 import fetchData from "../../Database/fetchData";
 import Button from "../../Gui/Basic/Button";
-import Enter from "../../Gui/Basic/Enter";
 import Doos from "../../Gui/Basic/Doos";
 import DropDownMenu from "../../Gui/Basic/DropDownMenu";
+import Enter from "../../Gui/Basic/Enter";
 import NumberInput from "../../Gui/Basic/NumberInput";
 import TextBox from "../../Gui/Basic/TextBox";
 import Vraag from "../../Gui/ExamenTekst/Vraag";
@@ -37,7 +37,6 @@ export default function VraagMakenPagina({ navigation, route }) {
       <Doos>
         <TextBox
           title="Vraag"
-          style={styles.textBox}
           onChangeText={(text) => zetVraag(text)}
           value={vraag}
         />

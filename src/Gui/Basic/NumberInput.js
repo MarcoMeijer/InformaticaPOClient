@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
-import { styles } from "../../Styles";
 import TextBox from "./TextBox";
 
 export default function NumberInput({
   title,
+  style,
   onChangeNumber,
   number,
   min,
-  max
+  max,
+  float
 }) {
   const [tekst, zetTekst] = useState(
     number !== null && number !== undefined ? number.toString() : 0
   );
 
   useEffect(() => {
-    let result = parseInt(tekst, 10);
+    let result = float ? parseFloat(tekst) : parseInt(tekst, 10);
     if (min !== undefined) result = Math.max(min, result);
     if (max !== undefined) result = Math.min(max, result);
     onChangeNumber(result);
@@ -22,8 +23,8 @@ export default function NumberInput({
 
   return (
     <TextBox
+      style={style}
       title={title}
-      style={styles.textBox}
       onChangeText={zetTekst}
       value={tekst}
     />

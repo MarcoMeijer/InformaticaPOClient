@@ -3,7 +3,6 @@ import { Image, StyleSheet, View } from "react-native";
 import { ParseElementArray } from "../../Marcos-gekke-shit/Parser/ExamTextParser";
 import { arrayToLinkedList } from "../../Marcos-gekke-shit/Parser/LinkedList";
 import Text from "../Basic/Text";
-import _arrayBufferToBase64 from "../../Marcos-gekke-shit/arrayBufferToBase64";
 
 function ExamTextElem({ val }) {
   const { tag, inside } = val;
@@ -43,19 +42,16 @@ function ExamTextItalics({ inside }) {
 }
 
 export default function ExamenTekst({ text }) {
-  const { title, afbeelding } = text;
+  const { title, afbeelding, afbeeldingX, afbeeldingY, afbeeldingW, afbeeldingH } = text;
   let parsedText = ParseElementArray()(arrayToLinkedList(text.text))[1];
 
   return (
     <View>
       <Text style={styles.titleText}>{title}</Text>
-      {afbeelding && afbeelding.data.length !== 0 && (
+      {afbeelding && (
         <Image
-          style={{ width: 399, height: 600 }}
-          source={{
-            uri:
-              "data:image/png;base64," + _arrayBufferToBase64(afbeelding.data)
-          }}
+          style={{ position: 'absolute', left: afbeeldingX, top: afbeeldingY, width: afbeeldingW, height: afbeeldingH }}
+          source={afbeelding}
         />
       )}
       {createExamElements(parsedText)}

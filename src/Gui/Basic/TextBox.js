@@ -1,8 +1,9 @@
+import { useTheme } from "@react-navigation/native";
 import { useEffect, useRef, useState } from "react";
 import { Animated, TextInput, View } from "react-native";
-import { useTheme } from "@react-navigation/native";
 
 export default function TextBox({
+  style,
   title,
   onChangeText,
   value,
@@ -42,13 +43,14 @@ export default function TextBox({
 
   return (
     <View
-      style={{
+      style={[{
         marginTop: 20,
         backgroundColor: colors.achtergrondKleur,
         borderRadius: 5,
         borderBottomWidth: 1,
-        borderBottomColor: "#555"
-      }}
+        borderBottomColor: "#555",
+        marginHorizontal: 3
+      }, style]}
     >
       <TextInput
         style={{

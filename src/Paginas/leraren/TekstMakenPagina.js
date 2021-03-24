@@ -1,24 +1,36 @@
 import { useTheme } from "@react-navigation/native";
+import { getDocumentAsync } from "expo-document-picker";
 import * as React from "react";
 import { useState } from "react";
 import { TextInput, View } from "react-native";
 import fetchData from "../../Database/fetchData";
 import Button from "../../Gui/Basic/Button";
+import NumberInput from "../../Gui/Basic/NumberInput";
 import Text from "../../Gui/Basic/Text";
-import ExamenTekst from "../../Gui/ExamenTekst/ExamenTekst";
 import ExamenSelecteerder from "../../Gui/ExamenTekst/ExamenSelecteerder";
+import ExamenTekst from "../../Gui/ExamenTekst/ExamenTekst";
 import { styles } from "../../Styles";
-import { getDocumentAsync } from "expo-document-picker";
 
 export default function TekstMakenPagina({ navigation }) {
   const [title, changeTitle] = useState("");
   const [text, changeText] = useState("");
+  const [afbeelding, zetAfbeelding] = useState("");
+  const [afbeeldingX, zetAfbeeldingX] = useState(0);
+  const [afbeeldingY, zetAfbeeldingY] = useState(0);
+  const [afbeeldingW, zetAfbeeldingW] = useState(0);
+  const [afbeeldingH, zetAfbeeldingH] = useState(0);
+  const [afbeeldingGrote, zetAfbeeldingGrote] = useState(1);
   const [geselecteerdExamen, zetGeselecteerdExamen] = useState("");
   const { colors } = useTheme();
 
   let examText = {
     title: title,
-    text: text
+    text: text,
+    afbeelding: afbeelding,
+    afbeeldingX: afbeeldingX,
+    afbeeldingY: afbeeldingY,
+    afbeeldingW: afbeeldingW*afbeeldingGrote,
+    afbeeldingH: afbeeldingH*afbeeldingGrote
   };
 
   const voegTekstToe = () => {
@@ -87,10 +99,40 @@ export default function TekstMakenPagina({ navigation }) {
           value={text}
         />
         <Button
-          title="Selecteer afbeelding (png)"
+          title="Selecteer afbeelding"
           onPress={() => {
-            getDocumentAsync({ type: ".png" }).then(() => {});
+            getDocumentAsync({ type: "image/*" }).then(({type, uri, name, size}) => {
+              zetAfbeelding(uri);
+
+              const img = new Image();
+              img.src = uri;
+
+              img.onload = function() {
+                zetAfbeeldingW(img.naturalWidth);
+                zetAfbeeldingH(img.naturalHeight);
+              };
+            });
           }}
+        />
+        <View style={{flexDirection: "row", justifyContent: "flex-start"}}>
+          <NumberInput
+            style={{ flexGrow: 1 }}
+            number={afbeeldingX}
+            title="Afbeelding x"
+            onChangeNumber={zetAfbeeldingX}
+          />
+          <NumberInput
+            style={{ flexGrow: 1 }}
+            number={afbeeldingY}
+            title="Afbeelding y"
+            onChangeNumber={zetAfbeeldingY}
+          />
+        </View>
+        <NumberInput
+          title="Afbeelding grote"
+          number={afbeeldingGrote}
+          onChangeNumber={zetAfbeeldingGrote}
+          float={true}
         />
       </View>
       <View
