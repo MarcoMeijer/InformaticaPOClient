@@ -1,5 +1,5 @@
-import { View, Text, TouchableOpacity } from "react-native";
 import { useTheme } from "@react-navigation/native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 export default function Button({ style, title, onPress, color }) {
   const { colors } = useTheme();

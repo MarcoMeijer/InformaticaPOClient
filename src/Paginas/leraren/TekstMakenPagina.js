@@ -100,6 +100,7 @@ export default function TekstMakenPagina({ navigation }) {
         />
         <Button
           title="Selecteer afbeelding"
+          style={{margin: 5}}
           onPress={() => {
             getDocumentAsync({ type: "image/*" }).then(({type, uri, name, size}) => {
               zetAfbeelding(uri);
