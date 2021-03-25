@@ -27,7 +27,7 @@ export default function LeerlingGegevensPagina({ navigation }) {
                 key={index}
                 title={klas}
                 onClick={() => {
-                  navigation.navigate(rea);
+                  navigation.navigate("Klik hier");
                 }}
               />
             ))}
