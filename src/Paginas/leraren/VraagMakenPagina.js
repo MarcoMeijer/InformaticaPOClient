@@ -1,4 +1,3 @@
-import { useTheme } from "@react-navigation/native";
 import * as React from "react";
 import { useState } from "react";
 import { Text, View } from "react-native";
@@ -22,9 +21,10 @@ export default function VraagMakenPagina({ navigation, route }) {
   const [probleemType, zetProbleemType] = useState("");
   const [vraagMethode, zetVraagMethode] = useState({});
   const [state, zetState] = useState(undefined);
-  const { colors } = useTheme();
 
-  const { tekstid } = route;
+  const { tekstid } = route.params;
+
+  console.log(route);
 
   let vraagInhoud = {
     vraag: vraag,
@@ -75,9 +75,8 @@ export default function VraagMakenPagina({ navigation, route }) {
           title="Voeg vraag toe"
           onPress={() => {
             fetchData("insertvraag", {
-              vraagInhoud: JSON.stringify(vraagInhoud),
-              vraagSoort: 1,
-              vraagVolgorde: 1,
+              vraaginhoud: JSON.stringify(vraagInhoud),
+              vraagsoort: 1,
               tekstid: tekstid
             });
           }}

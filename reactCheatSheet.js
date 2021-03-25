@@ -17,7 +17,7 @@ function pagina1({ navigation }) {
 
 // doorgegeven informatie ontvangen
 function pagina2({ route, navigation }) { // let op dat route toegevoegd is
-  const {info1, info2} = route; // info1 = "hallo", info2 = 42
+  const {info1, info2} = route.params; // info1 = "hallo", info2 = 42
 
   return (
     <View>
