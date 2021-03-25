@@ -1,7 +1,7 @@
+import { ActivityIndicator } from "react-native";
 import Enter from "../../Gui/Basic/Enter";
 import Text from "../../Gui/Basic/Text";
 import Jacket from "../../Gui/Pagina-layout/Jacket";
-import Pagina from "../../Gui/Pagina-layout/Pagina";
 import useFetch from "../../Hooks/useFetch";
 
 export default function EigenGegevens({ navigation }) {
@@ -12,8 +12,11 @@ export default function EigenGegevens({ navigation }) {
   );
 
   return (
-    <Pagina navigation={navigation}>
-      <Jacket>
+    <Jacket>
+      {
+        leerling === undefined ?
+        <ActivityIndicator/>
+        : 
         <Text>
           <b>{`Gegevens van ${leerling.voornaam} ${leerling.tussenvoegsel} ${leerling.achternaam}`}</b>
           <Enter />
@@ -24,7 +27,7 @@ export default function EigenGegevens({ navigation }) {
           {`Bevoegdheid: ${leerling.bevoegdheid}`} <Enter />
           {`Bevoegdheid: ${leerling.bevoegdheid}`} <Enter />
         </Text>
-      </Jacket>
-    </Pagina>
+      }
+    </Jacket>
   );
 }

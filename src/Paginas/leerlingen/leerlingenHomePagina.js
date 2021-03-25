@@ -3,8 +3,8 @@ import * as React from "react";
 import Text from "../../Gui/Basic/Text";
 import Jacket from "../../Gui/Pagina-layout/Jacket";
 import { Tab, TabsHeader } from "../../Gui/Pagina-layout/Tabs";
+import EigenGegevens from "./EigenGegevens";
 import LeerlingStatistiekPagina from "./leerlingStatistiekPagina";
-import EigenGegevens from "./eigenGegevens";
 import TekstKiezenPagina from "./TekstKiezenPagina";
 
 function HomeScreen() {

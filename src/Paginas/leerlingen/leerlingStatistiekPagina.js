@@ -1,11 +1,11 @@
+import { useTheme } from "@react-navigation/native";
 import * as React from "react";
+import { useState } from "react";
 import { View } from "react-native";
+import Button from "../../Gui/Basic/Button";
 import Text from "../../Gui/Basic/Text";
 import Jacket from "../../Gui/Pagina-layout/Jacket";
 import useFetch from "../../Hooks/useFetch";
-import Button from "../../Gui/Basic/Button";
-import { useTheme } from "@react-navigation/native";
-import { useState } from "react";
 import LeerlingStatistiek from "./LeerlingStatistiek";
 
 export default function LeerlingStatistiekPagina({ navigation }) {
@@ -41,7 +41,7 @@ export default function LeerlingStatistiekPagina({ navigation }) {
                 style={{
                   color: colors.tekstKleur
                 }}
-                onPress={() => onPress(tekst.tekstid)}
+                onPress={() => {}}
               >
                 {tekst.title}
               </Text>
