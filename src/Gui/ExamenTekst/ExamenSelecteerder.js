@@ -6,7 +6,7 @@ export default function ExamenSelecteerd({ title, onChangeText }) {
   const [examens] = useFetch("examens");
 
   return (
-    <View>
+    <View style={{zIndex: 2}}>
       <DropDownMenu
         title={title === undefined ? "Selecteer examen" : title}
         opties={

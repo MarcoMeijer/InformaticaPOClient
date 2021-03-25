@@ -4,8 +4,8 @@ import Text from "../../Gui/Basic/Text";
 import TekstenLijst from "../../Gui/ExamenTekst/TekstenLijst";
 import Jacket from "../../Gui/Pagina-layout/Jacket";
 import { Tab, TabsHeader } from "../../Gui/Pagina-layout/Tabs";
-import TekstMakenPagina from "./TekstMakenPagina";
 import LeerlingGegevensPagina from "./LeerlingGegevens";
+import TekstMakenPagina from "./TekstMaken/TekstMakenPagina";
 
 function LerarenHome() {
   return (
