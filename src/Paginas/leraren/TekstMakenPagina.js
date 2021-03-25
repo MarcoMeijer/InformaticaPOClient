@@ -23,20 +23,32 @@ export default function TekstMakenPagina({ navigation }) {
   const [geselecteerdExamen, zetGeselecteerdExamen] = useState("");
   const { colors } = useTheme();
 
-  let examText = {
+  const examText = {
     title: title,
     text: text,
     afbeelding: afbeelding,
     afbeeldingX: afbeeldingX,
     afbeeldingY: afbeeldingY,
-    afbeeldingW: afbeeldingW*afbeeldingGrote,
-    afbeeldingH: afbeeldingH*afbeeldingGrote
+    afbeeldingW: afbeeldingW * afbeeldingGrote,
+    afbeeldingH: afbeeldingH * afbeeldingGrote
+  };
+
+  const selecteerAfbeelding = ({ uri }) => {
+    zetAfbeelding(uri);
+
+    const img = new Image();
+    img.src = uri;
+
+    img.onload = () => {
+      zetAfbeeldingW(img.naturalWidth);
+      zetAfbeeldingH(img.naturalHeight);
+    };
   };
 
   const voegTekstToe = () => {
     fetchData("inserttekst", {
       tekstniveau: 1,
-      examenid: geselecteerdExamen,
+      examennaam: geselecteerdExamen,
       teksttitel: title,
       tekstinoud: JSON.stringify(examText)
     })
@@ -100,22 +112,12 @@ export default function TekstMakenPagina({ navigation }) {
         />
         <Button
           title="Selecteer afbeelding"
-          style={{margin: 5}}
+          style={{ margin: 5 }}
           onPress={() => {
-            getDocumentAsync({ type: "image/*" }).then(({type, uri, name, size}) => {
-              zetAfbeelding(uri);
-
-              const img = new Image();
-              img.src = uri;
-
-              img.onload = function() {
-                zetAfbeeldingW(img.naturalWidth);
-                zetAfbeeldingH(img.naturalHeight);
-              };
-            });
+            getDocumentAsync({ type: "image/*" }).then(selecteerAfbeelding);
           }}
         />
-        <View style={{flexDirection: "row", justifyContent: "flex-start"}}>
+        <View style={{ flexDirection: "row", justifyContent: "flex-start" }}>
           <NumberInput
             style={{ flexGrow: 1 }}
             number={afbeeldingX}
