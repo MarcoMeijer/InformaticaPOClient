@@ -8,13 +8,12 @@ import useErrorState from "./Hooks/errorState";
 import InlogPagina from "./Paginas/inlogPagina";
 import HomePageLeerlingen from "./Paginas/leerlingen/leerlingenHomePagina";
 import ExamTextPage from "./Paginas/leerlingen/TekstOefenenPagina";
-import LerarenHomePagina from "./Paginas/leraren/lerarenHomePagina";
-import VraagMakenPagina from "./Paginas/leraren/VraagMakenPagina";
-import RegistreerPagina from "./Paginas/registreerPagina";
-import LeerlingGegevens from "./Paginas/leraren/LeerlingGegevens";
-import TekstAanpassenPagina from "./Paginas/leraren/TekstMaken/TekstAanpassenPagina";
 import LeerlingGegevens1 from "./Paginas/leraren/LeerlingGegevens1";
 import LeerlingGegevens2 from "./Paginas/leraren/LeerlingGegevens2";
+import LerarenHomePagina from "./Paginas/leraren/lerarenHomePagina";
+import TekstAanpassenPagina from "./Paginas/leraren/TekstMaken/TekstAanpassenPagina";
+import VraagMakenPagina from "./Paginas/leraren/VraagMakenPagina";
+import RegistreerPagina from "./Paginas/registreerPagina";
 
 const Stack = createStackNavigator();
 
