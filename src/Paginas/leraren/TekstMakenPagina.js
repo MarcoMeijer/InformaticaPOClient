@@ -47,10 +47,10 @@ export default function TekstMakenPagina({ navigation }) {
 
   const voegTekstToe = () => {
     fetchData("inserttekst", {
-      tekstniveau: 1,
       examennaam: geselecteerdExamen,
       teksttitel: title,
-      tekstinoud: JSON.stringify(examText)
+      tekstinhoud: JSON.stringify(examText),
+      tekstniveau: 1
     })
       .then((data) => {
         console.log(data);

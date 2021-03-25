@@ -5,21 +5,21 @@ import fetchData from "../../Database/fetchData";
 import Button from "../Basic/Button";
 import Text from "../Basic/Text";
 
-export default function ExamenTekstSelecteerder({ examenid, titel, onPress }) {
+export default function ExamenTekstSelecteerder({ examennaam, titel, onPress }) {
   const { colors } = useTheme();
   const [open, zetOpen] = useState(false);
   const [teksten, zetTeksten] = useState(undefined);
 
   useEffect(() => {
     if (teksten === undefined && open) {
-      fetchData("teksten", { examenid: examenid }).then((data) => {
+      fetchData("teksten", { examennaam: examennaam }).then((data) => {
         data = data.map((x) => {
           return { ...x, title: x.teksttitel };
         });
         zetTeksten(data);
       });
     }
-  }, [teksten, examenid, open]);
+  }, [teksten, examennaam, open]);
 
   return (
     <View>

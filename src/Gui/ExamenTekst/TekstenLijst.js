@@ -11,11 +11,11 @@ export default function TekstenLijst({ onPress }) {
       {
         examens === undefined
         ? <ActivityIndicator/>
-        : examens.map(({ examenid, examennaam }, index) => {
+        : examens.map(({ examennaam }, index) => {
           return (
             <ExamenTekstSelecteerder
               key={index}
-              examenid={examenid}
+              examennaam={examennaam}
               titel={examennaam}
               onPress={onPress}
             />
