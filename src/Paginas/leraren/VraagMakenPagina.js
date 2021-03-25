@@ -24,8 +24,6 @@ export default function VraagMakenPagina({ navigation, route }) {
 
   const { tekstid } = route.params;
 
-  console.log(route);
-
   let vraagInhoud = {
     vraag: vraag,
     score: score,

@@ -17,24 +17,6 @@ function LerarenHome() {
   );
 }
 
-function VraagMakenScherm({ navigation }) {
-  return (
-    <Jacket>
-      <Text>
-        <b>Selecteer aan welke tekst je een vraag wilt toevoegen:</b>
-      </Text>
-      <Enter />
-      <TekstenLijst
-        onPress={(tekstid) => {
-          navigation.navigate("Vraag maken", {
-            tekstid: tekstid
-          });
-        }}
-      />
-    </Jacket>
-  );
-}
-
 function TekstAanpassenScherm({ navigation }) {
   return (
     <Jacket>
@@ -59,7 +41,6 @@ export default function LerarenHomePagina({ navigation }) {
       <Tab name="Home" component={LerarenHome} />
       <Tab name="Tekst maken" component={TekstMakenPagina} />
       <Tab name="Tekst aanpassen" component={TekstAanpassenScherm} />
-      <Tab name="Vraag maken" component={VraagMakenScherm} />
       <Tab name="Leerling statistieken" component={LeerlingGegevensPagina} />
     </TabsHeader>
   );
