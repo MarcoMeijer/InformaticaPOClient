@@ -23,8 +23,7 @@ export default function TekstOefenenPagina({ route, navigation }) {
   useEffect(() => {
     if (text === undefined) {
       fetchData("tekst", { tekstid: tekstid }).then((data) => {
-        let text = JSON.parse(data.tekstinhoud);
-        zetText(text);
+        zetText(JSON.parse(data.tekstinhoud));
       });
     }
   }, [text, tekstid]);

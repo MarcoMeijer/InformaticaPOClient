@@ -35,11 +35,30 @@ function VraagMakenScherm({ navigation }) {
   );
 }
 
+function TekstAanpassenScherm({ navigation }) {
+  return (
+    <Jacket>
+      <Text>
+        <b>Selecteer welke tekst je wilt aanpassen:</b>
+      </Text>
+      <Enter />
+      <TekstenLijst
+        onPress={(tekstid) => {
+          navigation.navigate("Tekst aanpassen pagina", {
+            tekstid: tekstid
+          });
+        }}
+      />
+    </Jacket>
+  );
+}
+
 export default function LerarenHomePagina({ navigation }) {
   return (
     <TabsHeader navigation={navigation}>
       <Tab name="Home" component={LerarenHome} />
       <Tab name="Tekst maken" component={TekstMakenPagina} />
+      <Tab name="Tekst aanpassen" component={TekstAanpassenScherm} />
       <Tab name="Vraag maken" component={VraagMakenScherm} />
       <Tab name="Leerling statistieken" component={LeerlingGegevensPagina} />
     </TabsHeader>

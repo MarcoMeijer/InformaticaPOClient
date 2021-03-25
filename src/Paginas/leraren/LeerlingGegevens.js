@@ -26,7 +26,9 @@ export default function LeerlingGegevensPagina({ navigation }) {
               <Button
                 key={index}
                 title={klas}
-                onClick={() => {}}
+                onClick={() => {
+                  navigation.navigate(rea);
+                }}
               />
             ))}
         </View>

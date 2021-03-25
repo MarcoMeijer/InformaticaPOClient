@@ -10,10 +10,17 @@ import ExamenTekst from "../../../Gui/ExamenTekst/ExamenTekst";
 import ExamenTekstEditor from "./ExamenTekstEditor";
 import TekstEditorTips from "./TekstEditorTips";
 
-export default function TekstMakenPagina({ navigation }) {
-  const [examText, zetExamText] = useState({title:"", text:"", afbeeldingX:0, afbeeldingY:0, afbeeldingW: 0, afbeeldingH: 0});
+export default function TekstMakenPagina() {
+  const [examText, zetExamText] = useState({
+    title: "",
+    text: "",
+    afbeeldingX: 0,
+    afbeeldingY: 0,
+    afbeeldingW: 0,
+    afbeeldingH: 0
+  });
   const [geselecteerdExamen, zetGeselecteerdExamen] = useState("");
-  const { colors } = useTheme();
+  const { colors, addSucces } = useTheme();
 
   const voegTekstToe = () => {
     fetchData("inserttekst", {
@@ -22,9 +29,8 @@ export default function TekstMakenPagina({ navigation }) {
       tekstinhoud: JSON.stringify(examText),
       tekstniveau: 1
     })
-      .then((data) => {
-        console.log(data);
-        navigation.goBack();
+      .then(() => {
+        addSucces("De tekst is succesvol toegevoegd!");
       })
       .catch((error) => {
         console.log(error);
@@ -45,13 +51,17 @@ export default function TekstMakenPagina({ navigation }) {
           examenTekst={examText}
           zetExamenTekst={zetExamText}
         />
-        <Button style={{margin: 3}} title="Voeg tekst toe." onPress={voegTekstToe} />
+        <Button
+          style={{ margin: 3 }}
+          title="Voeg tekst toe."
+          onPress={voegTekstToe}
+        />
       </Doos>
       <Doos>
-        <ExamenTekst text={examText}/>
+        <ExamenTekst text={examText} />
       </Doos>
       <View style={{ alignItems: "center" }}>
-        <TekstEditorTips/>
+        <TekstEditorTips />
       </View>
     </View>
   );
