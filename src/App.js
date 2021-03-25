@@ -7,9 +7,10 @@ import ErrorBoxList from "./Gui/Errors/ErrorBoxList";
 import useErrorState from "./Hooks/errorState";
 import InlogPagina from "./Paginas/inlogPagina";
 import HomePageLeerlingen from "./Paginas/leerlingen/leerlingenHomePagina";
+import EigenGegevens from "./Paginas/leerlingen/eigenGegevens";
 import ExamTextPage from "./Paginas/leerlingen/TekstOefenenPagina";
-import LeerlingGegevens1 from "./Paginas/leraren/LeerlingGegevens1";
-import LeerlingGegevens2 from "./Paginas/leraren/LeerlingGegevens2";
+import LeerlingGegevens1 from "./Paginas/leraren/LeerlingGegevens/LeerlingGegevens1";
+import LeerlingGegevens2 from "./Paginas/leraren/LeerlingGegevens/LeerlingGegevens2";
 import LerarenHomePagina from "./Paginas/leraren/lerarenHomePagina";
 import TekstAanpassenPagina from "./Paginas/leraren/TekstMaken/TekstAanpassenPagina";
 import VraagMakenPagina from "./Paginas/leraren/VraagMakenPagina";
@@ -131,6 +132,7 @@ export default function App() {
             name="Leerling gegevens2"
             component={LeerlingGegevens2}
           />
+          <Stack.Screen name="eigen Gegevens" component={EigenGegevens} />
           <Stack.Screen name="Registreren" component={RegistreerPagina} />
           <Stack.Screen name="Vraag maken" component={VraagMakenPagina} />
         </Stack.Navigator>

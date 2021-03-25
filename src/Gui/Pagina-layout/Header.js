@@ -85,7 +85,7 @@ export default function Header({ navigation, children }) {
     }
   };
 
-  if (windowWidth <= 625) {
+  if (windowWidth < 625) {
     return (
       <View style={{ zIndex: 2 }}>
         <OpenHeader />
@@ -104,7 +104,8 @@ export default function Header({ navigation, children }) {
                 style={{
                   flexDirection: "row",
                   alignSelf: "center",
-                  marginBottom: 4
+                  marginBottom: 4,
+                  marginTop: 4
                 }}
               >
                 <DarkModeSwitch style={{ margin: 10 }} />

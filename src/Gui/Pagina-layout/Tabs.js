@@ -14,7 +14,8 @@ export function Tab({ name, tabNavigator, current }) {
           color: colors.tekstKleur,
           marginLeft: 20,
           marginTop: 10,
-          alignSelf: "center"
+          alignSelf: "center",
+          marginBottom: 6
         }}
       >
         <b>{name}</b>
@@ -29,7 +30,12 @@ export function Tab({ name, tabNavigator, current }) {
         style={{ alignSelf: "center" }}
       >
         <Text
-          style={{ color: colors.tekstKleur, marginTop: 10, marginLeft: 20 }}
+          style={{
+            color: colors.tekstKleur,
+            marginTop: 10,
+            marginLeft: 20,
+            marginBottom: 6
+          }}
         >
           {name}
         </Text>

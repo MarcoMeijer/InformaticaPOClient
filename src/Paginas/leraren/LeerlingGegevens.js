@@ -1,8 +1,8 @@
-import { View } from "react-native";
-import Button from "../../../Gui/Basic/Button";
-import Text from "../../../Gui/Basic/Text";
-import Jacket from "../../../Gui/Pagina-layout/Jacket";
-import useFetch from "../../../Hooks/useFetch";
+mport { View } from "react-native";
+import Button from "../../Gui/Basic/Button";
+import Text from "../../Gui/Basic/Text";
+import Jacket from "../../Gui/Pagina-layout/Jacket";
+import useFetch from "../../Hooks/useFetch";
 
 export default function LeerlingGegevensPagina({ navigation }) {
   const [klassen] = useFetch("klassen", {}, (klassen) =>

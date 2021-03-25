@@ -4,6 +4,7 @@ import Text from "../../Gui/Basic/Text";
 import Jacket from "../../Gui/Pagina-layout/Jacket";
 import { Tab, TabsHeader } from "../../Gui/Pagina-layout/Tabs";
 import LeerlingStatistiekPagina from "./leerlingStatistiekPagina";
+import EigenGegevens from "./eigenGegevens";
 import TekstKiezenPagina from "./TekstKiezenPagina";
 
 function HomeScreen() {
@@ -25,8 +26,9 @@ export default function HomePageLeerlingen({ navigation }) {
   return (
     <TabsHeader navigation={navigation}>
       <Tab name="Home" component={HomeScreen} />
-      <Tab name="Teksten oefenen" component={TekstKiezenPagina} />
-      <Tab name="Statestieken bekijken" component={LeerlingStatistiekPagina} />
+      <Tab name="Teksten" component={TekstKiezenPagina} />
+      <Tab name="Statestieken" component={LeerlingStatistiekPagina} />
+      <Tab name="gegevens" component={EigenGegevens} />
     </TabsHeader>
   );
 }
