@@ -11,26 +11,32 @@ export default function LeerlingGegevensPagina({ navigation }) {
 
   return (
     <Jacket>
-      <Text>
+      <Text style={{ textAlign: "center" }}>
         <b>Selecteer een klas:</b> <br />
         <View
           style={{
-            justifycontent: "center",
-            flexDirection: "collumn",
-            height: 400,
-            padding: 30
+            padding: 10
           }}
         >
           {klassen &&
             klassen.map((klas, index) => (
               <Button
+                style={{ margin: 5 }}
                 key={index}
                 title={klas}
-                onClick={() => {
-                  navigation.navigate("Klik hier");
+                onPress={() => {
+                  navigation.navigate("Leerling gegevens", { klas: klas });
                 }}
               />
             ))}
+
+          <Button
+            style={{ margin: 20 }}
+            title="Terug"
+            onPress={() => {
+              navigation.goBack();
+            }}
+          />
         </View>
       </Text>
     </Jacket>
