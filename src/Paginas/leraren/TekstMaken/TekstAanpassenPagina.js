@@ -15,7 +15,13 @@ export default function TekstAanpassenPagina({ navigation, route }) {
   const { addSucces } = useTheme();
   const { tekstid } = route.params;
 
-  const voegTekstToe = () => {
+  const voegVraagToe = () => {
+    navigation.navigate("Vraag maken", {
+      tekstid: tekstid
+    });
+  };
+
+  const pasTekstAan = () => {
     fetchData("updatetekst", {
       tekstid: tekstid,
       teksttitel: examText.title,
@@ -52,8 +58,13 @@ export default function TekstAanpassenPagina({ navigation, route }) {
             />,
             <Button
               style={{ margin: 3 }}
+              title="Voeg vraag toe."
+              onPress={voegVraagToe}
+            />,
+            <Button
+              style={{ margin: 3 }}
               title="Sla tekst op en ga terug."
-              onPress={voegTekstToe}
+              onPress={pasTekstAan}
             />
           ]
         )}

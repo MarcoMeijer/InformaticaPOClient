@@ -31,6 +31,7 @@ export default function TekstOefenenPagina({ route, navigation }) {
   useEffect(() => {
     if (vragen === undefined) {
       fetchData("vragen", { tekstid: tekstid }).then((data) => {
+        console.log(data);
         zetVragen(
           data.map((object) => {
             let res = JSON.parse(object.vraaginhoud);
@@ -124,12 +125,12 @@ export default function TekstOefenenPagina({ route, navigation }) {
                 }}
               >
                 <Button
-                  style={{ flex: 1 }}
+                  style={{ margin: 3, flex: 1 }}
                   title="Opslaan / Vorige pagina"
                   onPress={slaOp}
                 />
                 <Button
-                  style={{ flex: 1 }}
+                  style={{ margin: 3, flex: 1 }}
                   title="Antwoorden indienen"
                   onPress={submit}
                 />

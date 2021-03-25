@@ -13,6 +13,7 @@ export function Tab({ name, tabNavigator, current }) {
         style={{
           color: colors.tekstKleur,
           marginLeft: 20,
+          marginTop: 10,
           alignSelf: "center"
         }}
       >
@@ -27,7 +28,11 @@ export function Tab({ name, tabNavigator, current }) {
         }}
         style={{ alignSelf: "center" }}
       >
-        <Text style={{ color: colors.tekstKleur, marginLeft: 20 }}>{name}</Text>
+        <Text
+          style={{ color: colors.tekstKleur, marginTop: 10, marginLeft: 20 }}
+        >
+          {name}
+        </Text>
       </TouchableOpacity>
     );
   }
