@@ -53,7 +53,9 @@ export default function ExamenTekstSelecteerder({ examennaam, titel, onPress, on
           onVerwijderExamen &&
           <VerwijderKnop
             style={{ margin: 5 }}
-            onPress={onVerwijderExamen}
+            onPress={() => {
+              onVerwijderExamen(examennaam);
+            }}
           />
         }
       </View>

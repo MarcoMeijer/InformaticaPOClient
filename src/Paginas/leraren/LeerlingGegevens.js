@@ -1,4 +1,4 @@
-mport { View } from "react-native";
+import { View } from "react-native";
 import Button from "../../Gui/Basic/Button";
 import Text from "../../Gui/Basic/Text";
 import Jacket from "../../Gui/Pagina-layout/Jacket";

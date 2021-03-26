@@ -1,15 +1,39 @@
 import { useTheme } from "@react-navigation/native";
-import React from "react";
+import React, { useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 import useFetch from "../../Hooks/useFetch";
+import ExamenAanmakenMenu from "../../Paginas/leraren/Examens/ExamenAanmakenMenu";
+import Button from "../Basic/Button";
 import ExamenTekstSelecteerder from "./ExamenTekstSelecteerder";
 
-export default function TekstenLijst({ onPress, onEditExamen, onTekstToevoegen, onVerwijderExamen, onTekstVerwijder }) {
-  const [examens] = useFetch("examens");
+export default function TekstenLijst({ onPress, onExamenToevoegen, onEditExamen, onTekstToevoegen, onVerwijderExamen, onTekstVerwijder }) {
+  const [open, zetOpen] = useState(false);
+  const [examens, updateExamens] = useFetch("examens");
   const {colors} = useTheme();
 
   return (
     <View style={{ alignSelf: "stretch" }}>
+      {
+        onExamenToevoegen &&
+        <View>
+          <Button
+            title="Nieuw examen"
+            onPress={() => zetOpen(!open)}
+          />
+          {
+            open &&
+            <ExamenAanmakenMenu
+              onCreate={(examenNaam) => {
+                onExamenToevoegen(examenNaam)
+                  .then(() => {
+                    zetOpen(false);
+                    updateExamens();
+                  })
+              }}
+            />
+          }
+        </View>
+      }
       {
         examens === undefined
         ? <ActivityIndicator/>
@@ -23,14 +47,17 @@ export default function TekstenLijst({ onPress, onEditExamen, onTekstToevoegen, 
               borderColor: "#aaa"
             }}>
               <ExamenTekstSelecteerder
-                key={index}
+                key={examennaam}
                 examennaam={examennaam}
                 titel={examennaam}
                 onPress={onPress}
                 onTekstToevoegen={onTekstToevoegen}
                 onEditExamen={onEditExamen}
                 onTekstVerwijder={onTekstVerwijder}
-                onVerwijderExamen={onVerwijderExamen}
+                onVerwijderExamen={(examennaam) => {
+                  return onVerwijderExamen(examennaam)
+                    .then(() => updateExamens())
+                }}
               />
             </View>
           );
