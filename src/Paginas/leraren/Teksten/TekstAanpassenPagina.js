@@ -46,21 +46,21 @@ export default function TekstAanpassenPagina({ navigation, route }) {
         {examText === undefined ? (
           <ActivityIndicator />
         ) : (
-          [
+          <View style={{flex: 1}}>
             <ExamenTekstEditor
               examenTekst={examText}
               zetExamenTekst={zetExamText}
-            />,
+            />
             <VragenAanpassen
               tekstid={tekstid}
               navigation={navigation}
-            />,
+            />
             <Button
               style={{ margin: 3 }}
               title="Sla tekst op en ga terug."
               onPress={pasTekstAan}
             />
-          ]
+          </View>
         )}
       </Doos>
       <Doos>

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 import useFetch from "../../Hooks/useFetch";
 import ExamenAanmakenMenu from "../../Paginas/leraren/Examens/ExamenAanmakenMenu";
-import Button from "../Basic/Button";
+import { ToevoegenKnop } from "../Basic/Knoppen";
 import ExamenTekstSelecteerder from "./ExamenTekstSelecteerder";
 
 export default function TekstenLijst({ onPress, onExamenToevoegen, onEditExamen, onTekstToevoegen, onVerwijderExamen, onTekstVerwijder }) {
@@ -13,28 +13,6 @@ export default function TekstenLijst({ onPress, onExamenToevoegen, onEditExamen,
 
   return (
     <View style={{ alignSelf: "stretch" }}>
-      {
-        onExamenToevoegen &&
-        <View>
-          <Button
-            style={{margin: 5, alignSelf: "center"}}
-            title="Nieuw examen"
-            onPress={() => zetOpen(!open)}
-          />
-          {
-            open &&
-            <ExamenAanmakenMenu
-              onCreate={(examenNaam) => {
-                onExamenToevoegen(examenNaam)
-                  .then(() => {
-                    zetOpen(false);
-                    updateExamens();
-                  })
-              }}
-            />
-          }
-        </View>
-      }
       {
         examens === undefined
         ? <ActivityIndicator/>
@@ -55,14 +33,37 @@ export default function TekstenLijst({ onPress, onExamenToevoegen, onEditExamen,
                 onTekstToevoegen={onTekstToevoegen}
                 onEditExamen={onEditExamen}
                 onTekstVerwijder={onTekstVerwijder}
-                onVerwijderExamen={(examennaam) => {
+                onVerwijderExamen={onVerwijderExamen && ((examennaam) => {
                   return onVerwijderExamen(examennaam)
                     .then(() => updateExamens())
-                }}
+                })}
               />
             </View>
           );
         })
+      }
+      {
+        onExamenToevoegen &&
+        <View>
+          {
+            open &&
+            <ExamenAanmakenMenu
+              onCreate={(examenNaam) => {
+                onExamenToevoegen(examenNaam)
+                  .then(() => {
+                    zetOpen(false);
+                    updateExamens();
+                  })
+              }}
+            />
+          }
+          <ToevoegenKnop
+            style={{margin: 5, alignSelf: "center"}}
+            title="Nieuw examen"
+            size={20}
+            onPress={() => zetOpen(!open)}
+          />
+        </View>
       }
     </View>
   );

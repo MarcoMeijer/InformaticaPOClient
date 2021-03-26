@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 import fetchData from "../../../Database/fetchData";
+import FouwDoos from "../../../Gui/Basic/FouwDoos";
 import { EditKnop, ToevoegenKnop, VerwijderKnop } from "../../../Gui/Basic/Knoppen";
 import Text from "../../../Gui/Basic/Text";
 
@@ -45,8 +46,10 @@ export default function VragenAanpassen({ navigation, tekstid }) {
   return vragen === undefined ?
     <ActivityIndicator />
     : 
-    <View>
-      <Text style={{margin: 5}}><b>Vragen:</b></Text>
+    <FouwDoos
+      style={{margin: 5}}
+      titel="Vragen"
+    >
       {vragen.map((vraag, index) =>
         <View 
           key={index}
@@ -67,8 +70,9 @@ export default function VragenAanpassen({ navigation, tekstid }) {
         </View>
       )}
       <ToevoegenKnop
-        style={{ margin: 5, alignSelf: "center", transform: [{ scale: 1.4 }] }}
+        style={{ margin: 5, alignSelf: "center" }}
         onPress={voegVraagToe}
+        size={20}
       />
-    </View>;
+    </FouwDoos>;
 }

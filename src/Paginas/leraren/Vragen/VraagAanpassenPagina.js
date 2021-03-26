@@ -5,12 +5,12 @@ import fetchData from "../../../Database/fetchData";
 import Button from "../../../Gui/Basic/Button";
 import Doos from "../../../Gui/Basic/Doos";
 import DropDownMenu from "../../../Gui/Basic/DropDownMenu";
-import Enter from "../../../Gui/Basic/Enter";
 import NumberInput from "../../../Gui/Basic/NumberInput";
 import Text from "../../../Gui/Basic/Text";
 import TextBox from "../../../Gui/Basic/TextBox";
 import Vraag, { KrijgVraagSoort } from "../../../Gui/ExamenTekst/Vraag";
 import Pagina from "../../../Gui/Pagina-layout/Pagina";
+import VraagSoortenLijst from "../VraagSoorten/VraagSoortenLijst";
 import MaakMeerKeuzeVraag from "./MaakMeerKeuzeVraag";
 import MaakOpenVraag from "./MaakOpenVraag";
 import MaakWaarNietWaarVraag from "./MaakWaarNietWaarVraag";
@@ -54,7 +54,7 @@ export default function VraagAanpassenPagina({ navigation, route }) {
           number={score}
         />
         <Text>Vraag type:</Text>
-        <View style={{ zIndex: 1 }}>
+        <View style={{ zIndex: 3 }}>
           <DropDownMenu
             title="Selecteer vraag type"
             value={probleemType}
@@ -69,7 +69,7 @@ export default function VraagAanpassenPagina({ navigation, route }) {
             }}
           />
         </View>
-        <View style={{ zIndex: -1 }}>
+        <View style={{ zIndex: 0 }}>
           {probleemType === "Meer keuze vraag" && (
             <MaakMeerKeuzeVraag
               oudeVraag={oudeVraag}
@@ -89,7 +89,9 @@ export default function VraagAanpassenPagina({ navigation, route }) {
             />
           )}
         </View>
-        <Enter />
+        <VraagSoortenLijst
+          vraagid={vraagid}
+        />
         <Button
           style={{ margin: 1 }}
           title="Ga terug en sla vraag op"

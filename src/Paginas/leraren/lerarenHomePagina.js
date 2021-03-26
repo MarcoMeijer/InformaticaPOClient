@@ -4,7 +4,7 @@ import Jacket from "../../Gui/Pagina-layout/Jacket";
 import { Tab, TabsHeader } from "../../Gui/Pagina-layout/Tabs";
 import ExamensAanpassenPagina from "./Examens/ExamensAanpassen";
 import LeerlingGegevensPagina from "./LeerlingGegevens/LeerlingGegevens";
-import EditVraagSoortenPagina from "./Vragen/EditVraagSoorten";
+import EditVraagSoortenPagina from "./VraagSoorten/EditVraagSoorten";
 
 function LerarenHome() {
   return (

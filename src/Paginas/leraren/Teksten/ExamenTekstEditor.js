@@ -3,6 +3,7 @@ import { getDocumentAsync } from "expo-document-picker";
 import { useEffect, useState } from "react";
 import { TextInput, View } from "react-native";
 import Button from "../../../Gui/Basic/Button";
+import FouwDoos from "../../../Gui/Basic/FouwDoos";
 import NumberInput from "../../../Gui/Basic/NumberInput";
 import Text from "../../../Gui/Basic/Text";
 import { styles } from "../../../Styles";
@@ -45,64 +46,74 @@ export default function ExamenTekstEditor({ examenTekst, zetExamenTekst}) {
     };
   };
   
-  return <View style={{flex: 1}}>
-    <Text style={styles.text}>Titel:</Text>
-    <TextInput
-      style={[
-        styles.textBox,
-        {
-          backgroundColor: colors.inputTextBoxBackgroundKleur,
-          borderColor: colors.inputTextBoxBorderKleur,
-          borderWidth: 1,
-          color: colors.tekstKleur
-        }
-      ]}
-      onChangeText={(text) => changeTitle(text)}
-      value={title}
-    />
+  return <View>
+    <FouwDoos
+      style={{margin: 5, flex: 1}}
+      titel="Algemeen"
+    >
+      <Text style={styles.text}>Titel:</Text>
+      <TextInput
+        style={[
+          styles.textBox,
+          {
+            backgroundColor: colors.inputTextBoxBackgroundKleur,
+            borderColor: colors.inputTextBoxBorderKleur,
+            borderWidth: 1,
+            color: colors.tekstKleur
+          }
+        ]}
+        onChangeText={(text) => changeTitle(text)}
+        value={title}
+      />
 
-    <Text style={styles.text}>Tekst:</Text>
-    <TextInput
-      style={[
-        styles.textBox,
-        {
-          flex: 1,
-          backgroundColor: colors.inputTextBoxBackgroundKleur,
-          borderColor: colors.inputTextBoxBorderKleur,
-          borderWidth: 1,
-          color: colors.tekstKleur
-        }
-      ]}
-      multiline
-      onChangeText={(text) => changeText(text)}
-      value={text}
-    />
-    <Button
-      title="Selecteer afbeelding"
-      style={{ margin: 5 }}
-      onPress={() => {
-        getDocumentAsync({ type: "image/*" }).then(selecteerAfbeelding);
-      }}
-    />
-    <View style={{ flexDirection: "row", justifyContent: "flex-start" }}>
-      <NumberInput
-        style={{ flexGrow: 1 }}
-        number={afbeeldingX}
-        title="Afbeelding x"
-        onChangeNumber={zetAfbeeldingX}
+      <Text style={styles.text}>Tekst:</Text>
+      <TextInput
+        style={[
+          styles.textBox,
+          {
+            backgroundColor: colors.inputTextBoxBackgroundKleur,
+            borderColor: colors.inputTextBoxBorderKleur,
+            borderWidth: 1,
+            color: colors.tekstKleur
+          }
+        ]}
+        multiline
+        numberOfLines={20}
+        onChangeText={(text) => changeText(text)}
+        value={text}
       />
-      <NumberInput
-        style={{ flexGrow: 1 }}
-        number={afbeeldingY}
-        title="Afbeelding y"
-        onChangeNumber={zetAfbeeldingY}
+    </FouwDoos>
+    <FouwDoos
+      style={{margin: 5}}
+      titel="Afbeelding"
+    >
+      <Button
+        title="Selecteer afbeelding"
+        style={{ margin: 5 }}
+        onPress={() => {
+          getDocumentAsync({ type: "image/*" }).then(selecteerAfbeelding);
+        }}
       />
-    </View>
-    <NumberInput
-      title="Afbeelding grote"
-      number={afbeeldingGrote}
-      onChangeNumber={zetAfbeeldingGrote}
-      float={true}
-    />
+      <View style={{ flexDirection: "row", justifyContent: "flex-start" }}>
+        <NumberInput
+          style={{ flexGrow: 1 }}
+          number={afbeeldingX}
+          title="Afbeelding x"
+          onChangeNumber={zetAfbeeldingX}
+        />
+        <NumberInput
+          style={{ flexGrow: 1 }}
+          number={afbeeldingY}
+          title="Afbeelding y"
+          onChangeNumber={zetAfbeeldingY}
+        />
+      </View>
+      <NumberInput
+        title="Afbeelding grote"
+        number={afbeeldingGrote}
+        onChangeNumber={zetAfbeeldingGrote}
+        float={true}
+      />
+    </FouwDoos>
   </View>
 }
