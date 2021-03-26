@@ -1,6 +1,6 @@
 import { useTheme } from "@react-navigation/native";
 import { Switch, View } from "react-native";
-import { Svg, Path } from "react-native-svg/src/ReactNativeSVG.web";
+import { Path, Svg } from "react-native-svg";
 
 export default function DarkModeSwitch(props) {
   const { darkMode, zetDarkMode } = useTheme();

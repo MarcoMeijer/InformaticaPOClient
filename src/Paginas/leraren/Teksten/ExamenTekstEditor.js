@@ -2,13 +2,15 @@ import { useTheme } from "@react-navigation/native";
 import { getDocumentAsync } from "expo-document-picker";
 import { useEffect, useState } from "react";
 import { TextInput, View } from "react-native";
-import FouwDoos from "../../../Gui/Basic/FouwDoos";
+import FouwDoos, { FouwDropDown } from "../../../Gui/Basic/FouwDoos";
 import NumberInput from "../../../Gui/Basic/NumberInput";
 import Text from "../../../Gui/Basic/Text";
 import { styles } from "../../../Styles";
+import TekstEditorTips from "./TekstEditorTips";
 
 
 export default function ExamenTekstEditor({ examenTekst, zetExamenTekst}) {
+  const [open, zetOpen] = useState(false);
   const [title, changeTitle] = useState(examenTekst.title);
   const [text, changeText] = useState(examenTekst.text);
   const [afbeelding, zetAfbeelding] = useState(examenTekst.afbeelding);
@@ -45,10 +47,19 @@ export default function ExamenTekstEditor({ examenTekst, zetExamenTekst}) {
     };
   };
   
-  return <View>
+  return <View style={{zIndex: 5}}>
+    {
+      open &&
+      <FouwDropDown
+        titel="Tools om de tekst te stylen"
+      >
+        <TekstEditorTips/>
+      </FouwDropDown>
+    }
     <FouwDoos
       style={{margin: 5, flex: 1}}
       titel="Algemeen"
+      onInfo={() => zetOpen(!open)}
     >
       <Text style={styles.text}>Titel:</Text>
       <TextInput

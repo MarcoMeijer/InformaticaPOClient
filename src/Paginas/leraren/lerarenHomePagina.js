@@ -21,8 +21,8 @@ export default function LerarenHomePagina({ navigation }) {
     <TabsHeader navigation={navigation}>
       <Tab name="Home" component={LerarenHome} />
       <Tab name="Examens aanpassen" component={ExamensAanpassenPagina} />
-      <Tab name="Edit vraag soorten" component={EditVraagSoortenPagina} />
-      <Tab name="Leerling statistieken" component={LeerlingGegevensPagina} />
+      <Tab name="Vraag soorten aanpassen" component={EditVraagSoortenPagina} />
+      <Tab name="Leerlingen" component={LeerlingGegevensPagina} />
     </TabsHeader>
   );
 }

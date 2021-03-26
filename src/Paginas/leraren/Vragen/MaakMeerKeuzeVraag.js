@@ -40,7 +40,8 @@ export default function MaakMeerKeuzeVraag({ oudeVraag, zetVraagMethode }) {
         );
       })}
       <ToevoegenKnop
-        style={{ margin: 5, alignSelf: "center", transform: [{ scale: 1.4 }] }}
+        style={{ margin: 5, alignSelf: "center" }}
+        size={20}
         onPress={() => zetAntwoorden([...antwoorden, ""])}
       />
       <Text style={styles.text}>Juiste antwoord:</Text>

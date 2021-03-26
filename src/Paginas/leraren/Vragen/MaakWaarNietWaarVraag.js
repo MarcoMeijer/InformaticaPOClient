@@ -1,7 +1,7 @@
 import { useTheme } from "@react-navigation/native";
 import { useEffect } from "react";
 import { CheckBox, TextInput, View } from "react-native";
-import Button from "../../../Gui/Basic/Button";
+import { ToevoegenKnop } from "../../../Gui/Basic/Knoppen";
 import Text from "../../../Gui/Basic/Text";
 import { KrijgVraagSoort } from "../../../Gui/ExamenTekst/Vraag";
 import useArrayState from "../../../Hooks/arrayState";
@@ -62,8 +62,9 @@ export default function MaakWaarNietWaarVraag({ oudeVraag, zetVraagMethode }) {
           </View>
         );
       })}
-      <Button
-        title="Voeg stelling toe."
+      <ToevoegenKnop
+        style={{ margin: 5, alignSelf: "center" }}
+        size={20}
         onPress={() =>
           zetStellingen([...stellingen, { tekst: "", waar: false }])
         }

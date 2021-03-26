@@ -9,7 +9,6 @@ import ExamenTekst from "../../../Gui/ExamenTekst/ExamenTekst";
 import Pagina from "../../../Gui/Pagina-layout/Pagina";
 import VragenAanpassen from "../Vragen/VragenAanpassen";
 import ExamenTekstEditor from "./ExamenTekstEditor";
-import TekstEditorTips from "./TekstEditorTips";
 
 export default function TekstAanpassenPagina({ navigation, route }) {
   const [examText, zetExamText] = useState(undefined);
@@ -70,9 +69,6 @@ export default function TekstAanpassenPagina({ navigation, route }) {
           <ExamenTekst text={examText} />
         )}
       </Doos>
-      <View style={{ alignItems: "center" }}>
-        <TekstEditorTips />
-      </View>
     </Pagina>
   );
 }

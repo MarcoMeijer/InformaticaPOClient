@@ -1,4 +1,4 @@
-import { Svg, Path } from "react-native-svg/src/ReactNativeSVG.web";
+import { Path, Svg } from "react-native-svg";
 
 export function LeegIcoon(props) {
   return (

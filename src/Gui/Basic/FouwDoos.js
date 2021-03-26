@@ -1,10 +1,10 @@
 import { useTheme } from "@react-navigation/native";
 import { useState } from "react";
 import { TouchableOpacity, View } from "react-native";
-import { AfbeeldingKnop, ConfiguratieKnop, EditKnop, FouwKnop, VerwijderKnop } from "./Knoppen";
+import { AfbeeldingKnop, ConfiguratieKnop, EditKnop, FouwKnop, InfoKnop, VerwijderKnop } from "./Knoppen";
 import Text from "./Text";
 
-export default function FouwDoos({style, altijdOpen, lazy, titel, children, onEdit, onPicture, onConfiguration, onDelete}) {
+export default function FouwDoos({style, altijdOpen, lazy, titel, children, onEdit, onPicture, onConfiguration, onDelete, onInfo}) {
   const [open, zetOpen] = useState(altijdOpen);
   const {colors} = useTheme();
 
@@ -64,6 +64,13 @@ export default function FouwDoos({style, altijdOpen, lazy, titel, children, onEd
             onPress={onDelete}
           />
         }
+        {
+          onInfo &&
+          <InfoKnop
+            style={{ margin: 5 }}
+            onPress={onInfo}
+          />
+        }
       </View>
       {
         lazy ?
@@ -84,7 +91,7 @@ export default function FouwDoos({style, altijdOpen, lazy, titel, children, onEd
   </View>;
 }
 
-export function FouwOpties({ titel, opties, onChangeText }) {
+export function FouwDropDown({ titel, children }) {
   return <FouwDoos
     altijdOpen={true}
     titel={titel}
@@ -94,6 +101,16 @@ export function FouwOpties({ titel, opties, onChangeText }) {
       position: "absolute",
       marginTop: 40
     }}
+  >
+    {
+      children
+    }
+  </FouwDoos>
+}
+
+export function FouwOpties({ titel, opties, onChangeText }) {
+  return <FouwDropDown
+    titel={titel}
   >
     {
       opties && 
@@ -113,5 +130,5 @@ export function FouwOpties({ titel, opties, onChangeText }) {
         </TouchableOpacity>
       })
     }
-  </FouwDoos>
+  </FouwDropDown>
 }
