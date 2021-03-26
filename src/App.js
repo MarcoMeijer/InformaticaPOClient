@@ -132,7 +132,10 @@ export default function App() {
             name="Leerling gegevens2"
             component={LeerlingGegevens2}
           />
-          <Stack.Screen name="Vraag aanpassen" component={VraagAanpassenPagina} />
+          <Stack.Screen
+            name="Vraag aanpassen"
+            component={VraagAanpassenPagina}
+          />
           <Stack.Screen name="Eigen gegevens" component={EigenGegevens} />
           <Stack.Screen name="Registreren" component={RegistreerPagina} />
         </Stack.Navigator>
