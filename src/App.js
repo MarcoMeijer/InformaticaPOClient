@@ -12,8 +12,8 @@ import ExamTextPage from "./Paginas/leerlingen/TekstOefenenPagina";
 import LeerlingGegevens1 from "./Paginas/leraren/LeerlingGegevens/LeerlingGegevens1";
 import LeerlingGegevens2 from "./Paginas/leraren/LeerlingGegevens/LeerlingGegevens2";
 import LerarenHomePagina from "./Paginas/leraren/lerarenHomePagina";
-import TekstAanpassenPagina from "./Paginas/leraren/TekstMaken/TekstAanpassenPagina";
-import VraagMakenPagina from "./Paginas/leraren/VraagMakenPagina";
+import TekstAanpassenPagina from "./Paginas/leraren/Teksten/TekstAanpassenPagina";
+import VraagAanpassenPagina from "./Paginas/leraren/Vragen/VraagAanpassenPagina";
 import RegistreerPagina from "./Paginas/registreerPagina";
 
 const Stack = createStackNavigator();
@@ -132,9 +132,9 @@ export default function App() {
             name="Leerling gegevens2"
             component={LeerlingGegevens2}
           />
-          <Stack.Screen name="eigen Gegevens" component={EigenGegevens} />
+          <Stack.Screen name="Vraag aanpassen" component={VraagAanpassenPagina} />
+          <Stack.Screen name="Eigen gegevens" component={EigenGegevens} />
           <Stack.Screen name="Registreren" component={RegistreerPagina} />
-          <Stack.Screen name="Vraag maken" component={VraagMakenPagina} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>

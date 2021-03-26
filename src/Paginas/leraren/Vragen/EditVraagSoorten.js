@@ -3,8 +3,8 @@ import { useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 import fetchData from "../../../Database/fetchData";
 import Button from "../../../Gui/Basic/Button";
+import { EditKnop, VerwijderKnop } from "../../../Gui/Basic/Knoppen";
 import Text from "../../../Gui/Basic/Text";
-import VerwijderKnop from "../../../Gui/Basic/VerwijderKnop";
 import Jacket from "../../../Gui/Pagina-layout/Jacket";
 import useFetch from "../../../Hooks/useFetch";
 import VraagsoortAanmakenMenu from "./VraagsoortAanmakenMenu";
@@ -48,14 +48,20 @@ export default function EditVraagSoortenPagina() {
           >
             {
               vraagSoorten.map((vraagSoort) => 
-                <VerwijderKnop
-                  key={vraagSoort}
-                  onPress={() => {
-                    fetchData("deletevraagsoort", {vraagsoort: vraagSoort}).then(() => {
-                      addSucces("Vraagsoort is succesvol verwijderd!");
-                    });
-                  }}
-                />
+                <View style={{flexDirection: "row"}}>
+                  <EditKnop
+                    style={{margin: 5}}
+                  />
+                  <VerwijderKnop
+                    key={vraagSoort}
+                    style={{margin: 5}}
+                    onPress={() => {
+                      fetchData("deletevraagsoort", {vraagsoort: vraagSoort}).then(() => {
+                        addSucces("Vraagsoort is succesvol verwijderd!");
+                      });
+                    }}
+                  />
+                </View>
               )
             }
           </View>

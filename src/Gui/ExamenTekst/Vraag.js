@@ -161,6 +161,12 @@ function WaarNietWaarVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
   );
 }
 
+export function KrijgVraagSoort(vraag) {
+  if (vraag.opties !== undefined) return "Meer keuze vraag";
+  if (vraag.juist !== undefined) return "Waar of niet waar vraag";
+  return "Open vraag";
+}
+
 export default function Vraag(props) {
   let newProps = { ...props };
   if (newProps.data.score === undefined) newProps.data.score = 1;

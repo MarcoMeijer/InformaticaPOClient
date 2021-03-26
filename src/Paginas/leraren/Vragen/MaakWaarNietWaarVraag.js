@@ -3,11 +3,22 @@ import { useEffect } from "react";
 import { CheckBox, TextInput, View } from "react-native";
 import Button from "../../../Gui/Basic/Button";
 import Text from "../../../Gui/Basic/Text";
+import { KrijgVraagSoort } from "../../../Gui/ExamenTekst/Vraag";
 import useArrayState from "../../../Hooks/arrayState";
 import { styles } from "../../../Styles";
 
-export default function MaakWaarNietWaarVraag({ zetVraagMethode }) {
-  const [stellingen, zetStellingen, zetStelling] = useArrayState();
+export default function MaakWaarNietWaarVraag({ oudeVraag, zetVraagMethode }) {
+  const oudeStellingen = [];
+  if(KrijgVraagSoort(oudeVraag) === "Waar of niet waar vraag") {
+    oudeVraag.juist.map((tekst, index) =>
+      oudeStellingen[index] = {tekst: tekst}
+    );
+    oudeVraag.antwoord.map((waar, index) => 
+      oudeStellingen[index].waar = waar
+    );
+  }
+
+  const [stellingen, zetStellingen, zetStelling] = useArrayState(oudeStellingen);
   const { colors } = useTheme();
 
   useEffect(() => {

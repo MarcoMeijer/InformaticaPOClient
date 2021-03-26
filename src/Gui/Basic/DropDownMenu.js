@@ -1,13 +1,13 @@
+import { useTheme } from "@react-navigation/native";
 import * as React from "react";
 import { useState } from "react";
 import { View } from "react-native";
 import Button from "./Button";
-import { useTheme } from "@react-navigation/native";
 
-export default function DropDownMenu({ title, opties, onChangeText }) {
+export default function DropDownMenu({ title, opties, value, onChangeText }) {
   const { colors } = useTheme();
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(undefined);
+  const [selected, setSelected] = useState(value);
 
   let OpenButton = () => {
     return (

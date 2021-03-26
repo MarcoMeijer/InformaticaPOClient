@@ -2,11 +2,12 @@ import { useTheme } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { TextInput, View } from "react-native";
 import Text from "../../../Gui/Basic/Text";
+import { KrijgVraagSoort } from "../../../Gui/ExamenTekst/Vraag";
 import { styles } from "../../../Styles";
 
-export default function MaakOpenVraag({ zetVraagMethode }) {
+export default function MaakOpenVraag({ oudeVraag, zetVraagMethode }) {
   const { colors } = useTheme();
-  const [nakijkAntwoord, zetNakijkAntwoord] = useState("");
+  const [nakijkAntwoord, zetNakijkAntwoord] = useState(KrijgVraagSoort(oudeVraag) === "Open vraag" ? oudeVraag.antwoord : "");
 
   useEffect(() => {
     zetVraagMethode({

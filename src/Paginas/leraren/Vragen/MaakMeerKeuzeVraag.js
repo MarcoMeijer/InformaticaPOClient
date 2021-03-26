@@ -1,14 +1,22 @@
 import { useTheme } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { TextInput, View } from "react-native";
-import Button from "../../../Gui/Basic/Button";
+import { ToevoegenKnop } from "../../../Gui/Basic/Knoppen";
 import Text from "../../../Gui/Basic/Text";
+import { KrijgVraagSoort } from "../../../Gui/ExamenTekst/Vraag";
 import useArrayState from "../../../Hooks/arrayState";
 import { styles } from "../../../Styles";
 
-export default function MaakMeerKeuzeVraag({ zetVraagMethode }) {
-  const [antwoorden, zetAntwoorden, zetAntwoord] = useArrayState();
-  const [juisteAntwoord, zetJuisteAntwoord] = useState("");
+export default function MaakMeerKeuzeVraag({ oudeVraag, zetVraagMethode }) {
+  let standaardAntwoorden = [];
+  let standaardJuisteAntwoord = "";
+  if(KrijgVraagSoort(oudeVraag) === "Meer keuze vraag") {
+    standaardAntwoorden = oudeVraag.opties;
+    standaardJuisteAntwoord = oudeVraag.antwoord;
+  }
+
+  const [antwoorden, zetAntwoorden, zetAntwoord] = useArrayState(standaardAntwoorden);
+  const [juisteAntwoord, zetJuisteAntwoord] = useState(standaardJuisteAntwoord);
   const { colors } = useTheme();
 
   useEffect(() => {
@@ -31,8 +39,8 @@ export default function MaakMeerKeuzeVraag({ zetVraagMethode }) {
           />
         );
       })}
-      <Button
-        title="Voeg antwoord optie toe."
+      <ToevoegenKnop
+        style={{ margin: 5, alignSelf: "center", transform: [{ scale: 1.4 }] }}
         onPress={() => zetAntwoorden([...antwoorden, ""])}
       />
       <Text style={styles.text}>Juiste antwoord:</Text>
