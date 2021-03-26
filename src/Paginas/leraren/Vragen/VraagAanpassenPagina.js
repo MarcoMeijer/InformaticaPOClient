@@ -5,8 +5,8 @@ import fetchData from "../../../Database/fetchData";
 import Button from "../../../Gui/Basic/Button";
 import Doos from "../../../Gui/Basic/Doos";
 import DropDownMenu from "../../../Gui/Basic/DropDownMenu";
+import FouwDoos from "../../../Gui/Basic/FouwDoos";
 import NumberInput from "../../../Gui/Basic/NumberInput";
-import Text from "../../../Gui/Basic/Text";
 import TextBox from "../../../Gui/Basic/TextBox";
 import Vraag, { KrijgVraagSoort } from "../../../Gui/ExamenTekst/Vraag";
 import Pagina from "../../../Gui/Pagina-layout/Pagina";
@@ -43,52 +43,61 @@ export default function VraagAanpassenPagina({ navigation, route }) {
   return (
     <Pagina navigation={navigation} back={true}>
       <Doos>
-        <TextBox
-          title="Vraag"
-          onChangeText={(text) => zetVraag(text)}
-          value={vraag}
-        />
-        <NumberInput
-          title="Aantal te behalen punten"
-          onChangeNumber={zetScore}
-          number={score}
-        />
-        <Text>Vraag type:</Text>
-        <View style={{ zIndex: 3 }}>
-          <DropDownMenu
-            title="Selecteer vraag type"
-            value={probleemType}
-            opties={[
-              "Meer keuze vraag",
-              "Open vraag",
-              "Waar of niet waar vraag"
-            ]}
-            onChangeText={(newType) => {
-              zetState(undefined);
-              zetProbleemType(newType);
-            }}
+        <FouwDoos
+          titel="Algemeen"
+          style={{margin: 5}}
+        >
+          <TextBox
+            title="Vraag"
+            onChangeText={(text) => zetVraag(text)}
+            value={vraag}
           />
-        </View>
-        <View style={{ zIndex: 0 }}>
-          {probleemType === "Meer keuze vraag" && (
-            <MaakMeerKeuzeVraag
-              oudeVraag={oudeVraag}
-              zetVraagMethode={zetVraagMethode}
+          <NumberInput
+            title="Aantal te behalen punten"
+            onChangeNumber={zetScore}
+            number={score}
+          />
+        </FouwDoos>
+        <FouwDoos
+          titel="Vraag type"
+          style={{zIndex: 3, margin: 5}}
+        >
+          <View style={{ zIndex: 3 }}>
+            <DropDownMenu
+              title="Selecteer vraag type"
+              value={probleemType}
+              opties={[
+                "Meer keuze vraag",
+                "Open vraag",
+                "Waar of niet waar vraag"
+              ]}
+              onChangeText={(newType) => {
+                zetState(undefined);
+                zetProbleemType(newType);
+              }}
             />
-          )}
-          {probleemType === "Open vraag" && (
-            <MaakOpenVraag
-              oudeVraag={oudeVraag}
-              zetVraagMethode={zetVraagMethode}
-            />
-          )}
-          {probleemType === "Waar of niet waar vraag" && (
-            <MaakWaarNietWaarVraag
-              oudeVraag={oudeVraag}
-              zetVraagMethode={zetVraagMethode}
-            />
-          )}
-        </View>
+          </View>
+          <View style={{ zIndex: 0 }}>
+            {probleemType === "Meer keuze vraag" && (
+              <MaakMeerKeuzeVraag
+                oudeVraag={oudeVraag}
+                zetVraagMethode={zetVraagMethode}
+              />
+            )}
+            {probleemType === "Open vraag" && (
+              <MaakOpenVraag
+                oudeVraag={oudeVraag}
+                zetVraagMethode={zetVraagMethode}
+              />
+            )}
+            {probleemType === "Waar of niet waar vraag" && (
+              <MaakWaarNietWaarVraag
+                oudeVraag={oudeVraag}
+                zetVraagMethode={zetVraagMethode}
+              />
+            )}
+          </View>
+        </FouwDoos>
         <VraagSoortenLijst
           vraagid={vraagid}
         />

@@ -1,11 +1,11 @@
 import { useTheme } from "@react-navigation/native";
 import { useState } from "react";
 import { View } from "react-native";
-import { EditKnop, FouwKnop, VerwijderKnop } from "./Knoppen";
+import { AfbeeldingKnop, EditKnop, FouwKnop, VerwijderKnop } from "./Knoppen";
 import Text from "./Text";
 
 
-export default function FouwDoos({style, altijdOpen, titel, children, onEdit, onDelete}) {
+export default function FouwDoos({style, altijdOpen, lazy, titel, children, onEdit, onPicture, onDelete}) {
   const [open, zetOpen] = useState(altijdOpen);
   const {colors} = useTheme();
 
@@ -36,12 +36,19 @@ export default function FouwDoos({style, altijdOpen, titel, children, onEdit, on
             zetOpen={zetOpen}
           />
         }
-        <Text style={{flex: 1}}>{titel}</Text>
+        <Text style={{margin: 5, flex: 1}}>{titel}</Text>
         {
           onEdit &&
           <EditKnop
             style={{ margin: 5 }}
             onPress={onEdit}
+          />
+        }
+        {
+          onPicture &&
+          <AfbeeldingKnop
+            style={{ margin: 5 }}
+            onPress={onPicture}
           />
         }
         {
@@ -53,9 +60,16 @@ export default function FouwDoos({style, altijdOpen, titel, children, onEdit, on
         }
       </View>
       {
-        open &&
+        lazy ?
+        (open &&
+          <View
+            style={{ padding: 6}}
+          >
+            {children}
+          </View>)
+        :
         <View
-          style={{ padding: 6}}
+          style={[{ padding: 6 }, open ? {} : {display: "none"}]}
         >
           {children}
         </View>

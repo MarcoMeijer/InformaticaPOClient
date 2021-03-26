@@ -3,6 +3,23 @@ import { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import Svg, { Path } from "react-native-svg";
 
+export function AfbeeldingKnop(props) {
+  return <TouchableOpacity {...props}>
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={16}
+      height={16}
+      fill="currentColor"
+      className="prefix__bi prefix__bi-image"
+      viewBox="0 0 16 16"
+      {...props}
+    >
+      <Path d="M6.002 5.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+      <Path d="M2.002 1a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V3a2 2 0 00-2-2h-12zm12 1a1 1 0 011 1v6.5l-3.777-1.947a.5.5 0 00-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 00-.63.062L1.002 12V3a1 1 0 011-1h12z" />
+    </Svg>
+  </TouchableOpacity>;
+}
+
 export function AanpassenKnop(props) {
   return <TouchableOpacity {...props}>
     <Svg

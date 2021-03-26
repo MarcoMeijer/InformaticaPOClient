@@ -22,6 +22,7 @@ export default function TekstenLijst({ onPress, onExamenToevoegen, onEditExamen,
             <FouwDoos
               titel={examennaam}
               key={examennaam}
+              lazy={true}
               onEdit={onEditExamen}
               onDelete={onVerwijderExamen && (() => {
                 return onVerwijderExamen(examennaam)

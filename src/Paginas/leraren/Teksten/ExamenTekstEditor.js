@@ -2,7 +2,6 @@ import { useTheme } from "@react-navigation/native";
 import { getDocumentAsync } from "expo-document-picker";
 import { useEffect, useState } from "react";
 import { TextInput, View } from "react-native";
-import Button from "../../../Gui/Basic/Button";
 import FouwDoos from "../../../Gui/Basic/FouwDoos";
 import NumberInput from "../../../Gui/Basic/NumberInput";
 import Text from "../../../Gui/Basic/Text";
@@ -86,14 +85,10 @@ export default function ExamenTekstEditor({ examenTekst, zetExamenTekst}) {
     <FouwDoos
       style={{margin: 5}}
       titel="Afbeelding"
+      onPicture={() => {
+        getDocumentAsync({ type: "image/*" }).then(selecteerAfbeelding);
+      }}
     >
-      <Button
-        title="Selecteer afbeelding"
-        style={{ margin: 5 }}
-        onPress={() => {
-          getDocumentAsync({ type: "image/*" }).then(selecteerAfbeelding);
-        }}
-      />
       <View style={{ flexDirection: "row", justifyContent: "flex-start" }}>
         <NumberInput
           style={{ flexGrow: 1 }}
