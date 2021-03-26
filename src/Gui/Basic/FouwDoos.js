@@ -1,11 +1,10 @@
 import { useTheme } from "@react-navigation/native";
 import { useState } from "react";
-import { View } from "react-native";
-import { AfbeeldingKnop, EditKnop, FouwKnop, VerwijderKnop } from "./Knoppen";
+import { TouchableOpacity, View } from "react-native";
+import { AfbeeldingKnop, ConfiguratieKnop, EditKnop, FouwKnop, VerwijderKnop } from "./Knoppen";
 import Text from "./Text";
 
-
-export default function FouwDoos({style, altijdOpen, lazy, titel, children, onEdit, onPicture, onDelete}) {
+export default function FouwDoos({style, altijdOpen, lazy, titel, children, onEdit, onPicture, onConfiguration, onDelete}) {
   const [open, zetOpen] = useState(altijdOpen);
   const {colors} = useTheme();
 
@@ -52,6 +51,13 @@ export default function FouwDoos({style, altijdOpen, lazy, titel, children, onEd
           />
         }
         {
+          onConfiguration && 
+          <ConfiguratieKnop
+            style={{ margin: 5 }}
+            onPress={onConfiguration}
+          />
+        }
+        {
           onDelete &&
           <VerwijderKnop
             style={{ margin: 5 }}
@@ -76,4 +82,36 @@ export default function FouwDoos({style, altijdOpen, lazy, titel, children, onEd
       }
     </View>
   </View>;
+}
+
+export function FouwOpties({ titel, opties, onChangeText }) {
+  return <FouwDoos
+    altijdOpen={true}
+    titel={titel}
+    style={{
+      right: 0,
+      zIndex: 5,
+      position: "absolute",
+      marginTop: 40
+    }}
+  >
+    {
+      opties && 
+      opties.map((optie) => {
+        return <TouchableOpacity
+          style={{
+            flexDirection: "row",
+            borderBottomWidth: 1,
+            borderBottomColor: "#ddd",
+            alignItems: "center",
+            padding: 5
+          }}
+          key={optie}
+          onPress={() => onChangeText(optie)}
+        >
+          <Text>{optie}</Text>
+        </TouchableOpacity>
+      })
+    }
+  </FouwDoos>
 }

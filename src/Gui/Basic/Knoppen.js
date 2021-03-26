@@ -20,7 +20,7 @@ export function AfbeeldingKnop(props) {
   </TouchableOpacity>;
 }
 
-export function AanpassenKnop(props) {
+export function ConfiguratieKnop(props) {
   return <TouchableOpacity {...props}>
     <Svg
       xmlns="http://www.w3.org/2000/svg"
