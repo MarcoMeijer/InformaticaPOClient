@@ -17,6 +17,7 @@ export default function TekstenLijst({ onPress, onExamenToevoegen, onEditExamen,
         onExamenToevoegen &&
         <View>
           <Button
+            style={{margin: 5, alignSelf: "center"}}
             title="Nieuw examen"
             onPress={() => zetOpen(!open)}
           />
