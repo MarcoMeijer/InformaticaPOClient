@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 import useFetch from "../../Hooks/useFetch";
 import ExamenAanmakenMenu from "../../Paginas/leraren/Examens/ExamenAanmakenMenu";
+import FouwDoos from "../Basic/FouwDoos";
 import { ToevoegenKnop } from "../Basic/Knoppen";
 import ExamenTekstSelecteerder from "./ExamenTekstSelecteerder";
 
@@ -16,29 +17,24 @@ export default function TekstenLijst({ onPress, onExamenToevoegen, onEditExamen,
       {
         examens === undefined
         ? <ActivityIndicator/>
-        : examens.map(({ examennaam }, index) => {
+        : examens.map(({ examennaam }) => {
           return (
-            <View style={{
-              backgroundColor: colors.textboxAchtergrondKleur,
-              margin: 1,
-              borderRadius: 10,
-              borderWidth: 1,
-              borderColor: "#aaa"
-            }}>
+            <FouwDoos
+              titel={examennaam}
+              key={examennaam}
+              onEdit={onEditExamen}
+              onDelete={onVerwijderExamen && (() => {
+                return onVerwijderExamen(examennaam)
+                .then(() => updateExamens())
+              })}
+            >
               <ExamenTekstSelecteerder
-                key={examennaam}
                 examennaam={examennaam}
-                titel={examennaam}
                 onPress={onPress}
                 onTekstToevoegen={onTekstToevoegen}
-                onEditExamen={onEditExamen}
                 onTekstVerwijder={onTekstVerwijder}
-                onVerwijderExamen={onVerwijderExamen && ((examennaam) => {
-                  return onVerwijderExamen(examennaam)
-                    .then(() => updateExamens())
-                })}
               />
-            </View>
+            </FouwDoos>
           );
         })
       }
