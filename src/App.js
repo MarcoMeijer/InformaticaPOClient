@@ -25,6 +25,27 @@ export default function App() {
   const [darkMode, zetDarkMode] = useState(false);
   const [errors, addError, addSucces] = useErrorState();
 
+  const minWidth = 1000;
+  const minHeight = 800;
+
+  let ratio = Math.min(
+    dimensions.window.width / minWidth,
+    dimensions.window.height / minHeight
+  );
+  if (ratio > 1) ratio = 1;
+
+  const newWidth = dimensions.window.width / ratio;
+  const newHeight = dimensions.window.height / ratio;
+
+  const globals = {
+    zetDarkMode: zetDarkMode,
+    darkMode: darkMode,
+    addError: addError,
+    addSucces: addSucces,
+    windowHeight: newHeight,
+    windowWidth: newWidth
+  };
+
   const LightTheme = {
     colors: {
       achtergrondKleur: "#f2f2f2",
@@ -45,12 +66,7 @@ export default function App() {
       succesBackgroundKleur: "#e4ffcc",
       dropdownButtonKleur: "#bfbfbf"
     },
-    zetDarkMode: zetDarkMode,
-    darkMode: darkMode,
-    addError: addError,
-    addSucces: addSucces,
-    windowHeight: dimensions.window.height,
-    windowWidth: dimensions.window.width
+    ...globals
   };
   const DarkTheme = {
     colors: {
@@ -72,12 +88,7 @@ export default function App() {
       succesBackgroundKleur: "#464f3d",
       dropdownButtonKleur: "#01013c"
     },
-    zetDarkMode: zetDarkMode,
-    darkMode: darkMode,
-    addError: addError,
-    addSucces: addSucces,
-    windowHeight: dimensions.window.height,
-    windowWidth: dimensions.window.width
+    ...globals
   };
 
   const onChange = ({ window, screen }) => {
@@ -94,52 +105,63 @@ export default function App() {
   return (
     <View
       style={{
-        height: dimensions.window.height,
-        width: dimensions.window.width
+        height: newHeight * ratio,
+        width: newWidth * ratio,
+        alignItems: "center",
+        justifyContent: "center"
       }}
     >
-      {errors && (
-        <ErrorBoxList
-          errors={errors}
-          theme={darkMode ? DarkTheme : LightTheme}
-        />
-      )}
-      <NavigationContainer theme={darkMode ? DarkTheme : LightTheme}>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false
-          }}
-        >
-          <Stack.Screen name="Home" component={InlogPagina} />
-          <Stack.Screen name="Examen tekst" component={ExamTextPage} />
-          <Stack.Screen
-            name="Leerlingen home pagina"
-            component={HomePageLeerlingen}
+      <View
+        style={{
+          flex: 1,
+          height: newHeight,
+          width: newWidth,
+          transform: [{ scale: ratio }]
+        }}
+      >
+        {errors && (
+          <ErrorBoxList
+            errors={errors}
+            theme={darkMode ? DarkTheme : LightTheme}
           />
-          <Stack.Screen
-            name="Leraren home pagina"
-            component={LerarenHomePagina}
-          />
-          <Stack.Screen
-            name="Tekst aanpassen pagina"
-            component={TekstAanpassenPagina}
-          />
-          <Stack.Screen
-            name="Leerling gegevens"
-            component={LeerlingGegevens1}
-          />
-          <Stack.Screen
-            name="Leerling gegevens2"
-            component={LeerlingGegevens2}
-          />
-          <Stack.Screen
-            name="Vraag aanpassen"
-            component={VraagAanpassenPagina}
-          />
-          <Stack.Screen name="Eigen gegevens" component={EigenGegevens} />
-          <Stack.Screen name="Registreren" component={RegistreerPagina} />
-        </Stack.Navigator>
-      </NavigationContainer>
+        )}
+        <NavigationContainer theme={darkMode ? DarkTheme : LightTheme}>
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false
+            }}
+          >
+            <Stack.Screen name="Home" component={InlogPagina} />
+            <Stack.Screen name="Examen tekst" component={ExamTextPage} />
+            <Stack.Screen
+              name="Leerlingen home pagina"
+              component={HomePageLeerlingen}
+            />
+            <Stack.Screen
+              name="Leraren home pagina"
+              component={LerarenHomePagina}
+            />
+            <Stack.Screen
+              name="Tekst aanpassen pagina"
+              component={TekstAanpassenPagina}
+            />
+            <Stack.Screen
+              name="Leerling gegevens"
+              component={LeerlingGegevens1}
+            />
+            <Stack.Screen
+              name="Leerling gegevens2"
+              component={LeerlingGegevens2}
+            />
+            <Stack.Screen
+              name="Vraag aanpassen"
+              component={VraagAanpassenPagina}
+            />
+            <Stack.Screen name="Eigen gegevens" component={EigenGegevens} />
+            <Stack.Screen name="Registreren" component={RegistreerPagina} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </View>
     </View>
   );
 }

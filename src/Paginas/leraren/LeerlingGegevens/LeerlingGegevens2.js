@@ -17,7 +17,6 @@ export default function LeerlingGegevens2({ route, navigation }) {
           {`Klas: ${leerling.klas}`} <Enter />
           {`Leerlingnummer: ${leerling.llnr}`} <Enter />
           {`PersoonID: ${leerling.persoonid}`} <Enter />
-          {`Wachtwoord: ${leerling.wachtwoord}`} <Enter />
           {`Bevoegdheid: ${leerling.bevoegdheid}`} <Enter />
         </Text>
         <LeerlingStatistiek persoonid={leerling.persoonid} />

@@ -13,21 +13,18 @@ export default function EigenGegevens({ navigation }) {
 
   return (
     <Jacket>
-      {
-        leerling === undefined ?
-        <ActivityIndicator/>
-        : 
+      {leerling === undefined ? (
+        <ActivityIndicator />
+      ) : (
         <Text>
           <b>{`Gegevens van ${leerling.voornaam} ${leerling.tussenvoegsel} ${leerling.achternaam}`}</b>
           <Enter />
           {`Klas: ${leerling.klas}`} <Enter />
           {`Leerlingnummer: ${leerling.llnr}`} <Enter />
           {`PersoonID: ${leerling.persoonid}`} <Enter />
-          {`Wachtwoord: ${leerling.wachtwoord}`} <Enter />
-          {`Bevoegdheid: ${leerling.bevoegdheid}`} <Enter />
           {`Bevoegdheid: ${leerling.bevoegdheid}`} <Enter />
         </Text>
-      }
+      )}
     </Jacket>
   );
 }
