@@ -4,8 +4,9 @@ import { TouchableOpacity, View } from "react-native";
 import { AfbeeldingKnop, ConfiguratieKnop, EditKnop, FouwKnop, InfoKnop, VerwijderKnop } from "./Knoppen";
 import Text from "./Text";
 
-export default function FouwDoos({style, altijdOpen, lazy, titel, children, onEdit, onPicture, onConfiguration, onDelete, onInfo}) {
-  const [open, zetOpen] = useState(altijdOpen);
+export default function FouwDoos(props) {
+  const {style, altijdOpen, lazy, titel, children, onEdit, onPicture, onConfiguration, onDelete, onInfo} = props;
+  const [open, zetOpen] = useState(props.open || altijdOpen);
   const {colors} = useTheme();
 
   return <View style={style}>
@@ -31,6 +32,7 @@ export default function FouwDoos({style, altijdOpen, lazy, titel, children, onEd
         {
           altijdOpen ||
           <FouwKnop
+            value={open}
             style={{ margin: 10 }}
             zetOpen={zetOpen}
           />

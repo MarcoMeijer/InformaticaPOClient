@@ -3,7 +3,7 @@ import Enter from "../../../Gui/Basic/Enter";
 import Text from "../../../Gui/Basic/Text";
 import Jacket from "../../../Gui/Pagina-layout/Jacket";
 import Pagina from "../../../Gui/Pagina-layout/Pagina";
-import LeerlingStatistiek from "../../leerlingen/LeerlingStatistiek";
+import LeerlingStatistiek from "../../leerlingen/statistiek/LeerlingStatistiek";
 
 export default function LeerlingGegevens2({ route, navigation }) {
   const { leerling } = route.params;

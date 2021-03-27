@@ -25,13 +25,15 @@ export default function EditVraagSoortenPagina() {
       {
         vraagSoorten &&
         vraagSoorten.map((vraagSoort) => 
-          <View style={{flexDirection: "row", borderBottomWidth: 1, borderColor: "#ddd"}}>
-            <Text style={{flex: 1}} key={vraagSoort}>{vraagSoort}</Text>
+          <View
+            key={vraagSoort}
+            style={{flexDirection: "row", borderBottomWidth: 1, borderColor: "#ddd"}}
+          >
+            <Text style={{flex: 1}}>{vraagSoort}</Text>
             <EditKnop
               style={{margin: 5}}
             />
             <VerwijderKnop
-              key={vraagSoort}
               style={{margin: 5}}
               onPress={() => {
                 fetchData("deletevraagsoort", {vraagsoort: vraagSoort}).then(() => {

@@ -59,6 +59,7 @@ export default function ExamenTekstEditor({ examenTekst, zetExamenTekst}) {
     <FouwDoos
       style={{margin: 5, flex: 1}}
       titel="Algemeen"
+      open={true}
       onInfo={() => zetOpen(!open)}
     >
       <Text style={styles.text}>Titel:</Text>
@@ -95,6 +96,7 @@ export default function ExamenTekstEditor({ examenTekst, zetExamenTekst}) {
     </FouwDoos>
     <FouwDoos
       style={{margin: 5}}
+      open={true}
       titel="Afbeelding"
       onPicture={() => {
         getDocumentAsync({ type: "image/*" }).then(selecteerAfbeelding);

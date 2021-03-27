@@ -1,7 +1,7 @@
 import { useTheme } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { TextInput, View } from "react-native";
-import { ToevoegenKnop } from "../../../Gui/Basic/Knoppen";
+import { ToevoegenKnop, VerwijderKnop } from "../../../Gui/Basic/Knoppen";
 import Text from "../../../Gui/Basic/Text";
 import { KrijgVraagSoort } from "../../../Gui/ExamenTekst/Vraag";
 import useArrayState from "../../../Hooks/arrayState";
@@ -31,12 +31,20 @@ export default function MaakMeerKeuzeVraag({ oudeVraag, zetVraagMethode }) {
       <Text>Mogelijke antwoorden:</Text>
       {antwoorden.map((value, index) => {
         return (
-          <TextInput
-            key={index}
-            style={styles.textBox}
-            onChangeText={zetAntwoord(index)}
-            value={value}
-          />
+          <View style={{ flexDirection: "row" }}>
+            <TextInput
+              key={index}
+              style={[styles.textBox, {flex: 1}]}
+              onChangeText={zetAntwoord(index)}
+              value={value}
+            />
+            <VerwijderKnop
+              style={{margin: 5}}
+              onPress={() => {
+                zetAntwoorden(antwoorden.filter((_, i) => i !== index));
+              }}
+            />
+          </View>
         );
       })}
       <ToevoegenKnop

@@ -1,11 +1,11 @@
 import { useTheme } from "@react-navigation/native";
-import { useState } from "react";
 import * as React from "react";
-import { View, TouchableOpacity, Image } from "react-native";
-import Button from "../Basic/Button";
+import { useState } from "react";
+import { Image, TouchableOpacity, View } from "react-native";
+import pullDownPng from "../../afbeeldingen/pulldownknop.png";
+import { UitlogKnop } from "../Basic/Knoppen";
 import DarkModeSwitch from "./DarkModeSwitch";
 import Logo from "./Logo";
-import pullDownPng from "../../afbeeldingen/pulldownknop.png";
 
 export default function Header({ navigation, children }) {
   const { colors, addSucces, windowWidth } = useTheme();
@@ -38,14 +38,14 @@ export default function Header({ navigation, children }) {
           </View>
 
           <DarkModeSwitch style={{ margin: 10 }} />
-          <Button
-            style={{ margin: 10 }}
-            title="Uitloggen"
+          <UitlogKnop
+            style={{margin: 5}}
+            size={35}
             onPress={() => {
               navigation.navigate("Home");
               addSucces("U bent succesvol uitgelogd.");
             }}
-          ></Button>
+          />
         </View>
       );
     } else {
@@ -109,14 +109,14 @@ export default function Header({ navigation, children }) {
                 }}
               >
                 <DarkModeSwitch style={{ margin: 10 }} />
-                <Button
-                  style={{ width: 80, height: 10 }}
-                  title="Uitloggen"
+                <UitlogKnop
+                  style={{margin: 5}}
+                  size={35}
                   onPress={() => {
                     navigation.navigate("Home");
                     addSucces("U bent succesvol uitgelogd.");
                   }}
-                ></Button>
+                />
               </View>
             </View>
           </View>

@@ -59,6 +59,7 @@ export default function VraagSoortenLijst({ vraagid }) {
     }
     <FouwDoos
       titel="Vraag soorten waar deze vraag bij hoort"
+      open={true}
       style={{margin: 5}}
       onConfiguration={() => zetOpen(!open)}
     >

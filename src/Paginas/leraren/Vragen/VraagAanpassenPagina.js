@@ -45,6 +45,7 @@ export default function VraagAanpassenPagina({ navigation, route }) {
       <Doos>
         <FouwDoos
           titel="Algemeen"
+          open={true}
           style={{margin: 5}}
         >
           <TextBox
@@ -77,6 +78,7 @@ export default function VraagAanpassenPagina({ navigation, route }) {
           }
           <FouwDoos
             titel={probleemType}
+            open={true}
             style={{zIndex: 3, margin: 5}}
             onConfiguration={() => zetOpen(!open)}
           >

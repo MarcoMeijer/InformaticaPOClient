@@ -48,6 +48,7 @@ export default function VragenAanpassen({ navigation, tekstid }) {
     : 
     <FouwDoos
       style={{margin: 5}}
+      open={true}
       titel="Vragen"
     >
       {vragen.map((vraag, index) =>

@@ -3,13 +3,15 @@ import * as React from "react";
 import { View } from "react-native";
 import { styles } from "../../Styles";
 
-export default function Jacket({ children, kleur, kleur2 }) {
+export default function Jacket({ children, width, height, kleur, kleur2 }) {
   const { colors, windowHeight } = useTheme();
   
+  if(width === undefined) width = 450;
+  if(height === undefined) height = 800;
   if (kleur === undefined) kleur = colors.achtergrondKleur;
   if (kleur2 === undefined) kleur2 = colors.blueboxKleur;
 
-  const factor = windowHeight <= 800 ? windowHeight / 800 : 1;
+  const factor = windowHeight <= height ? windowHeight / height : 1;
 
   return (
     <View style={[styles.setupNormal, { backgroundColor: kleur }]}>
@@ -17,8 +19,8 @@ export default function Jacket({ children, kleur, kleur2 }) {
         style={[
           styles.blueBackground,
           {
-            width: 450*factor,
-            height: 800*factor,
+            width: width*factor,
+            height: height*factor,
             backgroundColor: kleur2,
             borderColor: kleur2,
           }
@@ -26,8 +28,8 @@ export default function Jacket({ children, kleur, kleur2 }) {
       >
         <View style={{
             flex: 1,
-            width: 450,
-            height: 800,
+            width: width,
+            height: height,
             alignItems: "center",
             justifyContent: "center",
             transform: [
