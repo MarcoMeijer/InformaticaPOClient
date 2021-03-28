@@ -105,15 +105,14 @@ export default function App() {
   return (
     <View
       style={{
-        height: newHeight * ratio,
-        width: newWidth * ratio,
+        height: dimensions.window.height,
+        width: dimensions.window.width,
         alignItems: "center",
         justifyContent: "center"
       }}
     >
       <View
         style={{
-          flex: 1,
           height: newHeight,
           width: newWidth,
           transform: [{ scale: ratio }]
