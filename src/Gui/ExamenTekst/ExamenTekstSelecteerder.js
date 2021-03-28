@@ -1,11 +1,18 @@
 import { useTheme } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { View } from "react-native";
+import { Touchable, TouchableOpacity, View } from "react-native";
 import fetchData from "../../Database/fetchData";
 import { ToevoegenKnop, VerwijderKnop } from "../Basic/Knoppen";
 import Text from "../Basic/Text";
+import PercentageGoed from "./PercentageGoed";
 
-export default function ExamenTekstSelecteerder({ examennaam, onPress, onTekstToevoegen, onTekstVerwijder }) {
+export default function ExamenTekstSelecteerder({
+  examennaam,
+  onPress,
+  onTekstToevoegen,
+  onTekstVerwijder,
+  statistiekTeksten
+}) {
   const { colors } = useTheme();
   const [moetUpdaten, zetMoetUpdaten] = useState(true);
   const [teksten, zetTeksten] = useState(undefined);
@@ -13,7 +20,13 @@ export default function ExamenTekstSelecteerder({ examennaam, onPress, onTekstTo
   useEffect(() => {
     if (moetUpdaten || teksten === undefined) {
       zetMoetUpdaten(false);
-      fetchData("teksten", { examennaam: examennaam }).then((data) => {
+      let fetch = undefined;
+      if (examennaam === undefined) {
+        fetch = fetchData("aanbevolenteksten");
+      } else {
+        fetch = fetchData("teksten", { examennaam: examennaam });
+      }
+      fetch.then((data) => {
         data = data.map((x) => {
           return { ...x, title: x.teksttitel };
         });
@@ -26,55 +39,66 @@ export default function ExamenTekstSelecteerder({ examennaam, onPress, onTekstTo
     <View>
       {teksten !== undefined &&
         teksten.map((tekst, index) => {
+          let percentageGoed = undefined;
+
+          if (statistiekTeksten !== undefined) {
+            for (let data of statistiekTeksten) {
+              if (data.tekstid === tekst.tekstid) {
+                percentageGoed = data.totaalpunten / data.totaalmaxpunten;
+              }
+            }
+          }
+
           return (
             <View
               key={index}
               style={{
                 flexDirection: "row",
-                borderRadius: 3,
-                borderBottomWidth: 1,
-                borderColor: '#ddd',
-                marginLeft: 30,
                 marginRight: 5,
-                marginBottom: 5,
+                marginBottom: 5
               }}
             >
-              <Text
+              <PercentageGoed factor={percentageGoed} />
+              <View
                 style={{
                   flex: 1,
-                  color: colors.tekstKleur
+                  flexDirection: "row",
+                  borderBottomWidth: 1,
+                  borderColor: "#ddd"
                 }}
-                onPress={() => onPress(tekst.tekstid)}
               >
-                {tekst.title}
-              </Text>
-              {
-                onTekstVerwijder &&
-                <VerwijderKnop
-                  style={{margin: 5}}
-                  onPress={() => {
-                    onTekstVerwijder(tekst.tekstid)
-                      .then(() => {
+                <TouchableOpacity
+                  style={{ flex: 1, marginLeft: 4 }}
+                  onPress={() => onPress(tekst.tekstid)}
+                >
+                  <Text style={{ color: colors.tekstKleur }}>
+                    {tekst.title}
+                  </Text>
+                </TouchableOpacity>
+                {onTekstVerwijder && (
+                  <VerwijderKnop
+                    style={{ margin: 5 }}
+                    onPress={() => {
+                      onTekstVerwijder(tekst.tekstid).then(() => {
                         zetMoetUpdaten(true);
                       });
-                  }}
-                />
-              }
+                    }}
+                  />
+                )}
+              </View>
             </View>
           );
         })}
-      {
-        onTekstToevoegen &&
+      {onTekstToevoegen && (
         <ToevoegenKnop
-          style={{ margin: 4, alignSelf: "center"}}
+          style={{ margin: 4, alignSelf: "center" }}
           onPress={() => {
-            onTekstToevoegen(examennaam)
-              .then(() => {
-                zetMoetUpdaten(true);
-              });
+            onTekstToevoegen(examennaam).then(() => {
+              zetMoetUpdaten(true);
+            });
           }}
         />
-      }
+      )}
     </View>
   );
 }

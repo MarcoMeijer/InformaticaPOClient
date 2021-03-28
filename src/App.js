@@ -25,7 +25,7 @@ export default function App() {
   const [darkMode, zetDarkMode] = useState(false);
   const [errors, addError, addSucces] = useErrorState();
 
-  const minWidth = 1000;
+  const minWidth = 800;
   const minHeight = 800;
 
   let ratio = Math.min(
@@ -111,6 +111,12 @@ export default function App() {
         justifyContent: "center"
       }}
     >
+      {errors && (
+        <ErrorBoxList
+          errors={errors}
+          theme={darkMode ? DarkTheme : LightTheme}
+        />
+      )}
       <View
         style={{
           height: newHeight,
@@ -118,12 +124,6 @@ export default function App() {
           transform: [{ scale: ratio }]
         }}
       >
-        {errors && (
-          <ErrorBoxList
-            errors={errors}
-            theme={darkMode ? DarkTheme : LightTheme}
-          />
-        )}
         <NavigationContainer theme={darkMode ? DarkTheme : LightTheme}>
           <Stack.Navigator
             screenOptions={{

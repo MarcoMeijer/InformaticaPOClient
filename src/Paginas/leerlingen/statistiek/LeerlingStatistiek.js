@@ -6,7 +6,6 @@ import VraagsoortenStatistiek from "./VraagsoortenStatistiek";
 export default function LeerlingStatistiek({ persoonid }) {
   // als persoonid = undefined, dan neemt hij de statistieken van de persoon die ingelogt is
   const [gemaakt] = useFetch("gemaakt", { persoonid: persoonid });
-  const [statistiekTeksten] = useFetch("statistiekteksten", { persoonid: persoonid });
 
   let punten = 0;
   let maximaalPunten = 0;
@@ -26,12 +25,11 @@ export default function LeerlingStatistiek({ persoonid }) {
       </Text>
       <Text>
         <b>
-          Je hebt {punten} van de {maximaalPunten} punten bij alle vragen die je hebt gemaakt.
+          Je hebt {punten} van de {maximaalPunten} punten bij alle vragen die je
+          hebt gemaakt.
         </b>
       </Text>
-      <VraagsoortenStatistiek
-        persoonid={persoonid}
-      />
+      <VraagsoortenStatistiek persoonid={persoonid} />
     </View>
   );
 }
