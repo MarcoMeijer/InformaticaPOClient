@@ -3,3 +3,9 @@ Bug van opgeslagen vragen
 Dark mode compleet
 Leraren kant statistiek examens
 Prompt voor verwijderen
+
+
+feetback van mijn moeder:
+Fontsize groter op alle pagina's (het is nu maar 10.5, 14px)
+informatie bij text editen is niet duidelijk genoeg (bijvoorbeeld iets van <p> hiertussen de paragraaf</p>)
+I in het balkje algemeen bij text editen is misschien niet duidelijk genoeg
