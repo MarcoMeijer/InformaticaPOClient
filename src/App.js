@@ -64,7 +64,9 @@ export default function App() {
       errorBackgroundKleur: "#ffcccc",
       succesBorderKleur: "#23cf30",
       succesBackgroundKleur: "#e4ffcc",
-      dropdownButtonKleur: "#bfbfbf"
+      dropdownButtonKleur: "#bfbfbf",
+      inputTextBoxBorderNew1: "#dddddd",
+      inputTextBoxBorderNew2: "#aaa"
     },
     ...globals
   };
@@ -86,7 +88,9 @@ export default function App() {
       errorBackgroundKleur: "#594848",
       succesBorderKleur: "#0b4710",
       succesBackgroundKleur: "#464f3d",
-      dropdownButtonKleur: "#01013c"
+      dropdownButtonKleur: "#01013c",
+      inputTextBoxBorderNew1: "#003547",
+      inputTextBoxBorderNew2: "#003547"
     },
     ...globals
   };

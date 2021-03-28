@@ -46,12 +46,12 @@ export default function TextBox({
       style={[
         {
           marginTop: 20,
-          backgroundColor: "#fff",
+          backgroundColor: colors.inputTextBoxBackgroundKleur,
           borderRadius: 5,
-          borderColor: "#ddd",
+          borderColor: colors.inputTextBoxBorderNew1,
           borderWidth: 1,
           borderBottomWidth: 2,
-          borderBottomColor: "#aaa",
+          borderBottomColor: colors.inputTextBoxBorderNew2,
           marginHorizontal: 3
         },
         style

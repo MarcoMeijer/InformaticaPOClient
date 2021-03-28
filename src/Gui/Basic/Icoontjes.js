@@ -1,12 +1,14 @@
 import { Path, Svg } from "svgs";
+import { useTheme } from "@react-navigation/native";
 
 export function LeegIcoon(props) {
+  const { colors } = useTheme();
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
       width={16}
       height={16}
-      fill="currentColor"
+      fill="currentColor" //{colors.tekstKleur}
       className="prefix__bi prefix__bi-check2"
       viewBox="0 0 16 16"
       {...props}
@@ -15,12 +17,13 @@ export function LeegIcoon(props) {
 }
 
 export function CheckIcoon(props) {
+  const { colors } = useTheme();
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
       width={16}
       height={16}
-      fill="currentColor"
+      fill="currentColor" //{colors.tekstKleur}
       className="prefix__bi prefix__bi-check2"
       viewBox="0 0 16 16"
       {...props}
