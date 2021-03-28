@@ -6,7 +6,7 @@ import TekstenLijst from "../../../Gui/ExamenTekst/TekstenLijst";
 import Jacket from "../../../Gui/Pagina-layout/Jacket";
 
 export default function ExamensAanpassenPagina({ navigation }) {
-  const {addSucces} = useTheme();
+  const { addSucces } = useTheme();
 
   return (
     <Jacket>
@@ -20,30 +20,38 @@ export default function ExamensAanpassenPagina({ navigation }) {
             tekstid: tekstid
           });
         }}
-        onEditExamen={() => {}}
-        onExamenToevoegen={(examennaam) => {
-          return fetchData("insertexamen", {examennaam: examennaam})
-            .then(() => {
-              addSucces("Examen is succesvol toegevoegt.")
-            })
-        }}
-        onVerwijderExamen={(examennaam) => {
-          return fetchData("deleteexamen", {examennaam: examennaam})
-            .then(() => {
-              addSucces("Examen is succesvol verwijdert.")
-            })
-        }}
+        onEditExamen={(oudeNaam, nieuweNaam) =>
+          fetchData("updateexamen", {
+            oudeexamen: oudeNaam,
+            nieuweexamen: nieuweNaam
+          }).then(() => {
+            addSucces("Examen is succesvol aangepast.");
+          })
+        }
+        onExamenToevoegen={(examennaam) =>
+          fetchData("insertexamen", { examennaam: examennaam }).then(() => {
+            addSucces("Examen is succesvol toegevoegt.");
+          })
+        }
+        onVerwijderExamen={(examennaam) =>
+          fetchData("deleteexamen", { examennaam: examennaam }).then(() => {
+            addSucces("Examen is succesvol verwijdert.");
+          })
+        }
         onTekstToevoegen={(examennaam) => {
-          return fetchData("inserttekst", {examennaam: examennaam, tekstinhoud: `{"text":"","title":""}`, teksttitel: "Voer hier de titel in.", tekstniveau: 1})
-            .then(() => {
-              addSucces("Tekst is succesvol toegevoegt.");
-            });
+          return fetchData("inserttekst", {
+            examennaam: examennaam,
+            tekstinhoud: `{"text":"","title":""}`,
+            teksttitel: "Voer hier de titel in.",
+            tekstniveau: 1
+          }).then(() => {
+            addSucces("Tekst is succesvol toegevoegt.");
+          });
         }}
         onTekstVerwijder={(tekstid) => {
-          return fetchData("deletetekst", {tekstid: tekstid})
-            .then(() => {
-              addSucces("Tekst is succesvol verwijdert.")
-            });
+          return fetchData("deletetekst", { tekstid: tekstid }).then(() => {
+            addSucces("Tekst is succesvol verwijdert.");
+          });
         }}
       />
     </Jacket>

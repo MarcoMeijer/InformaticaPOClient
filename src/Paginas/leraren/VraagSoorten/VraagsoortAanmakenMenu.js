@@ -9,23 +9,24 @@ export default function VraagsoortAanmakenMenu({ onCreate }) {
   const [tekst, zetTekst] = useState("");
   const { addSucces } = useTheme();
 
-  return <View
-    style={{flexDirection: "row", alignItems: "flex-end", justifyContent: "center"}}
-  >
-    <TextBox
-      title="Vraag soort"
-      value={tekst}
-      onChangeText={zetTekst}
-    />
-    <Button
-      title="Creëer vraag soort"
-      onPress={() => {
-        fetchData("insertvraagsoort", {vraagsoort: tekst})
-          .then(() => {
-            addSucces("Vraag soort succesvol aangemaakt.");
-            if(onCreate) onCreate();
-          });
+  return (
+    <View
+      style={{
+        flexDirection: "row",
+        alignItems: "flex-end",
+        justifyContent: "center"
       }}
-    />
-  </View>;
+    >
+      <TextBox title="Vraag soort" value={tekst} onChangeText={zetTekst} />
+      <Button
+        title="Creëer vraag soort"
+        onPress={() => {
+          fetchData("insertvraagsoort", { vraagsoort: tekst }).then(() => {
+            addSucces("Vraag soort succesvol aangemaakt.");
+            if (onCreate) onCreate();
+          });
+        }}
+      />
+    </View>
+  );
 }

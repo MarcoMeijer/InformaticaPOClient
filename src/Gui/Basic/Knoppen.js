@@ -2,6 +2,36 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { Path, Svg } from "svgs";
+import { CheckIcoon } from "./Icoontjes";
+
+export function AnnuleerKnop(props) {
+  let { size } = props;
+  if (size === undefined) size = 16;
+
+  return (
+    <TouchableOpacity {...props}>
+      <Svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={16}
+        height={16}
+        fill="currentColor"
+        className="prefix__bi prefix__bi-x"
+        viewBox="0 0 16 16"
+        {...props}
+      >
+        <Path d="M4.646 4.646a.5.5 0 01.708 0L8 7.293l2.646-2.647a.5.5 0 01.708.708L8.707 8l2.647 2.646a.5.5 0 01-.708.708L8 8.707l-2.646 2.647a.5.5 0 01-.708-.708L7.293 8 4.646 5.354a.5.5 0 010-.708z" />
+      </Svg>
+    </TouchableOpacity>
+  );
+}
+
+export function CheckKnop(props) {
+  return (
+    <TouchableOpacity {...props}>
+      <CheckIcoon />
+    </TouchableOpacity>
+  );
+}
 
 export function UitlogKnop(props) {
   let { size } = props;

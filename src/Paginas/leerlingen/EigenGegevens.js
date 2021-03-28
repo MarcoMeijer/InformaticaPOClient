@@ -21,7 +21,6 @@ export default function EigenGegevens({ navigation }) {
           <Enter />
           {`Klas: ${leerling.klas}`} <Enter />
           {`Leerlingnummer: ${leerling.llnr}`} <Enter />
-          {`PersoonID: ${leerling.persoonid}`} <Enter />
           {`Bevoegdheid: ${leerling.bevoegdheid}`} <Enter />
         </Text>
       )}

@@ -43,14 +43,19 @@ export default function TextBox({
 
   return (
     <View
-      style={[{
-        marginTop: 20,
-        backgroundColor: colors.achtergrondKleur,
-        borderRadius: 5,
-        borderBottomWidth: 1,
-        borderBottomColor: "#555",
-        marginHorizontal: 3
-      }, style]}
+      style={[
+        {
+          marginTop: 20,
+          backgroundColor: "#fff",
+          borderRadius: 5,
+          borderColor: "#ddd",
+          borderWidth: 1,
+          borderBottomWidth: 2,
+          borderBottomColor: "#aaa",
+          marginHorizontal: 3
+        },
+        style
+      ]}
     >
       <TextInput
         style={{

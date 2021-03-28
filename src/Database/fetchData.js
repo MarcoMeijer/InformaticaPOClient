@@ -1,4 +1,4 @@
-const serverURL = "https://marco-meijer.nl";
+const serverURL = "https://marco-meijer.nl:80";
 
 let key = "";
 

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { ActivityIndicator, View } from "react-native";
 import useFetch from "../../Hooks/useFetch";
-import ExamenAanmakenMenu from "../../Paginas/leraren/Examens/ExamenAanmakenMenu";
 import FouwDoos from "../Basic/FouwDoos";
-import { ToevoegenKnop } from "../Basic/Knoppen";
+import ToevoegenMenu from "../Basic/ToevoegenMenu";
 import ExamenTekstSelecteerder from "./ExamenTekstSelecteerder";
 
 export default function TekstenLijst({
@@ -16,7 +15,6 @@ export default function TekstenLijst({
   statistiekTeksten,
   statistiekExamens
 }) {
-  const [open, zetOpen] = useState(false);
   const [examens, updateExamens] = useFetch("examens");
 
   return (
@@ -41,14 +39,15 @@ export default function TekstenLijst({
               percentage={percentage}
               key={examennaam}
               lazy={true}
-              onEdit={onEditExamen}
+              onEdit={
+                onEditExamen &&
+                ((tekst) =>
+                  onEditExamen(examennaam, tekst).then(() => updateExamens()))
+              }
               onDelete={
                 onVerwijderExamen &&
-                (() => {
-                  return onVerwijderExamen(examennaam).then(() =>
-                    updateExamens()
-                  );
-                })
+                (() =>
+                  onVerwijderExamen(examennaam).then(() => updateExamens()))
               }
             >
               <ExamenTekstSelecteerder
@@ -63,24 +62,14 @@ export default function TekstenLijst({
         })
       )}
       {onExamenToevoegen && (
-        <View>
-          {open && (
-            <ExamenAanmakenMenu
-              onCreate={(examenNaam) => {
-                onExamenToevoegen(examenNaam).then(() => {
-                  zetOpen(false);
-                  updateExamens();
-                });
-              }}
-            />
-          )}
-          <ToevoegenKnop
-            style={{ margin: 5, alignSelf: "center" }}
-            title="Nieuw examen"
-            size={20}
-            onPress={() => zetOpen(!open)}
-          />
-        </View>
+        <ToevoegenMenu
+          naam="examen"
+          onCreate={(tekst) => {
+            onExamenToevoegen(tekst).then(() => {
+              updateExamens();
+            });
+          }}
+        />
       )}
     </View>
   );
