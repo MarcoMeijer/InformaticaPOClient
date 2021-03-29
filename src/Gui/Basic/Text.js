@@ -9,7 +9,7 @@ export default function Text(props) {
   return (
     <React.Text
       {...props}
-      style={[{ color: colors.tekstKleur }, props.style]}
+      style={[{ color: colors.tekstKleur, fontSize: 16 }, props.style]}
     />
   );
 }

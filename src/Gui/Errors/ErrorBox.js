@@ -1,8 +1,9 @@
+import { useTheme } from "@react-navigation/native";
 import { useEffect, useRef } from "react";
 import { Animated, Text, TouchableOpacity } from "react-native";
 
-export default function ErrorBox({ message, onClose, type, theme }) {
-  const { colors } = theme;
+export default function ErrorBox({ message, onClose, type }) {
+  const { colors } = useTheme();
 
   let borderColor = colors.errorBorderKleur;
   let backgroundColor = colors.errorBackgroundKleur;

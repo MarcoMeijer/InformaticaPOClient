@@ -13,7 +13,7 @@ export default function ExamenTekstSelecteerder({
   onTekstVerwijder,
   statistiekTeksten
 }) {
-  const { colors } = useTheme();
+  const { colors, zetPrompt } = useTheme();
   const [moetUpdaten, zetMoetUpdaten] = useState(true);
   const [teksten, zetTeksten] = useState(undefined);
 
@@ -64,7 +64,7 @@ export default function ExamenTekstSelecteerder({
                   flex: 1,
                   flexDirection: "row",
                   borderBottomWidth: 1,
-                  borderColor: "#ddd"
+                  borderColor: colors.fouwDoosLijnKLeur
                 }}
               >
                 <TouchableOpacity
@@ -77,10 +77,15 @@ export default function ExamenTekstSelecteerder({
                 </TouchableOpacity>
                 {onTekstVerwijder && (
                   <VerwijderKnop
-                    style={{ margin: 5 }}
+                    style={{ margin: 5, color: colors.tekstKleur }}
                     onPress={() => {
-                      onTekstVerwijder(tekst.tekstid).then(() => {
-                        zetMoetUpdaten(true);
+                      zetPrompt({
+                        message:
+                          "Weet je zeker dat je deze tekst wilt verwijderen? Alle vragen die daar bij horen worden dan ook verwijdert.",
+                        onClose: () =>
+                          onTekstVerwijder(tekst.tekstid).then(() => {
+                            zetMoetUpdaten(true);
+                          })
                       });
                     }}
                   />
@@ -91,7 +96,7 @@ export default function ExamenTekstSelecteerder({
         })}
       {onTekstToevoegen && (
         <ToevoegenKnop
-          style={{ margin: 4, alignSelf: "center" }}
+          style={{ margin: 4, alignSelf: "center", color: colors.tekstKleur }}
           onPress={() => {
             onTekstToevoegen(examennaam).then(() => {
               zetMoetUpdaten(true);

@@ -7,15 +7,23 @@ import NumberInput from "../Basic/NumberInput";
 import RadioChoices from "../Basic/RadioChoices";
 import Text from "../Basic/Text";
 
-function MeerKeuzeVraag({
-  data,
-  zetPunten,
-  zetIngevuld,
-  state,
-  zetState
-}) {
+function MeerKeuzeVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
   const { vraag, opties, antwoord, score } = data;
   const { colors } = useTheme();
+
+  useEffect(() => {
+    if (zetIngevuld !== undefined) {
+      if (state !== undefined) zetIngevuld(true);
+      else zetIngevuld(false);
+    }
+    if (zetPunten !== undefined) {
+      if (state === antwoord) {
+        zetPunten(score);
+      } else {
+        zetPunten(0);
+      }
+    }
+  }, [state]);
 
   return (
     <View>
@@ -26,17 +34,7 @@ function MeerKeuzeVraag({
         backgroundColor={colors.radioButtonKleur}
         opties={opties}
         value={state}
-        onChangeText={(geselecteerdeOptie) => {
-          zetState(geselecteerdeOptie);
-          if (zetIngevuld !== undefined) zetIngevuld(true);
-          if (zetPunten !== undefined) {
-            if (geselecteerdeOptie === antwoord) {
-              zetPunten(score);
-            } else {
-              zetPunten(0);
-            }
-          }
-        }}
+        onChangeText={zetState}
       />
     </View>
   );
@@ -46,16 +44,32 @@ function OpenVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
   const { vraag, antwoord, score } = data;
   const { colors } = useTheme();
 
+  useEffect(() => {
+    if (state !== undefined) {
+      if (zetIngevuld !== undefined) {
+        if (state.nagekeken) zetIngevuld(true);
+        else zetIngevuld(false);
+      }
+      if (zetPunten !== undefined) {
+        zetPunten(state.ingevuldNummer);
+      }
+    }
+  }, [state]);
+
   if (state === undefined) {
     zetState({
       ingevuldAntwoord: "",
-      ingevuldNummer: 0
+      ingevuldNummer: 0,
+      nagekeken: false
     });
     return <View></View>;
   }
 
   const { ingevuldAntwoord, ingevuldNummer } = state;
 
+  const zetNagekeken = (nieuwNagekeken) => {
+    zetState({ ...state, nagekeken: nieuwNagekeken });
+  };
   const zetIngevuldAntwoord = (nieuwAntwoord) => {
     zetState({ ...state, ingevuldAntwoord: nieuwAntwoord });
   };
@@ -83,7 +97,7 @@ function OpenVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
       <Button
         title="Klik hier om je antwoord na te kijken"
         onPress={() => {
-          if (zetIngevuld !== undefined) zetIngevuld(true);
+          zetNagekeken(true);
           zetAntwoordOpen(!antwoordOpen);
         }}
       />
@@ -96,10 +110,7 @@ function OpenVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
           <NumberInput
             title="Behaalde punten"
             number={ingevuldNummer}
-            onChangeNumber={(punten) => {
-              if (zetPunten !== undefined) zetPunten(punten);
-              zetIngevuldNummer(punten);
-            }}
+            onChangeNumber={zetIngevuldNummer}
             min={0}
             max={score}
           />
@@ -114,7 +125,18 @@ function WaarNietWaarVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
 
   let antwoorden = Array.isArray(state) ? state : [];
 
-  const goed = antwoorden.map((x, index) => x === antwoord[index]);
+  const goed = antwoord.map((x, index) => x === antwoorden[index]);
+
+  useEffect(() => {
+    if (zetIngevuld !== undefined) {
+      let ingevuld = true;
+      goed.map((_, index) => {
+        if (antwoorden[index] === undefined) ingevuld = false;
+        return 0;
+      });
+      zetIngevuld(ingevuld);
+    }
+  }, [antwoorden]);
 
   useEffect(() => {
     if (zetPunten === undefined) return;
@@ -129,8 +151,7 @@ function WaarNietWaarVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
     zetState(res);
   };
 
-  if (!Array.isArray(state))
-    zetState([]);
+  if (!Array.isArray(state)) zetState([]);
 
   return (
     <View>
@@ -151,7 +172,6 @@ function WaarNietWaarVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
               onChangeText={(geselecteerdeOptie) => {
                 let waar = geselecteerdeOptie === "Waar";
                 zetStateIndex(index)(waar);
-                if (zetIngevuld !== undefined) zetIngevuld(true);
               }}
             />
           </View>
@@ -172,8 +192,7 @@ export default function Vraag(props) {
   if (newProps.data.score === undefined) newProps.data.score = 1;
   let { data } = newProps;
 
-  if (data.opties !== undefined)
-    return <MeerKeuzeVraag {...newProps} />;
+  if (data.opties !== undefined) return <MeerKeuzeVraag {...newProps} />;
   if (data.juist !== undefined) return <WaarNietWaarVraag {...newProps} />;
   return <OpenVraag {...newProps} />;
 }

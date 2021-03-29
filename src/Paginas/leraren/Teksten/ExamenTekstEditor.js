@@ -8,8 +8,7 @@ import Text from "../../../Gui/Basic/Text";
 import { styles } from "../../../Styles";
 import TekstEditorTips from "./TekstEditorTips";
 
-
-export default function ExamenTekstEditor({ examenTekst, zetExamenTekst}) {
+export default function ExamenTekstEditor({ examenTekst, zetExamenTekst }) {
   const [open, zetOpen] = useState(false);
   const [title, changeTitle] = useState(examenTekst.title);
   const [text, changeText] = useState(examenTekst.text);
@@ -20,7 +19,7 @@ export default function ExamenTekstEditor({ examenTekst, zetExamenTekst}) {
   const [afbeeldingH, zetAfbeeldingH] = useState(examenTekst.afbeeldingH);
   const [afbeeldingGrote, zetAfbeeldingGrote] = useState(1);
   const { colors } = useTheme();
-  
+
   const examText = {
     title: title,
     text: text,
@@ -33,8 +32,17 @@ export default function ExamenTekstEditor({ examenTekst, zetExamenTekst}) {
 
   useEffect(() => {
     zetExamenTekst(examText);
-  }, [title, text, afbeelding, afbeeldingX, afbeeldingY, afbeeldingW, afbeeldingH, afbeeldingGrote]);
-  
+  }, [
+    title,
+    text,
+    afbeelding,
+    afbeeldingX,
+    afbeeldingY,
+    afbeeldingW,
+    afbeeldingH,
+    afbeeldingGrote
+  ]);
+
   const selecteerAfbeelding = ({ uri }) => {
     zetAfbeelding(uri);
 
@@ -46,63 +54,60 @@ export default function ExamenTekstEditor({ examenTekst, zetExamenTekst}) {
       zetAfbeeldingH(img.naturalHeight);
     };
   };
-  
-  return <View style={{zIndex: 5}}>
-    {
-      open &&
-      <FouwDropDown
-        titel="Tools om de tekst te stylen"
-      >
-        <TekstEditorTips/>
-      </FouwDropDown>
-    }
-    <FouwDoos
-      style={{margin: 5, flex: 1}}
-      titel="Algemeen"
-      open={true}
-      onInfo={() => zetOpen(!open)}
-    >
-      <Text style={styles.text}>Titel:</Text>
-      <TextInput
-        style={[
-          styles.textBox,
-          {
-            backgroundColor: colors.inputTextBoxBackgroundKleur,
-            borderColor: colors.inputTextBoxBorderKleur,
-            borderWidth: 1,
-            color: colors.tekstKleur
-          }
-        ]}
-        onChangeText={(text) => changeTitle(text)}
-        value={title}
-      />
 
-      <Text style={styles.text}>Tekst:</Text>
-      <TextInput
-        style={[
-          styles.textBox,
-          {
-            backgroundColor: colors.inputTextBoxBackgroundKleur,
-            borderColor: colors.inputTextBoxBorderKleur,
-            borderWidth: 1,
-            color: colors.tekstKleur
-          }
-        ]}
-        multiline
-        numberOfLines={20}
-        onChangeText={(text) => changeText(text)}
-        value={text}
-      />
-    </FouwDoos>
-    <FouwDoos
-      style={{margin: 5}}
-      open={true}
-      titel="Afbeelding"
-      onPicture={() => {
-        getDocumentAsync({ type: "image/*" }).then(selecteerAfbeelding);
-      }}
-    >
-      <View style={{ flexDirection: "row", justifyContent: "flex-start" }}>
+  return (
+    <View style={{ flex: 1, zIndex: 5 }}>
+      {open && (
+        <FouwDropDown titel="Tools om de tekst te stylen">
+          <TekstEditorTips />
+        </FouwDropDown>
+      )}
+      <FouwDoos
+        style={{ margin: 5, flex: 1 }}
+        titel="Algemeen"
+        open={true}
+        onInfo={() => zetOpen(!open)}
+      >
+        <Text style={styles.text}>Titel:</Text>
+        <TextInput
+          style={[
+            styles.textBox,
+            {
+              backgroundColor: colors.inputTextBoxBackgroundKleur,
+              borderColor: colors.inputTextBoxBorderKleur,
+              borderWidth: 1,
+              color: colors.tekstKleur
+            }
+          ]}
+          onChangeText={(text) => changeTitle(text)}
+          value={title}
+        />
+
+        <Text style={styles.text}>Tekst:</Text>
+        <TextInput
+          style={[
+            styles.textBox,
+            {
+              backgroundColor: colors.inputTextBoxBackgroundKleur,
+              borderColor: colors.inputTextBoxBorderKleur,
+              borderWidth: 1,
+              color: colors.tekstKleur
+            }
+          ]}
+          multiline
+          numberOfLines={20}
+          onChangeText={(text) => changeText(text)}
+          value={text}
+        />
+      </FouwDoos>
+      <FouwDoos
+        style={{ margin: 5 }}
+        open={true}
+        titel="Afbeelding"
+        onPicture={() => {
+          getDocumentAsync({ type: "image/*" }).then(selecteerAfbeelding);
+        }}
+      >
         <NumberInput
           style={{ flexGrow: 1 }}
           number={afbeeldingX}
@@ -115,13 +120,13 @@ export default function ExamenTekstEditor({ examenTekst, zetExamenTekst}) {
           title="Afbeelding y"
           onChangeNumber={zetAfbeeldingY}
         />
-      </View>
-      <NumberInput
-        title="Afbeelding grote"
-        number={afbeeldingGrote}
-        onChangeNumber={zetAfbeeldingGrote}
-        float={true}
-      />
-    </FouwDoos>
-  </View>
+        <NumberInput
+          title="Afbeelding grootte"
+          number={afbeeldingGrote}
+          onChangeNumber={zetAfbeeldingGrote}
+          float={true}
+        />
+      </FouwDoos>
+    </View>
+  );
 }

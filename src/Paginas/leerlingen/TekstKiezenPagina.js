@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import { TouchableOpacity } from "react-native";
 import Text from "../../Gui/Basic/Text";
 import TekstenLijst from "../../Gui/ExamenTekst/TekstenLijst";
@@ -8,8 +9,17 @@ import useFetch from "../../Hooks/useFetch";
 
 export default function TekstKiezenPagina({ navigation }) {
   const [fahnekleur, veranderfahne, veranderterug] = useFahneKleur();
-  const [statistiekExamens] = useFetch("statistiekexamens");
-  const [statistiekTeksten] = useFetch("statistiekteksten");
+  const [statistiekExamens, updateExamens] = useFetch("statistiekexamens");
+  const [statistiekTeksten, updateTeksten] = useFetch("statistiekteksten");
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      updateExamens();
+      updateTeksten();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <Jacket kleur={fahnekleur}>

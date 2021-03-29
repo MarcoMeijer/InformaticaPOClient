@@ -1,7 +1,7 @@
 import { useTheme } from "@react-navigation/native";
 import { Text, TouchableOpacity, View } from "react-native";
 
-export default function Button({ style, title, onPress, color }) {
+export default function Button({ style, title, onPress, color, titleColor }) {
   const { colors } = useTheme();
 
   return (
@@ -16,7 +16,14 @@ export default function Button({ style, title, onPress, color }) {
         }}
         onPress={onPress}
       >
-        <Text style={{ color: colors.tekstKleurInverted, fontSize: 15 }}>
+        <Text
+          style={[
+            {
+              color: titleColor ? titleColor : colors.tekstKleurInverted,
+              fontSize: 15
+            }
+          ]}
+        >
           <b>{title}</b>
         </Text>
       </TouchableOpacity>

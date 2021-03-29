@@ -5,9 +5,11 @@ export default function useArrayState(initial) {
   const [array, zetArray] = useState(initial);
 
   const zetIndex = (i) => (value) => {
-    let res = [...array];
-    res[i] = value;
-    zetArray(res);
+    zetArray((state) => {
+      let res = [...state];
+      res[i] = value;
+      return res;
+    });
   };
 
   return [array, zetArray, zetIndex];

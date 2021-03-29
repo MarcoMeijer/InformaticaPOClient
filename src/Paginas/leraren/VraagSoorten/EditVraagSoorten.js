@@ -17,12 +17,12 @@ import useFetch from "../../../Hooks/useFetch";
 function VraagSoort({ vraagSoort, updateVraagSoorten, onEdit }) {
   const [vraagsoortNaam, zetVraagsoortNaam] = useState(vraagSoort);
   const [editen, zetEditen] = useState(false);
-  const { addSucces } = useTheme();
+  const { addSucces, colors, zetPrompt } = useTheme();
 
   return editen ? (
     <View style={{ flexDirection: "row", flex: 1, alignItems: "center" }}>
       <TextInput
-        style={{ margin: 5, flex: 1 }}
+        style={{ margin: 5, flex: 1, color: colors.tekstKleur }}
         value={vraagsoortNaam}
         onChangeText={zetVraagsoortNaam}
       />
@@ -51,19 +51,24 @@ function VraagSoort({ vraagSoort, updateVraagSoorten, onEdit }) {
     >
       <Text style={{ flex: 1 }}>{vraagsoortNaam}</Text>
       <EditKnop
-        style={{ margin: 5 }}
+        style={{ margin: 5, color: colors.tekstKleur }}
         onPress={() => {
           zetEditen(true);
         }}
       />
       <VerwijderKnop
-        style={{ margin: 5 }}
+        style={{ margin: 5, color: colors.tekstKleur }}
         onPress={() => {
-          fetchData("deletevraagsoort", {
-            vraagsoort: vraagsoortNaam
-          }).then(() => {
-            addSucces("Vraagsoort is succesvol verwijderd!");
-            updateVraagSoorten();
+          zetPrompt({
+            message: "Weet u zeker dat u de vraagsoort wilt verwijderen?",
+            onClose: () => {
+              fetchData("deletevraagsoort", {
+                vraagsoort: vraagsoortNaam
+              }).then(() => {
+                addSucces("Vraagsoort is succesvol verwijderd!");
+                updateVraagSoorten();
+              });
+            }
           });
         }}
       />

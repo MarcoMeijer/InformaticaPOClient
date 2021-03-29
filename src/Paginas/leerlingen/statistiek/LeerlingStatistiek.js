@@ -1,4 +1,5 @@
 import { ActivityIndicator, View } from "react-native";
+import Enter from "../../../Gui/Basic/Enter";
 import Text from "../../../Gui/Basic/Text";
 import useFetch from "../../../Hooks/useFetch";
 import VraagsoortenStatistiek from "./VraagsoortenStatistiek";
@@ -15,20 +16,14 @@ export default function LeerlingStatistiek({ persoonid }) {
       maximaalPunten += x.maximaalPunten;
     }
   }
-
   return gemaakt === undefined ? (
     <ActivityIndicator />
   ) : (
     <View>
       <Text>
-        <b>kijk hieronder hoe je de vragen hebt beantwoord:</b>
+        <b>Kijk hieronder hoe je de vragen hebt beantwoord:</b>
       </Text>
-      <Text>
-        <b>
-          Je hebt {punten} van de {maximaalPunten} punten bij alle vragen die je
-          hebt gemaakt.
-        </b>
-      </Text>
+      <Enter />
       <VraagsoortenStatistiek persoonid={persoonid} />
     </View>
   );

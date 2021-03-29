@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { Animated, View } from "react-native";
 import Text from "../Basic/Text";
+import { useTheme } from "@react-navigation/native";
 
 export default function PercentageGoed({ style, factor }) {
   const [percentage, zetPercentage] = useState(0);
   const animation = useRef(new Animated.Value(0)).current;
+  const { colors } = useTheme();
 
   useEffect(() => {
     Animated.timing(animation, {
@@ -14,7 +16,7 @@ export default function PercentageGoed({ style, factor }) {
   }, [animation, percentage]);
 
   useEffect(() => {
-    const targetPercentage = Math.round(factor * 100);
+    let targetPercentage = Math.round(factor === undefined ? 0 : factor * 100);
 
     if (percentage !== targetPercentage) {
       let timer = setTimeout(() => {
@@ -38,7 +40,12 @@ export default function PercentageGoed({ style, factor }) {
     margin: 1,
     backgroundColor: animation.interpolate({
       inputRange: [0, 40, 60, 100],
-      outputRange: ["#ff6136", "#ffc814", "#fff424", "#b3ff40"]
+      outputRange: [
+        colors.ouputRangeColor1,
+        colors.ouputRangeColor2,
+        colors.ouputRangeColor3,
+        colors.ouputRangeColor4
+      ]
     })
   };
 
@@ -46,7 +53,7 @@ export default function PercentageGoed({ style, factor }) {
     <View style={[viewStyle, { backgroundColor: undefined }]}></View>
   ) : (
     <Animated.View style={[viewStyle, style]}>
-      <Text>{percentage}%</Text>
+      <Text style={{ color: "#000000" }}>{percentage}%</Text>
     </Animated.View>
   );
 }

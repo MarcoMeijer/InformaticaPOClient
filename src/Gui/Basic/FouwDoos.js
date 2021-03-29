@@ -36,29 +36,30 @@ export default function FouwDoos(props) {
     <View style={style}>
       <View
         style={{
-          backgroundColor: colors.textboxAchtergrondKleur,
+          backgroundColor: colors.fouwDoosAchtergrondKLeur,
           margin: 1,
           borderRadius: 10,
           borderWidth: 1,
-          borderColor: "#aaa"
+          borderColor: colors.inputTextBoxBorderNew2
         }}
       >
-        <View
+        <TouchableOpacity
           style={[
             {
               flexDirection: "row",
               alignItems: "center",
-              backgroundColor: "#e8f6f6",
+              backgroundColor: colors.fouwDoosHeaderBackgroundKleur,
               borderRadius: 10
             },
             open && {
               borderBottomLeftRadius: 0,
               borderBottomRightRadius: 0,
               borderBottomWidth: 1,
-              borderBottomColor: "#ddd",
+              borderBottomColor: colors.fouwDoosLijnKLeur,
               marginBottom: 3
             }
           ]}
+          onPress={() => zetOpen(!open)}
         >
           {altijdOpen || (
             <FouwKnop value={open} style={{ margin: 10 }} zetOpen={zetOpen} />
@@ -68,7 +69,7 @@ export default function FouwDoos(props) {
               style={{ flexDirection: "row", flex: 1, alignItems: "center" }}
             >
               <TextInput
-                style={{ margin: 5, flex: 1 }}
+                style={{ margin: 5, flex: 1, color: colors.tekstKleurFouwDoos }}
                 value={titel}
                 onChangeText={zetTitel}
               />
@@ -89,8 +90,12 @@ export default function FouwDoos(props) {
             </View>
           ) : (
             <View style={{ flexDirection: "row", flex: 1 }}>
-              <Text style={{ margin: 5, flex: 1 }}>{titel}</Text>
-              {percentage && (
+              <Text
+                style={{ margin: 5, flex: 1, color: colors.tekstKleurFouwDoos }}
+              >
+                {titel}
+              </Text>
+              {percentage !== undefined && (
                 <PercentageGoed
                   style={{ marginRight: 6 }}
                   factor={percentage}
@@ -119,7 +124,7 @@ export default function FouwDoos(props) {
               {onInfo && <InfoKnop style={{ margin: 5 }} onPress={onInfo} />}
             </View>
           )}
-        </View>
+        </TouchableOpacity>
         {lazy ? (
           open && <View style={{ padding: 6 }}>{children}</View>
         ) : (
@@ -150,6 +155,7 @@ export function FouwDropDown({ titel, children }) {
 }
 
 export function FouwOpties({ titel, opties, onChangeText }) {
+  const { colors } = useTheme();
   return (
     <FouwDropDown titel={titel}>
       {opties &&
@@ -159,7 +165,7 @@ export function FouwOpties({ titel, opties, onChangeText }) {
               style={{
                 flexDirection: "row",
                 borderBottomWidth: 1,
-                borderBottomColor: "#ddd",
+                borderBottomColor: colors.fouwDoosLijnKLeur,
                 alignItems: "center",
                 padding: 5
               }}

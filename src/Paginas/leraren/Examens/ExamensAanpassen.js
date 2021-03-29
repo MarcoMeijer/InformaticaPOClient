@@ -11,7 +11,7 @@ export default function ExamensAanpassenPagina({ navigation }) {
   return (
     <Jacket>
       <Text>
-        <b>Hier kan je alle examens aanpassen:</b>
+        <b>Hier kunt u alle examens aanpassen:</b>
       </Text>
       <Enter />
       <TekstenLijst

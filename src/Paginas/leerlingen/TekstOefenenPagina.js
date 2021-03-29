@@ -12,7 +12,7 @@ import Pagina from "../../Gui/Pagina-layout/Pagina";
 import useArrayState from "../../Hooks/arrayState";
 
 export default function TekstOefenenPagina({ route, navigation }) {
-  const { colors, addError, addSucces } = useTheme();
+  const { addError, addSucces } = useTheme();
   const { tekstid } = route.params;
   const [text, zetText] = useState(undefined);
   const [vragen, zetVragen] = useState(undefined);
@@ -30,21 +30,23 @@ export default function TekstOefenenPagina({ route, navigation }) {
 
   useEffect(() => {
     if (vragen === undefined) {
-      fetchData("vragen", { tekstid: tekstid }).then((data) => {
-        console.log(data);
-        zetVragen(
-          data.map((object) => {
-            let res = JSON.parse(object.vraaginhoud);
-            res.vraagid = object.vraagid;
-            return res;
+      fetchData("vragen", { tekstid: tekstid })
+        .then((data) => {
+          zetPunten(data.map(() => 0));
+          zetIngevuld(data.map(() => false));
+          zetVragen(
+            data.map((object) => {
+              let res = JSON.parse(object.vraaginhoud);
+              res.vraagid = object.vraagid;
+              return res;
+            })
+          );
+        })
+        .then(() =>
+          fetchData("voortgang", { tekstid: tekstid }).then((data) => {
+            zetState(data);
           })
         );
-        zetPunten(data.map(() => 0));
-        zetIngevuld(data.map(() => false));
-      });
-      fetchData("voortgang", { tekstid: tekstid }).then((data) => {
-        zetState(data);
-      });
     }
   }, [vragen, tekstid]);
 
@@ -55,16 +57,24 @@ export default function TekstOefenenPagina({ route, navigation }) {
       return;
     }
 
-    for (let index in vragen) {
-      const vraag = vragen[index];
-      fetchData("maak", {
-        vraagid: vraag.vraagid,
-        punten: punten[index] ? 1 : 0,
-        maximaalPunten: vraag.score ? vraag.score : 1
+    fetchData("slaop", {
+      tekstid: tekstid,
+      inhoud: JSON.stringify(state)
+    })
+      .then(async () => {
+        for (let index in vragen) {
+          const vraag = vragen[index];
+          await fetchData("maak", {
+            vraagid: vraag.vraagid,
+            punten: punten[index] ? 1 : 0,
+            maximaalPunten: vraag.score ? vraag.score : 1
+          });
+        }
+      })
+      .then(() => {
+        navigation.navigate("Leerlingen home pagina");
+        addSucces("Uw antwoorden zijn ingediend.");
       });
-    }
-    navigation.navigate("Leerlingen home pagina");
-    addSucces("Uw antwoorden zijn ingediend.");
   };
   const slaOp = () => {
     fetchData("slaop", {
@@ -80,9 +90,7 @@ export default function TekstOefenenPagina({ route, navigation }) {
     <Pagina navigation={navigation}>
       <View
         style={{
-          flex: 1,
-          flexDirection: "row",
-          backgroundColor: colors.achtergrondKleur
+          flexDirection: "row"
         }}
       >
         <Doos>

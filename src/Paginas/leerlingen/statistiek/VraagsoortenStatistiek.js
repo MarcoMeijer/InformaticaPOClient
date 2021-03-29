@@ -4,6 +4,7 @@ import FouwDoos from "../../../Gui/Basic/FouwDoos";
 import Text from "../../../Gui/Basic/Text";
 import useFetch from "../../../Hooks/useFetch";
 import PercentageGoed from "../../../Gui/ExamenTekst/PercentageGoed";
+import { useTheme } from "@react-navigation/native";
 
 export default function VraagsoortenStatistiek({ persoonid }) {
   // als persoonid = undefined, dan neemt hij de statistieken van de persoon die ingelogt is
@@ -19,6 +20,7 @@ export default function VraagsoortenStatistiek({ persoonid }) {
         y: data.vragengemaakt
       };
     });
+  const { colors } = useTheme();
 
   return statistiekVraagsoorten === undefined ? (
     <ActivityIndicator />
@@ -37,7 +39,7 @@ export default function VraagsoortenStatistiek({ persoonid }) {
             responsive={false}
             scale={{ x: 0.5, y: 0.5 }}
             padding={10}
-            colorScale="qualitative"
+            colorScale={colors.colorScale}
             data={vpData}
           />
         </View>

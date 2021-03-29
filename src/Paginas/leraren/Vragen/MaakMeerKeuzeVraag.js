@@ -10,12 +10,14 @@ import { styles } from "../../../Styles";
 export default function MaakMeerKeuzeVraag({ oudeVraag, zetVraagMethode }) {
   let standaardAntwoorden = [];
   let standaardJuisteAntwoord = "";
-  if(KrijgVraagSoort(oudeVraag) === "Meer keuze vraag") {
+  if (KrijgVraagSoort(oudeVraag) === "Meer keuze vraag") {
     standaardAntwoorden = oudeVraag.opties;
     standaardJuisteAntwoord = oudeVraag.antwoord;
   }
 
-  const [antwoorden, zetAntwoorden, zetAntwoord] = useArrayState(standaardAntwoorden);
+  const [antwoorden, zetAntwoorden, zetAntwoord] = useArrayState(
+    standaardAntwoorden
+  );
   const [juisteAntwoord, zetJuisteAntwoord] = useState(standaardJuisteAntwoord);
   const { colors } = useTheme();
 
@@ -34,12 +36,12 @@ export default function MaakMeerKeuzeVraag({ oudeVraag, zetVraagMethode }) {
           <View style={{ flexDirection: "row" }}>
             <TextInput
               key={index}
-              style={[styles.textBox, {flex: 1}]}
+              style={[styles.textBox, { flex: 1 }]}
               onChangeText={zetAntwoord(index)}
               value={value}
             />
             <VerwijderKnop
-              style={{margin: 5}}
+              style={{ margin: 5, color: colors.tekstKleur }}
               onPress={() => {
                 zetAntwoorden(antwoorden.filter((_, i) => i !== index));
               }}
@@ -48,7 +50,7 @@ export default function MaakMeerKeuzeVraag({ oudeVraag, zetVraagMethode }) {
         );
       })}
       <ToevoegenKnop
-        style={{ margin: 5, alignSelf: "center" }}
+        style={{ margin: 5, alignSelf: "center", color: colors.tekstKleur }}
         size={20}
         onPress={() => zetAntwoorden([...antwoorden, ""])}
       />

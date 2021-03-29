@@ -1,3 +1,4 @@
+import { useTheme } from "@react-navigation/native";
 import React from "react";
 import { ActivityIndicator, View } from "react-native";
 import useFetch from "../../Hooks/useFetch";
@@ -16,6 +17,7 @@ export default function TekstenLijst({
   statistiekExamens
 }) {
   const [examens, updateExamens] = useFetch("examens");
+  const { zetPrompt } = useTheme();
 
   return (
     <View style={{ alignSelf: "stretch" }}>
@@ -47,7 +49,12 @@ export default function TekstenLijst({
               onDelete={
                 onVerwijderExamen &&
                 (() =>
-                  onVerwijderExamen(examennaam).then(() => updateExamens()))
+                  zetPrompt({
+                    message:
+                      "Weet je zeker dat je dit examen wilt verwijderen? Alle teksten die daar bij horen worden dan ook verwijdert",
+                    onClose: () =>
+                      onVerwijderExamen(examennaam).then(() => updateExamens())
+                  }))
               }
             >
               <ExamenTekstSelecteerder
@@ -64,11 +71,11 @@ export default function TekstenLijst({
       {onExamenToevoegen && (
         <ToevoegenMenu
           naam="examen"
-          onCreate={(tekst) => {
+          onCreate={(tekst) =>
             onExamenToevoegen(tekst).then(() => {
               updateExamens();
-            });
-          }}
+            })
+          }
         />
       )}
     </View>

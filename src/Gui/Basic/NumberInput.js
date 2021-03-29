@@ -15,7 +15,9 @@ export default function NumberInput({
   );
 
   useEffect(() => {
-    let result = float ? parseFloat(tekst) : parseInt(tekst, 10);
+    let result = float
+      ? parseFloat(tekst.replace(",", "."))
+      : parseInt(tekst, 10);
     if (min !== undefined) result = Math.max(min, result);
     if (max !== undefined) result = Math.min(max, result);
     onChangeNumber(result);

@@ -7,7 +7,9 @@ import { styles } from "../../../Styles";
 
 export default function MaakOpenVraag({ oudeVraag, zetVraagMethode }) {
   const { colors } = useTheme();
-  const [nakijkAntwoord, zetNakijkAntwoord] = useState(KrijgVraagSoort(oudeVraag) === "Open vraag" ? oudeVraag.antwoord : "");
+  const [nakijkAntwoord, zetNakijkAntwoord] = useState(
+    KrijgVraagSoort(oudeVraag) === "Open vraag" ? oudeVraag.antwoord : ""
+  );
 
   useEffect(() => {
     zetVraagMethode({
@@ -26,7 +28,9 @@ export default function MaakOpenVraag({ oudeVraag, zetVraagMethode }) {
           {
             flex: 1,
             backgroundColor: colors.inputTextBoxBackgroundKleur,
-            borderColor: colors.inputTextBoxBackgroundKleur
+            borderColor: colors.inputTextBoxBackgroundKleur,
+            color: colors.tekstKleur,
+            borderRadius: 10
           }
         ]}
         onChangeText={zetNakijkAntwoord}

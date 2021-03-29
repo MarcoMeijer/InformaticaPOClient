@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { Path, Svg } from "svgs";
 import { CheckIcoon } from "./Icoontjes";
+import { useTheme } from "@react-navigation/native";
 
 export function AnnuleerKnop(props) {
   let { size } = props;
   if (size === undefined) size = 16;
+  const { colors } = useTheme();
 
   return (
     <TouchableOpacity {...props}>
@@ -14,7 +16,7 @@ export function AnnuleerKnop(props) {
         xmlns="http://www.w3.org/2000/svg"
         width={16}
         height={16}
-        fill="currentColor"
+        fill={colors.tekstKleur}
         className="prefix__bi prefix__bi-x"
         viewBox="0 0 16 16"
         {...props}
@@ -36,6 +38,7 @@ export function CheckKnop(props) {
 export function UitlogKnop(props) {
   let { size } = props;
   if (size === undefined) size = 16;
+  const { colors } = useTheme();
 
   return (
     <TouchableOpacity {...props}>
@@ -43,7 +46,7 @@ export function UitlogKnop(props) {
         xmlns="http://www.w3.org/2000/svg"
         width={size}
         height={size}
-        fill="currentColor"
+        fill={colors.tekstKleur}
         className="prefix__bi prefix__bi-box-arrow-right"
         viewBox="0 0 16 16"
         {...props}
@@ -204,6 +207,10 @@ export function FouwKnop(props) {
   useEffect(() => {
     if (zetOpen) zetOpen(open);
   }, [open]);
+
+  useEffect(() => {
+    zetOpen2(props.value);
+  }, [props.value]);
 
   return (
     <TouchableOpacity onPress={() => zetOpen2(!open)} {...props}>

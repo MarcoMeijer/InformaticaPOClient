@@ -20,7 +20,7 @@ export default function InlogPagina({ navigation }) {
 
   let inloggen = () => {
     if (leerlingnummer === "") {
-      addError("U heeft het leerling nummer niet ingevuld.");
+      addError("U heeft het leerlingnummer / gebruikersnaam niet ingevuld.");
     } else if (wachtwoord === "") {
       addError("U heeft uw wachtwoord niet ingevuld.");
     } else {
@@ -59,7 +59,7 @@ export default function InlogPagina({ navigation }) {
       </Text>
       <View style={{ flexDirection: "collumn" }}>
         <TextBox
-          title={"Leerling nummer"}
+          title={"Leerlingnummer"}
           onChangeText={(nieuweleerlingnummer) => {
             zetleerlingnummer(nieuweleerlingnummer);
           }}

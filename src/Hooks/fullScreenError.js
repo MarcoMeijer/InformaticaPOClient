@@ -1,8 +1,10 @@
 import Text from "../Gui/Basic/Text";
 import Button from "../Gui/Basic/Button";
 import { View } from "react-native";
+import { useTheme } from "@react-navigation/native";
 
 export default function FullScreenError({ inhoud, doedit, sluitZelf }) {
+  const { colors } = useTheme();
   return (
     <View
       style={{
@@ -30,7 +32,7 @@ export default function FullScreenError({ inhoud, doedit, sluitZelf }) {
       />
       <View
         style={{
-          backgroundColor: "#fff",
+          backgroundColor: colors.blueboxKleur,
           borderRadius: 10,
           padding: 10,
           alignItems: "center"
@@ -48,12 +50,14 @@ export default function FullScreenError({ inhoud, doedit, sluitZelf }) {
           <Button
             style={{ margin: 3, flex: 5 }}
             title="Terug"
+            titleColor={colors.tekstKleurInverted}
             onPress={sluitZelf}
           />
           <Button
             style={{ margin: 3, flex: 5 }}
             color="red"
             title="Toch doorgaan"
+            titleColor={colors.tekstKleurInverted}
             onPress={() => {
               doedit();
               sluitZelf();

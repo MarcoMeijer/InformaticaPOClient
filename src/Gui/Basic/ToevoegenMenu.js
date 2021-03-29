@@ -3,10 +3,12 @@ import { View } from "react-native";
 import Button from "./Button";
 import TextBox from "./TextBox";
 import { ToevoegenKnop } from "./Knoppen";
+import { useTheme } from "@react-navigation/native";
 
 export default function ToevoegenMenu({ naam, onCreate }) {
   const [open, zetOpen] = useState(false);
   const [tekst, zetTekst] = useState("");
+  const { colors } = useTheme();
 
   return (
     <View>
@@ -16,10 +18,10 @@ export default function ToevoegenMenu({ naam, onCreate }) {
             flexDirection: "row",
             alignItems: "flex-end",
             justifyContent: "center",
-            backgroundColor: "#e8f6f6",
+            backgroundColor: colors.fouwDoosHeaderBackgroundKleur,
             borderRadius: 10,
             borderWidth: 1,
-            borderColor: "#aaa",
+            borderColor: colors.inputTextBoxBorderNew2,
             margin: 1,
             paddingBottom: 10
           }}
@@ -40,7 +42,7 @@ export default function ToevoegenMenu({ naam, onCreate }) {
         </View>
       )}
       <ToevoegenKnop
-        style={{ margin: 5, alignSelf: "center" }}
+        style={{ margin: 5, alignSelf: "center", color: colors.tekstKleur }}
         size={20}
         onPress={() => zetOpen(!open)}
       />

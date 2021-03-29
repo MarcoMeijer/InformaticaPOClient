@@ -13,13 +13,12 @@ function HomeScreen({ navigation }) {
   return (
     <Jacket>
       <Text style={{ margin: 30 }}>
-        <b>
-          Geachte leerling, welkom op jouw online examenteksten portal. Hier kun
-          je teksten oefenen en je resultaten bekijken, veel succes!
-          <br />
-          Als je nieuw bent op deze site wordt het aanbevolen om te beginnen met
-          één van de oriëntatie toestsen.
-        </b>
+        <b>Geachte leerling, </b>
+        welkom op jouw online examenteksten portal. Hier kun je teksten oefenen
+        en je resultaten bekijken, veel succes!
+        <br />
+        Als je nieuw bent op deze site wordt het aanbevolen om te beginnen met
+        één van de oriëntatie toestsen.
       </Text>
       <FouwDoos
         style={{ alignSelf: "stretch" }}
@@ -43,8 +42,8 @@ export default function HomePageLeerlingen({ navigation }) {
     <TabsHeader navigation={navigation}>
       <Tab name="Home" component={HomeScreen} />
       <Tab name="Teksten" component={TekstKiezenPagina} />
-      <Tab name="Statestieken" component={LeerlingStatistiekPagina} />
-      <Tab name="gegevens" component={EigenGegevens} />
+      <Tab name="Statistieken" component={LeerlingStatistiekPagina} />
+      <Tab name="Gegevens" component={EigenGegevens} />
     </TabsHeader>
   );
 }

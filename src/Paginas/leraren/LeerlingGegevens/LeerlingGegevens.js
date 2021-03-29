@@ -12,7 +12,7 @@ export default function LeerlingGegevensPagina({ navigation }) {
   const [klassen, updateKlassen] = useFetch("klassen", {}, (klassen) =>
     klassen.map((klas) => klas.klas)
   );
-  const { addSucces } = useTheme();
+  const { addSucces, zetPrompt } = useTheme();
 
   return (
     <Jacket>
@@ -40,9 +40,15 @@ export default function LeerlingGegevensPagina({ navigation }) {
                 });
               }}
               onDelete={() => {
-                fetchData("deleteklas", { klas: klas }).then(() => {
-                  updateKlassen();
-                  addSucces("Klas is succesvol verwijdert!");
+                zetPrompt({
+                  message:
+                    "Weet u zeker dat u deze klas wilt verwijderen? Alle leerlingen worden ook automatisch verwijdert.",
+                  onClose: () => {
+                    fetchData("deleteklas", { klas: klas }).then(() => {
+                      updateKlassen();
+                      addSucces("Klas is succesvol verwijdert!");
+                    });
+                  }
                 });
               }}
             >
