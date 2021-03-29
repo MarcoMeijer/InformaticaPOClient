@@ -3,6 +3,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { Dimensions, View } from "react-native";
+import PromptBox from "./Gui/Basic/prompt";
+import usePromptState from "./Hooks/promptState";
 import ErrorBoxList from "./Gui/Errors/ErrorBoxList";
 import useErrorState from "./Hooks/errorState";
 import InlogPagina from "./Paginas/inlogPagina";
@@ -15,6 +17,7 @@ import LerarenHomePagina from "./Paginas/leraren/lerarenHomePagina";
 import TekstAanpassenPagina from "./Paginas/leraren/Teksten/TekstAanpassenPagina";
 import VraagAanpassenPagina from "./Paginas/leraren/Vragen/VraagAanpassenPagina";
 import RegistreerPagina from "./Paginas/registreerPagina";
+import FullScreenError from "./Hooks/fullScreenError";
 
 const Stack = createStackNavigator();
 
@@ -24,6 +27,7 @@ export default function App() {
   const [dimensions, setDimensions] = useState({ window, screen });
   const [darkMode, zetDarkMode] = useState(false);
   const [errors, addError, addSucces] = useErrorState();
+  const [prompt, zetPrompt] = usePromptState();
 
   const minWidth = 800;
   const minHeight = 800;
@@ -43,7 +47,8 @@ export default function App() {
     addError: addError,
     addSucces: addSucces,
     windowHeight: newHeight,
-    windowWidth: newWidth
+    windowWidth: newWidth,
+    zetPrompt: zetPrompt
   };
 
   const LightTheme = {
@@ -66,7 +71,15 @@ export default function App() {
       succesBackgroundKleur: "#e4ffcc",
       dropdownButtonKleur: "#bfbfbf",
       inputTextBoxBorderNew1: "#dddddd",
-      inputTextBoxBorderNew2: "#aaa"
+      inputTextBoxBorderNew2: "#aaa",
+      fouwDoosHeaderBackgroundKleur: "#e8f6f6",
+      tekstKleurFouwDoos: "#000000",
+      fouwDoosLijnKLeur: "#ddd",
+      ouputRangeColor1: "#ff6136",
+      ouputRangeColor2: "#ffc814",
+      ouputRangeColor3: "#fff424",
+      ouputRangeColor4: "#b3ff40",
+      colorScale: "qualitative"
     },
     ...globals
   };
@@ -90,7 +103,15 @@ export default function App() {
       succesBackgroundKleur: "#464f3d",
       dropdownButtonKleur: "#01013c",
       inputTextBoxBorderNew1: "#003547",
-      inputTextBoxBorderNew2: "#003547"
+      inputTextBoxBorderNew2: "#003547",
+      fouwDoosHeaderBackgroundKleur: "#787878",
+      tekstKleurFouwDoos: "#000000",
+      fouwDoosLijnKLeur: "#525252",
+      ouputRangeColor1: "#8a331c",
+      ouputRangeColor2: "#a17e0e",
+      ouputRangeColor3: "#757012",
+      ouputRangeColor4: "#49661e",
+      colorScale: "grayscale"
     },
     ...globals
   };
@@ -107,28 +128,32 @@ export default function App() {
   });
 
   return (
-    <View
-      style={{
-        height: dimensions.window.height,
-        width: dimensions.window.width,
-        alignItems: "center",
-        justifyContent: "center"
-      }}
-    >
-      {errors && (
-        <ErrorBoxList
-          errors={errors}
-          theme={darkMode ? DarkTheme : LightTheme}
-        />
-      )}
+    <NavigationContainer theme={darkMode ? DarkTheme : LightTheme}>
       <View
         style={{
-          height: newHeight,
-          width: newWidth,
-          transform: [{ scale: ratio }]
+          height: dimensions.window.height,
+          width: dimensions.window.width,
+          alignItems: "center",
+          justifyContent: "center"
         }}
       >
-        <NavigationContainer theme={darkMode ? DarkTheme : LightTheme}>
+        {errors && <ErrorBoxList errors={errors} />}
+        {prompt.message !== "" && (
+          <FullScreenError
+            inhoud={prompt.message}
+            sluitZelf={() => {
+              zetPrompt({ ...prompt, message: "" });
+            }}
+            doedit={prompt.onClose}
+          />
+        )}
+        <View
+          style={{
+            height: newHeight,
+            width: newWidth,
+            transform: [{ scale: ratio }]
+          }}
+        >
           <Stack.Navigator
             screenOptions={{
               headerShown: false
@@ -163,8 +188,8 @@ export default function App() {
             <Stack.Screen name="Eigen gegevens" component={EigenGegevens} />
             <Stack.Screen name="Registreren" component={RegistreerPagina} />
           </Stack.Navigator>
-        </NavigationContainer>
+        </View>
       </View>
-    </View>
+    </NavigationContainer>
   );
 }

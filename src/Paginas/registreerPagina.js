@@ -19,7 +19,7 @@ export default function RegistreerPagina({ navigation }) {
   const [voornaam, zetvoornaam] = useState("");
   const [tussenvoegsel, zettussenvoegsel] = useState("");
   const [achternaam, zetachternaam] = useState("");
-  const [klas, zetklas] = useState("");
+  const [klas, zetklas] = useState(undefined);
   const [wachtwoord, zetwachtwoord] = useState("");
   const [wachtwoordherhalen, zetwachtwoordherhalen] = useState("");
   const [klassen] = useFetch("klassen", {}, (data) =>

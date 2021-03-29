@@ -6,7 +6,7 @@ import TekstenLijst from "../../../Gui/ExamenTekst/TekstenLijst";
 import Jacket from "../../../Gui/Pagina-layout/Jacket";
 
 export default function ExamensAanpassenPagina({ navigation }) {
-  const { addSucces } = useTheme();
+  const { addSucces, zetPrompt } = useTheme();
 
   return (
     <Jacket>
@@ -30,12 +30,12 @@ export default function ExamensAanpassenPagina({ navigation }) {
         }
         onExamenToevoegen={(examennaam) =>
           fetchData("insertexamen", { examennaam: examennaam }).then(() => {
-            addSucces("Examen is succesvol toegevoegt.");
+            addSucces("Examen is succesvol toegevoegd.");
           })
         }
         onVerwijderExamen={(examennaam) =>
           fetchData("deleteexamen", { examennaam: examennaam }).then(() => {
-            addSucces("Examen is succesvol verwijdert.");
+            addSucces("Examen is succesvol verwijderd.");
           })
         }
         onTekstToevoegen={(examennaam) => {
@@ -45,12 +45,12 @@ export default function ExamensAanpassenPagina({ navigation }) {
             teksttitel: "Voer hier de titel in.",
             tekstniveau: 1
           }).then(() => {
-            addSucces("Tekst is succesvol toegevoegt.");
+            addSucces("Tekst is succesvol toegevoegd.");
           });
         }}
         onTekstVerwijder={(tekstid) => {
           return fetchData("deletetekst", { tekstid: tekstid }).then(() => {
-            addSucces("Tekst is succesvol verwijdert.");
+            addSucces("Tekst is succesvol verwijderd.");
           });
         }}
       />

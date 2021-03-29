@@ -1,7 +1,5 @@
 
-Bug van opgeslagen vragen
 Dark mode compleet
-Leraren kant statistiek examens
 Prompt voor verwijderen
 
 
@@ -9,3 +7,11 @@ feetback van mijn moeder:
 Fontsize groter op alle pagina's (het is nu maar 10.5, 14px)
 informatie bij text editen is niet duidelijk genoeg (bijvoorbeeld iets van <p> hiertussen de paragraaf</p>)
 I in het balkje algemeen bij text editen is misschien niet duidelijk genoeg
+
+feetback van bijzet:
+Het moet duideijker zijn hoe meerkeuze vragen ingevoerd moeten worden. (Dit zei ze niet maar ze heeft het verkeerd ingevoerd)
+Het invoeren van teksten is vrij eenvoudig
+Het plaatsen van fotos ging lastig
+"Van leerlingnummer moet dan wellicht inlogcode o.i.d. gemaakt worden?
+Omdat het voor zowel leerling- als leraar is?
+Of kun je daar nog onderscheid in aanbrengen?"
