@@ -7,7 +7,14 @@ import NumberInput from "../Basic/NumberInput";
 import RadioChoices from "../Basic/RadioChoices";
 import Text from "../Basic/Text";
 
-function MeerKeuzeVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
+function MeerKeuzeVraag({
+  data,
+  zetPunten,
+  zetIngevuld,
+  state,
+  zetState,
+  showAnswers
+}) {
   const { vraag, opties, antwoord, score } = data;
   const { colors } = useTheme();
 
@@ -36,6 +43,16 @@ function MeerKeuzeVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
         value={state}
         onChangeText={zetState}
       />
+      {showAnswers &&
+        (state === antwoord ? (
+          <Text>
+            <b>Juist</b>
+          </Text>
+        ) : (
+          <Text>
+            <b>Het juiste antwoord was {antwoord}</b>
+          </Text>
+        ))}
     </View>
   );
 }
@@ -119,7 +136,14 @@ function OpenVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
     </View>
   );
 }
-function WaarNietWaarVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
+function WaarNietWaarVraag({
+  data,
+  zetPunten,
+  zetIngevuld,
+  state,
+  zetState,
+  showAnswers
+}) {
   const { juist, vraag, antwoord, score } = data;
   const { colors } = useTheme();
 
@@ -159,21 +183,26 @@ function WaarNietWaarVraag({ data, zetPunten, zetIngevuld, state, zetState }) {
         {vraag}
       </Text>
       {juist.map((stelling, index) => {
-        let antwoord = "";
-        if (antwoorden[index] === true) antwoord = "Waar";
-        if (antwoorden[index] === false) antwoord = "Niet waar";
+        let cAntwoord = "";
+        if (antwoorden[index] === true) cAntwoord = "Waar";
+        if (antwoorden[index] === false) cAntwoord = "Niet waar";
         return (
           <View key={index}>
             <Text style={{ color: colors.tekstKleur }}>{stelling}</Text>
             <RadioChoices
               backgroundColor={colors.radioButtonKleur}
               opties={["Waar", "Niet waar"]}
-              value={antwoord}
+              value={cAntwoord}
               onChangeText={(geselecteerdeOptie) => {
                 let waar = geselecteerdeOptie === "Waar";
                 zetStateIndex(index)(waar);
               }}
             />
+            {showAnswers && (
+              <Text>
+                <b>{antwoord[index] === antwoorden[index] ? "Goed" : "Fout"}</b>
+              </Text>
+            )}
           </View>
         );
       })}

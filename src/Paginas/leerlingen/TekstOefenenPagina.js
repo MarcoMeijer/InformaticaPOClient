@@ -19,6 +19,7 @@ export default function TekstOefenenPagina({ route, navigation }) {
   const [punten, zetPunten, zetIndexPunten] = useArrayState();
   const [ingevuld, zetIngevuld, zetIndexIngevuld] = useArrayState();
   const [state, zetState, zetStateIndex] = useArrayState();
+  const [showAnswers, setShowAnswers] = useState(false);
 
   useEffect(() => {
     if (text === undefined) {
@@ -72,7 +73,7 @@ export default function TekstOefenenPagina({ route, navigation }) {
         }
       })
       .then(() => {
-        navigation.navigate("Leerlingen home pagina");
+        setShowAnswers(true);
         addSucces("Uw antwoorden zijn ingediend.");
       });
   };
@@ -121,6 +122,7 @@ export default function TekstOefenenPagina({ route, navigation }) {
                       zetIngevuld={zetIndexIngevuld(index)}
                       state={state[index]}
                       zetState={zetStateIndex(index)}
+                      showAnswers={showAnswers}
                     />
                   </View>
                 );
@@ -137,11 +139,13 @@ export default function TekstOefenenPagina({ route, navigation }) {
                   title="Opslaan / Vorige pagina"
                   onPress={slaOp}
                 />
-                <Button
-                  style={{ margin: 3, flex: 1 }}
-                  title="Antwoorden indienen"
-                  onPress={submit}
-                />
+                {showAnswers || (
+                  <Button
+                    style={{ margin: 3, flex: 1 }}
+                    title="Antwoorden indienen"
+                    onPress={submit}
+                  />
+                )}
               </View>
             </View>
           )}
