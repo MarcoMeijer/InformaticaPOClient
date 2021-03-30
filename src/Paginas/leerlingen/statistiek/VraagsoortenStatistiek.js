@@ -5,6 +5,7 @@ import Text from "../../../Gui/Basic/Text";
 import useFetch from "../../../Hooks/useFetch";
 import PercentageGoed from "../../../Gui/ExamenTekst/PercentageGoed";
 import { useTheme } from "@react-navigation/native";
+import Enter from "../../../Gui/Basic/Enter";
 
 export default function VraagsoortenStatistiek({ persoonid }) {
   // als persoonid = undefined, dan neemt hij de statistieken van de persoon die ingelogt is
@@ -43,6 +44,18 @@ export default function VraagsoortenStatistiek({ persoonid }) {
             data={vpData}
           />
         </View>
+        {statistiekVraagsoorten.map(({ vraagsoort, vragengemaakt }) => (
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center"
+            }}
+          >
+            <Text style={{ flex: 1 }}>{vraagsoort}:</Text>
+            <Text>{vragengemaakt} gemaakt</Text>
+          </View>
+        ))}
+        <Enter />
         <Text>
           <b>Percentage goed per vraagsoort:</b>
         </Text>
@@ -54,7 +67,7 @@ export default function VraagsoortenStatistiek({ persoonid }) {
                 alignItems: "center"
               }}
             >
-              <Text style={{ flex: 1 }}>{vraagsoort}</Text>
+              <Text style={{ flex: 1 }}>{vraagsoort}:</Text>
               <PercentageGoed factor={totaalpunten / totaalmaxpunten} />
             </View>
           )

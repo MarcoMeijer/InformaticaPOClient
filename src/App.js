@@ -3,7 +3,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { Dimensions, View } from "react-native";
-import PromptBox from "./Gui/Basic/prompt";
 import usePromptState from "./Hooks/promptState";
 import ErrorBoxList from "./Gui/Errors/ErrorBoxList";
 import useErrorState from "./Hooks/errorState";
